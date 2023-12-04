@@ -72,16 +72,15 @@ public class MovieController {
 
     @GetMapping("/movies/yearOfRelease")
     public void getFilmByYearOfRelease(@Requestparam(name = "lowerYear", required = true) Integer lowerYear, @RequestParam(name = "upperYear", required = true)Integer upperYear) {
-        //List<MovieDTO> movies = movieRepository.findAll();
+        List<MovieDTO> movies = movieRepository.findAll();
+        List<MovieDTO> selectedMovies = new ArrayList();
         for(MovieDTO movie : movies) {
-
+            Integer yearOfRelease = movie.get().getYearOfRelease();
+            if (yearOfRelease >= lowerYear && yearOfRelease <= upperYear) {
+                selectedMovies.add(yearOfRelease);
+            }
         }
-
-        if(movie.isPresent() && movie.getCountry().equals(country)) {
-            return movies;
-        } else {
-            return new CountryNotFoundException(country);
-        }
+        return selectedMovies;
     }
 
 
