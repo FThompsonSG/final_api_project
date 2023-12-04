@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/comments")
 public class CommentsController {
-//
-//
+
 //        // Assuming we'll have a service for handling comments
 //        private final CommentService commentService;
 //
@@ -21,12 +20,12 @@ public class CommentsController {
 //
 //        @Tag(name = "Comments API")
 //        @Operation(summary = "Get all comments")
-//        @GetMapping
+//        @GetMapping("/allComments")
 //        public List<Comment> getAllComments() {
 //            return commentService.getAllComments();
 //        }
 
-        // @PostMapping
+        // @PostMapping("/{commentId}")
         // public Comment createComment(@RequestBody CommentRequest commentRequest) {
         //    return commentService.createComment(commentRequest);
         // }
