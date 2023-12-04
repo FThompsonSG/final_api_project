@@ -96,6 +96,21 @@ public class MovieController {
         return selectedMovies;
     }
 
+    @GetMapping("/movies/runtime")
+    public void getFilmByRuntime(@Requestparam(name = "minimumRuntime", required = true) Integer minimumRuntime, @RequestParam(name = "maximumRuntime", required = true)Integer maximumRating) {
+        List<MovieDTO> movies = movieRepository.findAll();
+        List<MovieDTO> selectedMovies = new ArrayList();
+        for(MovieDTO movie : movies) {
+            Integer movieRuntime = movie.get().getRuntime();
+            if (movieRuntime >= minimumRuntime && movieRuntime <= maximumRuntime) {
+                selectedMovies.add(movie);
+            }
+        }
+        return selectedMovies;
+    }
+
+
+
 
 
 
