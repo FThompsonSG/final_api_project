@@ -18,7 +18,7 @@ public class MovieController {
     @Tag(name = "Movie Controller API")
     @Operation(summary = "")
     @GetMapping("/movies/title")
-    public void getFilmByTitle(@Requestparam(name = "title", required = true) String title) {
+    public void getFilmByTitle(@RequestParam(name = "title", required = true) String title) {
         //return lists instead of optional
         Optional<MovieDTO> movie = movieRepository.findByTitle(title);
 
@@ -28,7 +28,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/director")
-    public void getFilmByDirector(@Requestparam(name = "director", required = true) String director) {
+    public void getFilmByDirector(@RequestParam(name = "director", required = true) String director) {
         Optional<MovieDTO> movie = movieRepository.findByDirector(director);
 
         if(movie.isPresent() && movie.getDirector().contains(director)) {
@@ -37,7 +37,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/performer")
-    public void getFilmByPerformer(@Requestparam(name = "performer", required = true) String performer) {
+    public void getFilmByPerformer(@RequestParam(name = "performer", required = true) String performer) {
         List<MovieDTO> movies = movieRepository.findAllMoviesByActors(performer);
 
         if(movie.isPresent() && movie.getActors().contains(performer)) {
@@ -48,7 +48,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/genre")
-    public void getFilmByGenre(@Requestparam(name = "genre", required = true) String genre) {
+    public void getFilmByGenre(@RequestParam(name = "genre", required = true) String genre) {
         List<MovieDTO> movies = movieRepository.findAllMoviesByGenre(genre);
 
         if(movie.isPresent() && movie.getGenre().contains(genre)) {
@@ -59,7 +59,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/country")
-    public void getFilmByCountry(@Requestparam(name = "country", required = true) String country) {
+    public void getFilmByCountry(@RequestParam(name = "country", required = true) String country) {
         //List<MovieDTO> movies = movieRepository.findByCountry(country);
         List<MovieDTO> movies = movieRepository.findAllMoviesByCountry(country);
 
@@ -71,7 +71,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/yearOfRelease")
-    public void getFilmByYearOfRelease(@Requestparam(name = "lowerYear", required = true) Integer lowerYear, @RequestParam(name = "upperYear", required = true)Integer upperYear) {
+    public void getFilmByYearOfRelease(@RequestParam(name = "lowerYear", required = true) Integer lowerYear, @RequestParam(name = "upperYear", required = true)Integer upperYear) {
         List<MovieDTO> movies = movieRepository.findAll();
         List<MovieDTO> selectedMovies = new ArrayList();
         for(MovieDTO movie : movies) {
@@ -84,7 +84,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/rating")
-    public void getFilmByRatings(@Requestparam(name = "lowerRating", required = true) Double lowerRating, @RequestParam(name = "upperRating", required = true)Double upperRating) {
+    public void getFilmByRatings(@RequestParam(name = "lowerRating", required = true) Double lowerRating, @RequestParam(name = "upperRating", required = true)Double upperRating) {
         List<MovieDTO> movies = movieRepository.findAll();
         List<MovieDTO> selectedMovies = new ArrayList();
         for(MovieDTO movie : movies) {
@@ -97,7 +97,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/runtime")
-    public void getFilmByRuntime(@Requestparam(name = "minimumRuntime", required = true) Integer minimumRuntime, @RequestParam(name = "maximumRuntime", required = true)Integer maximumRating) {
+    public void getFilmByRuntime(@RequestParam(name = "minimumRuntime", required = true) Integer minimumRuntime, @RequestParam(name = "maximumRuntime", required = true)Integer maximumRating) {
         List<MovieDTO> movies = movieRepository.findAll();
         List<MovieDTO> selectedMovies = new ArrayList();
         for(MovieDTO movie : movies) {
