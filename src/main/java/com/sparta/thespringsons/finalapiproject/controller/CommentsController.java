@@ -2,9 +2,11 @@ package com.sparta.thespringsons.finalapiproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.xml.stream.events.Comment;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -25,18 +27,24 @@ public class CommentsController {
 //            return commentService.getAllComments();
 //        }
 
-        // @PostMapping("/{commentId}")
-        // public Comment createComment(@RequestBody CommentRequest commentRequest) {
-        //    return commentService.createComment(commentRequest);
-        // }
+//         @PostMapping("/{commentId}")
+//         public Comment createComment(@RequestBody CommentRequest commentRequest) {
+//            return commentService.createComment(commentRequest);
+//         }
+//
+//         @PutMapping("/{commentId}")
+//         public Comment updateComment(@PathVariable String commentId, @RequestBody CommentRequest commentRequest) {
+//            return commentService.updateComment(commentId, commentRequest);
+//         }
+//
+//         @DeleteMapping("/{commentId}")
+//         public void deleteComment(@PathVariable String commentId) {
+//            commentService.deleteComment(commentId);
+//         }
 
-        // @PutMapping("/{commentId}")
-        // public Comment updateComment(@PathVariable String commentId, @RequestBody CommentRequest commentRequest) {
-        //    return commentService.updateComment(commentId, commentRequest);
-        // }
-
-        // @DeleteMapping("/{commentId}")
-        // public void deleteComment(@PathVariable String commentId) {
-        //    commentService.deleteComment(commentId);
-        // }
+//    @PostMapping
+//    @Operation(summary = "Create a new comment")
+//    public ResponseEntity<Comment> createComment(@RequestBody CommentRequest commentRequest) {
+//        Comment createdComment = commentService.createComment(commentRequest);
+//        return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
