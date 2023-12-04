@@ -77,12 +77,24 @@ public class MovieController {
         for(MovieDTO movie : movies) {
             Integer yearOfRelease = movie.get().getYearOfRelease();
             if (yearOfRelease >= lowerYear && yearOfRelease <= upperYear) {
-                selectedMovies.add(yearOfRelease);
+                selectedMovies.add(movie);
             }
         }
         return selectedMovies;
     }
 
+    @GetMapping("/movies/rating")
+    public void getFilmByRatings(@Requestparam(name = "lowerRating", required = true) Double lowerRating, @RequestParam(name = "upperRating", required = true)Double upperRating) {
+        List<MovieDTO> movies = movieRepository.findAll();
+        List<MovieDTO> selectedMovies = new ArrayList();
+        for(MovieDTO movie : movies) {
+            Double movieRating = movie.get().getRating();
+            if (movieRating >= lowerRating && movieRating <= upperRating) {
+                selectedMovies.add(movie);
+            }
+        }
+        return selectedMovies;
+    }
 
 
 
