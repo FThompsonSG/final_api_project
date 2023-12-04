@@ -58,21 +58,31 @@ public class MovieController {
         }
     }
 
-    @GetMapping("/movies/genre")
-    public void getFilmByGenre(@Requestparam(name = "genre", required = true) String genre) {
-        List<MovieDTO> movies = movieRepository.findAllMoviesByGenre(genre);
+    @GetMapping("/movies/country")
+    public void getFilmByCountry(@Requestparam(name = "country", required = true) String country) {
+        //List<MovieDTO> movies = movieRepository.findByCountry(country);
+        List<MovieDTO> movies = movieRepository.findAllMoviesByCountry(country);
 
-        if(movie.isPresent() && movie.getGenre().contains(genre)) {
+        if(movie.isPresent() && movie.getCountry().equals(country)) {
             return movies;
         } else {
-            return new GenreNotFoundException(performer);
+            return new CountryNotFoundException(country);
         }
     }
 
+    @GetMapping("/movies/yearOfRelease")
+    public void getFilmByYearOfRelease(@Requestparam(name = "lowerYear", required = true) Integer lowerYear, @RequestParam(name = "upperYear", required = true)Integer upperYear) {
+        //List<MovieDTO> movies = movieRepository.findAll();
+        for(MovieDTO movie : movies) {
 
+        }
 
-
-
+        if(movie.isPresent() && movie.getCountry().equals(country)) {
+            return movies;
+        } else {
+            return new CountryNotFoundException(country);
+        }
+    }
 
 
 
