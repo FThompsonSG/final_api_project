@@ -1,5 +1,9 @@
 package com.sparta.thespringsons.finalapiproject;
 
+import com.sparta.thespringsons.finalapiproject.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.entities.User;
+import com.sparta.thespringsons.finalapiproject.repositories.MovieRepository;
+import com.sparta.thespringsons.finalapiproject.repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,11 +20,14 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(UsersRepository usersRepository) {
+    public CommandLineRunner runner(UsersRepository usersRepository, MovieRepository movieRepository) {
         return args -> {
             User thisGuy = usersRepository.findByName("Jon Snow");
+            Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
+            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
+            System.out.println(thisMovie.getImdb());
+            System.out.println(thisMovie2.getTomatoes());
             System.out.println(thisGuy.email);
         };
     }
-
 }
