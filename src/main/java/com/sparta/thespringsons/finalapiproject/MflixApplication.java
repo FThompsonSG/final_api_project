@@ -23,7 +23,7 @@ public class MflixApplication {
 
     @Bean
     public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository) {
+                                    EmbeddedMoviesRepository embeddedMoviesRepository){
         return args -> {
             User thisGuy = userRepository.findByName("Jon Snow");
             //System.out.println(thisGuy.email);
