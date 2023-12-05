@@ -19,7 +19,7 @@ public class MoviesService {
     }
 
     public List<Movie> getAllMovies() {
-        List<Movie> movies = movieRepository.findAllMovies();
+        List<Movie> movies = movieRepository.findAll();
         return movies;
     }
 
@@ -34,10 +34,10 @@ public class MoviesService {
     }
 
     public List<Movie> getAllMoviesByDirector(List<String> directors) {
-        List<Movie> movies = movieRepository.findAllMoviesByDirectors(directors);
-        for (Movie movie : movies) {
+        List<Movie> movies = new ArrayList<>();
+        for (Movie movie : movieRepository.findAllByDirectors(directors)) {
             for (String director : directors) {
-                if(!movies.isEmpty() && movies.get(0).getDirectors().contains(director)) {
+                if(directors.contains(director)){
                     movies.add(movie);
                 }
             }

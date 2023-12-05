@@ -17,29 +17,34 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableMongoRepositories
 public class MflixApplication {
-
+    private MoviesService moviesService;
     public static void main(String[] args) {
         SpringApplication.run(MflixApplication.class, args);
     }
 
     @Bean
     public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository, MoviesService moviesService){
+                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
         return args -> {
+
 //            User thisGuy = userRepository.findByName("Jon Snow");
 //            System.out.println(thisGuy.email);
 //            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
 //            System.out.println(movies.toString());
 //            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-                List<String> directors = new ArrayList<>(1);
-                directors.add("Edwin S. Porter");
+                List<String> directors = new ArrayList<>();
+                directors.add("Winsor McCay");
                 List<Movie> movies = moviesService.getAllMoviesByDirector(directors);
-                System.out.println(movies);
+
+                for (Movie movie : movies) {
+                    System.out.println(movie.getTitle());
+                }
 //            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
 //            System.out.println(thisMovie.getImdb().rating);
 //            System.out.println(thisMovie2.getTomatoes());

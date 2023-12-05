@@ -9,17 +9,17 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
-    List<Movie> findAllMovies();
+//    List<Movie> findAllMovies();
     Movie findByTitle(String title);
-    List<Movie> findAllMoviesByDirectors(List<String> directors);
+    List<Movie> findAllByDirectors(List<String> directors);
 
-    List<Movie> findAllMoviesByCast(List<String> performers);
-
-    List<Movie> findAllMoviesByGenre(String genre);
-
-    List<Movie> findAllByImdbId(Integer id);
-    List<Movie> findAllByImdbRating(Double rating);
-    List<Movie> findAllByImdbVotes(Integer votes);
+//    List<Movie> findAllMoviesByCast(List<String> performers);
+//
+////    List<Movie> findAllMoviesByGenres(String genre);
+//
+//    List<Movie> findAllByImdbId(Integer id);
+//    List<Movie> findAllByImdbRating(Double rating);
+//    List<Movie> findAllByImdbVotes(Integer votes);
 
 
 }
