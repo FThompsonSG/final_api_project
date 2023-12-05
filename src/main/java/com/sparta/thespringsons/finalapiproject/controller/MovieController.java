@@ -1,32 +1,26 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
+import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MovieController {
 
 
-    /*
     private final MovieRepository movieRepository;
 
     @Autowired
-    public MovieController(MovieRepository movieRepository) {
-        this.movieController = movieController;
+    public MovieController(MovieRepository movieRepository1) {
+        this.movieRepository = movieRepository1;
     }
-
+    /*
+    */
     //Partial search for movie title
-    @Tag(name = "Movie Controller API")
-    @Operation(summary = "")
-    @GetMapping("/movies/title")
-    public void getFilmByTitle(@Requestparam(name = "title", required = true) String title) {
-        //return lists instead of optional
-        Optional<MovieDTO> movie = movieRepository.findByTitle(title);
 
-        if(movie.isPresent() && movie.getTitle().contains(title)) {
-            return movie;
-        }
-    }
 
+
+    /*
     @GetMapping("/movies/director")
     public void getFilmByDirector(@Requestparam(name = "director", required = true) String director) {
         Optional<MovieDTO> movie = movieRepository.findByDirector(director);
@@ -35,6 +29,8 @@ public class MovieController {
             return movie;
         }
     }
+
+
 
     @GetMapping("/movies/performer")
     public void getFilmByPerformer(@Requestparam(name = "performer", required = true) String performer) {
@@ -46,6 +42,8 @@ public class MovieController {
             return new PerformerNotFoundException(performer);
         }
     }
+
+
 
     @GetMapping("/movies/genre")
     public void getFilmByGenre(@Requestparam(name = "genre", required = true) String genre) {
