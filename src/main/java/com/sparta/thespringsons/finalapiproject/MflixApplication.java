@@ -26,5 +26,4 @@ public class MflixApplication {
             System.out.println(commentRepository.findAll());
         };
     }
-
 }
