@@ -26,3 +26,4 @@ public class Tomato {
     public Reviewer viewer;
 
 }
+
