@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,4 +16,10 @@ public class EmbeddedMovieController {
         // Gets all embedded movie
     }
 
+    @Tag(name = "")
+    @Operation(summary = "Gets all embedded movies with a specified actor in the cast")
+    @GetMapping("/embeddedMovies/actor")
+    public void getEmbeddedMovieByActor(String actor) {
+
+    }
 }

@@ -11,4 +11,7 @@ public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie,
 
    List<EmbeddedMovie>  findByTitle(String title);
    List<EmbeddedMovie> findByAwardsNominations(Integer noms);
+
+   List<EmbeddedMovie> findByCastContains(String actor);
+
 }
