@@ -1,4 +1,4 @@
-package com.sparta.thespringsons.finalapiproject.entities;
+package com.sparta.thespringsons.finalapiproject.model.entities;
 
 
 import org.springframework.data.annotation.Id;

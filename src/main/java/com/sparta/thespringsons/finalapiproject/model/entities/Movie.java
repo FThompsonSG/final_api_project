@@ -1,11 +1,10 @@
-package com.sparta.thespringsons.finalapiproject.entities;
+package com.sparta.thespringsons.finalapiproject.model.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Document("movies")
 public class Movie {
