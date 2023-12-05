@@ -20,4 +20,36 @@ public class CommentController {
     public List<Comment> getAllComments(){
         return commentRepository.findAll();
     }
+
+    //
+//
+//        // Assuming we'll have a service for handling comments
+//        private final CommentService commentService;
+//
+//        @Autowired
+//        public CommentsController(CommentService commentService) {
+//            this.commentService = commentService;
+//        }
+//
+//        @Tag(name = "Comments API")
+//        @Operation(summary = "Get all comments")
+//        @GetMapping
+//        public List<Comment> getAllComments() {
+//            return commentService.getAllComments();
+//        }
+
+    // @PostMapping
+    // public Comment createComment(@RequestBody CommentRequest commentRequest) {
+    //    return commentService.createComment(commentRequest);
+    // }
+
+    // @PutMapping("/{commentId}")
+    // public Comment updateComment(@PathVariable String commentId, @RequestBody CommentRequest commentRequest) {
+    //    return commentService.updateComment(commentId, commentRequest);
+    // }
+
+    // @DeleteMapping("/{commentId}")
+    // public void deleteComment(@PathVariable String commentId) {
+    //    commentService.deleteComment(commentId);
+    // }
 }

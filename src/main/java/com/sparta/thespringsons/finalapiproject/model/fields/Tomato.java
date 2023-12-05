@@ -1,12 +1,11 @@
-package com.sparta.thespringsons.finalapiproject.entities;
+package com.sparta.thespringsons.finalapiproject.model.fields;
 
-import com.sparta.thespringsons.finalapiproject.entities.Reviewer;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class Tomatoes {
+public class Tomato {
 
     public Reviewer critic;
 
