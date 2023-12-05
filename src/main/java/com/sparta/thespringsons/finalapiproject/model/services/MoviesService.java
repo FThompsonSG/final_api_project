@@ -32,13 +32,19 @@ public class MoviesService {
         return movie;
     }
 
-    public List<Movie> getAllMoviesByDirectors(List<String> directors) {
-        List<Movie> allMovies = movieRepository.findAllByDirectors(directors);
-        return allMovies;
+    public List<Movie> getAllMoviesByDirector(String directors) {
+        List<Movie> movies = movieRepository.findAllByDirectors(directors);
+        for (Movie movie : movies) {
+            if(!movies.isEmpty() && movies.get(0).getDirectors().contains(directors)) {
+                return movies;
+            }
+        }
+        return movies;
     }
 
-    public List<Movie> getAllMoviesByActors(List<String> directors) {
-        List<Movie> allMovies = movieRepository.findAllByDirectors(directors);
-        return allMovies;
-    }
+
+
+
+
+
 }
