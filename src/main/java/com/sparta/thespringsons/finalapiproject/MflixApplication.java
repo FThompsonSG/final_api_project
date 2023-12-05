@@ -9,10 +9,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableMongoRepositories
-public class TestingMongo2Application {
+public class MflixApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestingMongo2Application.class, args);
+        SpringApplication.run(MflixApplication.class, args);
     }
 
     @Bean
