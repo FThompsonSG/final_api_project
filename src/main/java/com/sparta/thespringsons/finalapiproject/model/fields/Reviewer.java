@@ -2,9 +2,9 @@ package com.sparta.thespringsons.finalapiproject.model.fields;
 
 public class Reviewer {
 
-    public Integer meter;
+    private Integer meter;
 
-    public Integer numReviews;
+    private Integer numReviews;
 
-    public Double rating;
+    private Double rating;
 }

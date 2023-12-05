@@ -36,7 +36,7 @@ public class MflixApplication {
 //            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
 //            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
-                System.out.println(thisMovie.getImdb().rating);
+//            System.out.println(thisMovie.getImdb().rating);
 //            System.out.println(thisMovie2.getTomatoes());
 //            System.out.println(noms.toString());
 //            System.out.println(thisGuy.email);

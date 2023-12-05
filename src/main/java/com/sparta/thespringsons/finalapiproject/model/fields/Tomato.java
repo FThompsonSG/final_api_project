@@ -7,13 +7,13 @@ import java.util.Date;
 
 public class Tomato {
 
-    public Reviewer critic;
+    private Reviewer critic;
 
     @Field("dvd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date dvd;
 
-    public Integer fresh;
+    private Integer fresh;
 
     @Field("lastUpdated")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

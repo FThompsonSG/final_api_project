@@ -2,9 +2,9 @@ package com.sparta.thespringsons.finalapiproject.model.fields;
 
 public class Awards {
 
-    public Integer nominations;
+    private Integer nominations;
 
-    public String text;
+    private String text;
 
-    public Integer wins;
+    private Integer wins;
 }
