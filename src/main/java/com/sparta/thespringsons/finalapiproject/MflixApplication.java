@@ -41,6 +41,7 @@ public class MflixApplication {
 //            System.out.println(noms.toString());
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
+
         };
     }
 }

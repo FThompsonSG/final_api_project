@@ -22,8 +22,8 @@ public class TheaterService {
         return theatersRepository.findAll();
     }
 
-    public Optional<Theater> getTheaterById(String theater_id) {
-        return theatersRepository.findById(theater_id);
+    public Optional<Theater> getTheaterByTheaterId(int theater_id) {
+        return theatersRepository.getTheaterByTheaterId(theater_id);
     }
 
     public String saveTheater(Theater theater) {
