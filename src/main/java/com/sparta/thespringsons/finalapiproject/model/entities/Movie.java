@@ -1,5 +1,8 @@
 package com.sparta.thespringsons.finalapiproject.model.entities;
 
+import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
+import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,13 +14,13 @@ public class Movie {
 
     @Id
     private String id;
-    private HashMap<String,?> awards;
+    private Awards awards;
     private List<String> cast;
     private List<String> countries;
     private List<String> directors;
     private String fullplot;
     private List<String> genres;
-    private HashMap<String,?> imdb;
+    private Imdb imdb;
     private List<String> languages;
     private String lastupdated;
     private Integer num_mflix_comments;
@@ -28,7 +31,7 @@ public class Movie {
     private String released;
     private Integer runtime;
     private String title;
-    private Object tomatoes;
+    private Tomato tomatoes;
     //could be enum
     private String type;
     private Integer year;
@@ -36,14 +39,14 @@ public class Movie {
 
     public Movie() {}
 
-    public Movie(String id, HashMap<String, ?> awards, List<String> cast,
+    public Movie(String id, Awards awards, List<String> cast,
                  List<String> countries, List<String> directors,
-                 String fullplot, List<String> genres, HashMap<String, ?> imdb,
+                 String fullplot, List<String> genres, Imdb imdb,
                  List<String> languages, String lastupdated,
-                 Integer num_mflix_comments, String plot, String poster,
-                 String rated, String released, Integer runtime,
-                 String title, Object tomatoes, String type, Integer year,
-                 List<String> writers) {
+                 Integer num_mflix_comments, String plot,
+                 String poster, String rated, String released,
+                 Integer runtime, String title, Tomato tomatoes,
+                 String type, Integer year, List<String> writers) {
         this.id = id;
         this.awards = awards;
         this.cast = cast;
@@ -75,11 +78,11 @@ public class Movie {
         this.id = id;
     }
 
-    public HashMap<String, ?> getAwards() {
+    public Awards getAwards() {
         return awards;
     }
 
-    public void setAwards(HashMap<String, ?> awards) {
+    public void setAwards(Awards awards) {
         this.awards = awards;
     }
 
@@ -123,11 +126,11 @@ public class Movie {
         this.genres = genres;
     }
 
-    public HashMap<String, ?> getImdb() {
+    public Imdb getImdb() {
         return imdb;
     }
 
-    public void setImdb(HashMap<String, ?> imdb) {
+    public void setImdb(Imdb imdb) {
         this.imdb = imdb;
     }
 
@@ -203,11 +206,11 @@ public class Movie {
         this.title = title;
     }
 
-    public Object getTomatoes() {
+    public Tomato getTomatoes() {
         return tomatoes;
     }
 
-    public void setTomatoes(Object tomatoes) {
+    public void setTomatoes(Tomato tomatoes) {
         this.tomatoes = tomatoes;
     }
 
