@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
     Movie findByTitle(String title);
+
 }
