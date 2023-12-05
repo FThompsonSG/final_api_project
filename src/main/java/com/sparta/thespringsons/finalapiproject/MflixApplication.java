@@ -3,12 +3,10 @@ package com.sparta.thespringsons.finalapiproject;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
-import com.sparta.thespringsons.finalapiproject.entities.EmbeddedMovies;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
-import com.sparta.thespringsons.finalapiproject.repositories.EmbeddedMoviesRepository;
-import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
+import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,9 +31,9 @@ public class MflixApplication {
         return args -> {
             User thisGuy = userRepository.findByName("Jon Snow");
             //System.out.println(thisGuy.email);
-            List<EmbeddedMovies> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
+            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
             //System.out.println(movies.toString());
-            List<EmbeddedMovies> noms = embeddedMoviesRepository.findByAwardsNominations(1);
+            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
             Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
             Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
             System.out.println(thisMovie.getImdb());

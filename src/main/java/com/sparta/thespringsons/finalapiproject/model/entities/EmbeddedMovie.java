@@ -1,5 +1,8 @@
-package com.sparta.thespringsons.finalapiproject.entities;
+package com.sparta.thespringsons.finalapiproject.model.entities;
 
+import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
+import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -9,7 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Document("embedded_movies")
-public class EmbeddedMovies {
+public class EmbeddedMovie {
     @Id
     public String id;
 
@@ -46,7 +49,7 @@ public class EmbeddedMovies {
 
     public String title;
 
-    public Tomatoes tomatoes;
+    public Tomato tomato;
 
     public String type;
 
@@ -76,7 +79,7 @@ public class EmbeddedMovies {
                 ", released=" + released +
                 ", runtime=" + runtime +
                 ", title='" + title + '\'' +
-                ", tomatoes=" + tomatoes +
+                ", tomatoes=" + tomato +
                 ", type='" + type + '\'' +
                 ", writers=" + Arrays.toString(writers) +
                 ", year=" + year +

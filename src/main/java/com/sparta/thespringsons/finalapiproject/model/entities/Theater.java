@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("theaters")
-public class TheaterDTO {
+public class Theater {
     @Id
     String id;
     public Location location;
@@ -35,7 +35,7 @@ public class TheaterDTO {
         this.theaterId = theaterId;
     }
 
-    public TheaterDTO(String id, Location location, int theaterId) {
+    public Theater(String id, Location location, int theaterId) {
         this.id = id;
         this.location = location;
         this.theaterId = theaterId;
