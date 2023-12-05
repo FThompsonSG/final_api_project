@@ -1,13 +1,14 @@
 package com.sparta.thespringsons.finalapiproject;
 
-
+import com.sparta.thespringsons.finalapiproject.model.entities.User;
+import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
+import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import com.sparta.thespringsons.finalapiproject.entities.EmbeddedMovies;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import com.sparta.thespringsons.finalapiproject.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,8 +27,9 @@ public class MflixApplication {
     }
 
     @Bean
+
     public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository){
+                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository, CommentRepository commentRepository){
         return args -> {
             User thisGuy = userRepository.findByName("Jon Snow");
             //System.out.println(thisGuy.email);
@@ -40,6 +42,7 @@ public class MflixApplication {
             System.out.println(thisMovie2.getTomatoes());
             System.out.println(noms.toString());
             System.out.println(thisGuy.email);
+            System.out.println(commentRepository.findAll());
         };
     }
 }
