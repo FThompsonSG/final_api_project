@@ -26,4 +26,13 @@ public class TheaterService {
         return theatersRepository.findById(theater_id);
     }
 
+    public String saveTheater(Theater theater) {
+        try {
+            theatersRepository.save(theater);
+            return "Saved";
+        } catch (Exception e) {
+            return "Failed to save";
+        }
+    }
+
 }
