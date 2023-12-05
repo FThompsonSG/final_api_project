@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieController {
 
 
-    private final MovieRepository movieRepository;
-
-    @Autowired
-    public MovieController(MovieRepository movieRepository1) {
-        this.movieRepository = movieRepository1;
-    }
-    /*
-    */
-    //Partial search for movie title
+//    private final MovieRepository movieRepository;
+//
+//    @Autowired
+//    public MovieController(MovieRepository movieRepository1) {
+//        this.movieRepository = movieRepository1;
+//    }
+//    /*
+//    */
+//    //Partial search for movie title
 
 
 
