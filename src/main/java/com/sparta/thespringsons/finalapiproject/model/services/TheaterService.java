@@ -26,6 +26,10 @@ public class TheaterService {
         return theatersRepository.getTheaterByTheaterId(theater_id);
     }
 
+    public Optional<Theater> getTheaterById(String id) {
+        return theatersRepository.findById(id);
+    }
+
     public String saveTheater(Theater theater) {
         try {
             theatersRepository.save(theater);

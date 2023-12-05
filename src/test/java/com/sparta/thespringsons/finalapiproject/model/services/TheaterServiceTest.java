@@ -28,12 +28,21 @@ class TheaterServiceTest {
     }
 
     @Test
-    @DisplayName("Testing get theater by ID")
-    public void getTheaterById() {
+    @DisplayName("Testing get theater by theaterID")
+    public void getTheaterByTheaterId() {
         Optional<Theater> testTheater = theaterService.getTheaterByTheaterId(1000);
 
             Assertions.assertEquals("MN",
                     testTheater.get().getLocation().getAddress().getState());
+    }
+
+    @Test
+    @DisplayName("Testing get theater by ID")
+        public void getTheaterById() {
+        Optional<Theater> testTheater = theaterService.getTheaterById("59a47286cfa9a3a73e51e72c");
+
+        Assertions.assertEquals("MN",
+                testTheater.get().getLocation().getAddress().getState());
     }
 
 }
