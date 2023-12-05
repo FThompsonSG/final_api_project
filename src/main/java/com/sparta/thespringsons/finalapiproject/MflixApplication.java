@@ -25,6 +25,7 @@ public class MflixApplication {
             User thisGuy = usersRepository.findByName("Jon Snow");
             Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
             Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
+
             System.out.println(thisMovie.getImdb());
             System.out.println(thisMovie2.getTomatoes());
             System.out.println(thisGuy.email);
