@@ -33,16 +33,8 @@ public class MoviesService {
         return movie;
     }
 
-    public List<Movie> getAllMoviesByDirector(List<String> directors) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAllByDirectors(directors)) {
-            for (String director : directors) {
-                if(directors.contains(director)){
-                    movies.add(movie);
-                }
-            }
-
-        }
+    public ArrayList<Movie> getAllMoviesByDirector(String directors) {
+        ArrayList<Movie> movies = movieRepository.findAllByDirectors(directors);
         return movies;
     }
     public Optional<List<Movie>> findAllByWriter(String writerName) {

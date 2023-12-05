@@ -38,13 +38,15 @@ public class MflixApplication {
 //            System.out.println(movies.toString());
 //            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-                List<String> directors = new ArrayList<>();
-                directors.add("Winsor McCay");
-                List<Movie> movies = moviesService.getAllMoviesByDirector(directors);
+                
+                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
 
-                for (Movie movie : movies) {
+                for(Movie movie : movies) {
                     System.out.println(movie.getTitle());
                 }
+//                System.out.println(movies.get(0).getTitle());
+//                List<Movie> thisMovie2 = movieRepository.findAllByDirectors(directors);
+//
 //            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
 //            System.out.println(thisMovie.getImdb().rating);
 //            System.out.println(thisMovie2.getTomatoes());
