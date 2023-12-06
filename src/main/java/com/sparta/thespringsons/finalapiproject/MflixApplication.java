@@ -45,7 +45,8 @@ public class MflixApplication {
 //            System.out.println(noms.toString());
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
-            System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
+            //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
+            //System.out.println(embeddedMoviesService.findAllByTomatoesViewerRating(3.0, 4.0));
         };
     }
 }

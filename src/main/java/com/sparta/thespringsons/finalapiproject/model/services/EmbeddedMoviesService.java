@@ -43,6 +43,54 @@ public class EmbeddedMoviesService  {
         return (embeddedMoviesTitles);
     }
 
+    public List<String> findAllByTomatoesViewerRating(double minRating, double maxRating) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getViewer() != null)
+                    if(embeddedMovie.getTomato().getViewer().getRating() != null)
+                        if (embeddedMovie.getTomato().getViewer().getRating() < maxRating && embeddedMovie.getTomato().getViewer().getRating() > minRating) {
+                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        }
+
+            }
+        }
+        return (embeddedMoviesTitles);
+    }
+
+    public List<String> findAllByTomatoesCriticMeter(double minMeter, double maxMeter) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getCritic() != null)
+                    if(embeddedMovie.getTomato().getCritic().getMeter() != null)
+                        if (embeddedMovie.getTomato().getCritic().getMeter() < maxMeter && embeddedMovie.getTomato().getCritic().getMeter() > minMeter) {
+                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        }
+
+            }
+        }
+        return (embeddedMoviesTitles);
+    }
+
+    public List<String> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getViewer() != null)
+                    if(embeddedMovie.getTomato().getViewer().getMeter() != null)
+                        if (embeddedMovie.getTomato().getViewer().getMeter() < maxMeter && embeddedMovie.getTomato().getViewer().getMeter() > minMeter) {
+                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        }
+
+            }
+        }
+        return (embeddedMoviesTitles);
+    }
+
 
 
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
