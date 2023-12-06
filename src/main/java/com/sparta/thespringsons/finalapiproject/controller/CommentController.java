@@ -1,5 +1,7 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
+import com.sparta.thespringsons.finalapiproject.MflixApplication;
+import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,28 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class CommentController {
+
+    public static final Logger logger = Logger.getLogger(CommentController.class.getName());
 
     private final CommentService commentService;
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
+        OurLogger.setUpLogger(logger);
     }
 
     @GetMapping("/comment")
     public List<Comment> getAllComments(){
+        logger.log(Level.INFO, "Entered get all comments method in comments controller");
         return commentService.getAllComments();
     }
 
     @GetMapping("/commentsbyname/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name){
+        logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         return commentService.getAllByName(name);
     }
 
     @GetMapping("/commentsbymovietitle/{movieTitle}")
     public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle){
+        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
         return commentService.getAllCommentsByMovieTitle(movieTitle);
     }
 }
