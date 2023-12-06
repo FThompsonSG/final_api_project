@@ -22,7 +22,7 @@ public class EmbeddedMoviesService  {
     public EmbeddedMoviesService(EmbeddedMoviesRepository embeddedMoviesRepository) {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
-
+  
     public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
         List<String> embeddedMoviesTitles = new ArrayList<>();
@@ -109,6 +109,21 @@ public class EmbeddedMoviesService  {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getFresh() != null)
                     if (embeddedMovie.getTomato().getFresh() < maxFresh && embeddedMovie.getTomato().getFresh() > minFresh) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
+            }
+        }
+        return embeddedMoviesTitles;
+    }
+
+    public List<String> findAllByTomatoesProduction(String production) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getProduction() != null)
+                    if (embeddedMovie.getTomato().getProduction().equals(production)) {
                         embeddedMoviesTitles.add(embeddedMovie.getTitle());
                     }
 
@@ -204,6 +219,5 @@ public class EmbeddedMoviesService  {
             return null;
         }
     }
-
 
 }
