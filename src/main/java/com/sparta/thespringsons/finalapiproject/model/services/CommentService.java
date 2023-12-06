@@ -30,7 +30,6 @@ public class CommentService {
 
     public List<Comment> getAllCommentsByMovieTitle(String movieTitle){
         Movie movie = movieRepository.findByTitle(movieTitle);
-        System.out.println("HEREEE ------" + commentRepository.findAllByMovieId(movie.getId()));
         return commentRepository.findAllByMovieId(movie.getId());
     }
 
