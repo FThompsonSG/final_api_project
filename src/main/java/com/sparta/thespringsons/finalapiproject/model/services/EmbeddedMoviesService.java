@@ -22,11 +22,6 @@ public class EmbeddedMoviesService  {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
 
-//    public Optional <List<EmbeddedMovie>> getEmbeddedMovieByActor(String actor){
-//        List<EmbeddedMovie> EmbeddedMovies = embeddedMoviesRepository.findByCastContains(actor);
-//        return Optional.of(EmbeddedMovies);
-//    }
-
     public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
         List<String> embeddedMoviesTitles = new ArrayList<>();
@@ -91,7 +86,6 @@ public class EmbeddedMoviesService  {
         return (embeddedMoviesTitles);
     }
 
-
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
@@ -133,12 +127,13 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.findByLanguage(language);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfComments(Integer numberOfComments) {
+    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfCommentsLowerBound(Integer numberOfComments) {
         return embeddedMoviesRepository.findByNumberOfComments(numberOfComments);
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByPlot(String plot) {
-        return embeddedMoviesRepository.findByPlot(plot);
+        String plotPadded = " " + plot + " ";
+        return embeddedMoviesRepository.findByPlot(plotPadded);
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(Integer mins) {
@@ -178,5 +173,4 @@ public class EmbeddedMoviesService  {
             return null;
         }
     }
-
 }
