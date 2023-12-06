@@ -4,8 +4,8 @@ public class NoRecordFoundException extends Exception {
 
     private String path;
 
-    public NoRecordFoundException(String message, String path) {
-        super("Error: No " + message + " found");
+    public NoRecordFoundException(String recordType, String path) {
+        super("Error: No " + recordType + " found");
         this.path = path;
     }
 

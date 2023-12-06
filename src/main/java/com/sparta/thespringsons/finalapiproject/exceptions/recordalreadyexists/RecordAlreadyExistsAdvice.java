@@ -1,6 +1,5 @@
-package com.sparta.thespringsons.finalapiproject.exceptions.norecordfound;
+package com.sparta.thespringsons.finalapiproject.exceptions.recordalreadyexists;
 
-import com.sparta.thespringsons.finalapiproject.controller.CommentController;
 import com.sparta.thespringsons.finalapiproject.exceptions.CustomResponse;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import org.springframework.http.HttpStatus;
@@ -13,22 +12,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 @ControllerAdvice
-public class NoRecordFoundAdvice {
+public class RecordAlreadyExistsAdvice {
 
-    public static final Logger logger = Logger.getLogger(NoRecordFoundAdvice.class.getName());
+    public static final Logger logger = Logger.getLogger(RecordAlreadyExistsException.class.getName());
 
     @ResponseBody
-    @ExceptionHandler(NoRecordFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<CustomResponse> noRecordFoundHandler(NoRecordFoundException e) {
+    @ExceptionHandler(RecordAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<CustomResponse> recordAlreadyExistsHandler(RecordAlreadyExistsException e) {
         OurLogger.setUpLogger(logger);
-        logger.log(Level.WARNING, "NoRecordFoundException thrown");
-        CustomResponse response = new CustomResponse(e.getMessage(), 404, "NoRecordFoundException", e.getPath());
+        logger.log(Level.WARNING, "RecordAlreadyExistsException thrown");
+        CustomResponse response = new CustomResponse(e.getMessage(), 400, "RecordAlreadyExistsException", e.getPath());
         return ResponseEntity
                 .badRequest()
                 .body(response);
     }
-
 }
