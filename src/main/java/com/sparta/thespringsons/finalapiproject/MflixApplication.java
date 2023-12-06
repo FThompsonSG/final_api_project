@@ -38,7 +38,6 @@ public class MflixApplication {
     }
 
     @Bean
-
     public CommandLineRunner runner(UserRepository userRepository,
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository) {
         return args -> {
