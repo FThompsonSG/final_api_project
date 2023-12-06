@@ -113,6 +113,13 @@ public class MoviesService {
         return Optional.of(movies);
     }
 
+    public ArrayList<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+        ArrayList<Movie> movies = movieRepository.findAllByImdb();
+        ArrayList<Movie> selectedMovies = new ArrayList<>();
+                selectedMovies.add(movie);
+            }
+        }
+    }
 
 
 
