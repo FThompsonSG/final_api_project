@@ -33,38 +33,18 @@ public class MflixApplication {
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
         return args -> {
 
-//            User thisGuy = userRepository.findByName("Jon Snow");
-//            System.out.println(thisGuy.email);
-//            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
-//            System.out.println(movies.toString());
-//            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
+//
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
                 ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
                 List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
-//                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(6.9,7d);
+                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
                 ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(6.9,7d);
-                System.out.println(imdbMovies);
-                for(Movie movie : imdbMovies) {
+                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(1d,1.1d);
+//                System.out.println(imdbMovies);
+                for(Movie movie : ratings) {
                     System.out.println(movie.getTitle());
                 }
-//                for(Movie rating : movies2){
-//                    System.out.println(rating.getTitle());
-//                }
-//                System.out.println(ratings);
 
-//                for(Movie movie : movies) {
-//                    System.out.println(movie.getTitle());
-//                }
-//                System.out.println(movies.get(0).getTitle());
-//                List<Movie> thisMovie2 = movieRepository.findAllByDirectors(directors);
-//
-//            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
-//            System.out.println(thisMovie.getImdb().rating);
-//            System.out.println(thisMovie2.getTomatoes());
-//            System.out.println(noms.toString());
-//            System.out.println(thisGuy.email);
-//            System.out.println(commentRepository.findAll());
         };
     }
 }

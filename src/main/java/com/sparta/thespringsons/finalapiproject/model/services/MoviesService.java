@@ -129,10 +129,7 @@ public class MoviesService {
         return selectedMovies;
     }
 
-    public List<Movie> getMoviesByImdbRatingsBetween(Double lowerRating, Double upperRating) {
-        List<Movie> selectedMovies = movieRepository.findByImdbRatingsBetween(lowerRating, upperRating);
-        return selectedMovies;
-    }
+
 
 
 

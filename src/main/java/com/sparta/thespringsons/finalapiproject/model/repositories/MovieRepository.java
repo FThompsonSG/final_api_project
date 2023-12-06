@@ -14,10 +14,7 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 //    List<Movie> findAllMovies();
     Movie findByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
-
-    @Query("{ $or: [ { 'Imdb.ratings' : { $gte: ?0, $lte: ?1 } }, { 'Imdb.ratings': null } ]  }")
-    List<Movie> findByImdbRatingsBetween(Double minValue, Double maxValue);
-
+    
     //@Query("{ $or: [ { 'Imdb.ratings' : { $gte: ?0, $lte: ?1 } }, { 'Imdb.ratings': null } ] }"
 //    List<Movie> findAllMoviesByCast(List<String> performers);
 //
