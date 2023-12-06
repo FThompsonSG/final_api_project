@@ -204,4 +204,18 @@ public class MoviesService {
         }
         return resultList;
     }
+
+    public List<String> getYearOfRelease(String name) {
+        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<String> movies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String year = movie.getReleased().substring(0,4);
+            String result = "";
+            if(year != null){
+                result = name + "'s year of release: " + year;
+                movies.add(result);
+            }
+        }
+        return movies;
+    }
 }
