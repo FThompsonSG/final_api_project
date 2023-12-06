@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,6 +83,7 @@ public class MflixApplication {
             for(String s4 : str4){
                 System.out.println(s4);
             }*/
+
 
         };
     }
