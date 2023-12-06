@@ -22,6 +22,10 @@ class MoviesServiceTest {
     public void testMovieIsWithinRange() throws Exception {
         List<Movie> movie = moviesService.getAllMoviesByReleaseRange("1900", "1915");
         Assertions.assertNotEquals(0, movie.size());
+
+        for (Movie movie1 : movie){
+            System.out.println(movie1.getTitle());
+        }
     }
 
 }
