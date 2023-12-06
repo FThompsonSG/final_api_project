@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject;
 
+import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
@@ -20,6 +21,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableMongoRepositories
@@ -31,12 +34,14 @@ public class MflixApplication {
     @Autowired
     UserService userService;
 
+    public static final Logger logger = Logger.getLogger(MflixApplication.class.getName());
+
     public static void main(String[] args) {
+        OurLogger.setUpLogger(logger);
         SpringApplication.run(MflixApplication.class, args);
     }
 
     @Bean
-
     public CommandLineRunner runner(UserRepository userRepository,
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository) {
         return args -> {
