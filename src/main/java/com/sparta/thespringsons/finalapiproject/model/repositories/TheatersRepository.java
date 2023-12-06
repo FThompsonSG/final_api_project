@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface TheatersRepository extends MongoRepository<Theater, String> {
 
-    public Optional<Theater> getTheaterByTheaterId(int theater_id);
+
+    Optional<Theater> getTheaterByTheaterId(int theater_id);
 
 }

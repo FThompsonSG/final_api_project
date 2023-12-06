@@ -32,6 +32,7 @@ public class CommentController {
         logger.log(Level.INFO, "Entered get all comments method in comments controller");
         List<Comment> allComments = commentService.getAllComments();
         if (allComments.isEmpty()) {
+
             throw new NoRecordFoundException("comments", "/comment");
         }
         return allComments;
