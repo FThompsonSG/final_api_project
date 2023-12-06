@@ -5,6 +5,7 @@ import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepositor
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import com.sparta.thespringsons.finalapiproject.model.services.MoviesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +26,7 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(UserRepository userRepository,EmbeddedMoviesService embeddedMoviesService,
+    public CommandLineRunner runner(UserRepository userRepository, EmbeddedMoviesService embeddedMoviesService,
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
         return args -> {
 
