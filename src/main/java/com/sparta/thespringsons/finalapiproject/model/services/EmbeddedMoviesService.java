@@ -22,7 +22,7 @@ public class EmbeddedMoviesService  {
     public EmbeddedMoviesService(EmbeddedMoviesRepository embeddedMoviesRepository) {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
-
+  
     public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
         List<String> embeddedMoviesTitles = new ArrayList<>();
@@ -219,6 +219,5 @@ public class EmbeddedMoviesService  {
             return null;
         }
     }
-
 
 }
