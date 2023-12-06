@@ -29,31 +29,31 @@ public class CommentController {
 
     @GetMapping("/comment")
     public List<Comment> getAllComments() throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered get all comments method in comments controller");
         List<Comment> allComments = commentService.getAllComments();
-        if (!allComments.isEmpty()) {
+        if (allComments.isEmpty()) {
             throw new NoRecordFoundException("comments", "/comment");
         }
-        logger.log(Level.INFO, "Entered get all comments method in comments controller");
         return allComments;
     }
 
     @GetMapping("/commentsbyname/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         List<Comment> allComments = commentService.getAllByName(name);
         if (allComments.isEmpty()) {
             throw new NoRecordFoundException("comments", "/commentsbyname/{name}");
         }
-        logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         return allComments;
     }
 
     @GetMapping("/commentsbymovietitle/{movieTitle}")
     public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
         List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
             throw new NoRecordFoundException("comments", "/commentsbymovietitle/{movieTitle}");
         }
-        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
         return allComments;
     }
 }

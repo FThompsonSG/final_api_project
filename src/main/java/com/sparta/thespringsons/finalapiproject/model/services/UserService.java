@@ -24,7 +24,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getByName(String name) {
+    public Optional<User> getByName(String name) {
         logger.log(Level.INFO, "Entered get user by name method in user service");
         return userRepository.findByName(name);
     }
