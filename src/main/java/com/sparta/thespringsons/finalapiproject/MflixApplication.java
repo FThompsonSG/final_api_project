@@ -48,7 +48,7 @@ public class MflixApplication {
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
-            System.out.println(embeddedMoviesService.findAllByTomatoesFreshReviews(1, 6));
+            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
 
 //
                 /*List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");
