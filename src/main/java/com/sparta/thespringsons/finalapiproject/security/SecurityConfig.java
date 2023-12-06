@@ -16,12 +16,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers("/comment", "/commentsbyname/**", "/commentsbymovietitle/**", "/generate")
+                .requestMatchers("/generate")
                 .authenticated()
                 .and()
                 .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
-
 }
