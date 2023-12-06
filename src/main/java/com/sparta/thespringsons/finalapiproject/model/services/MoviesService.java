@@ -28,7 +28,7 @@ public class MoviesService {
         //return lists instead of optional
         Optional<Movie> movie = Optional.ofNullable(movieRepository.findByTitle(title));
 
-        if(movie.isPresent() && movie.get().toString().contains(title)) {
+        if (movie.isPresent() && movie.get().toString().contains(title)) {
             return movie;
         }
         return movie;
@@ -38,6 +38,7 @@ public class MoviesService {
         ArrayList<Movie> movies = movieRepository.findAllByDirectors(directors);
         return movies;
     }
+
     public Optional<List<Movie>> findAllByWriter(String writerName) {
         List<Movie> movies = new ArrayList<>();
         for (Movie movie : movieRepository.findAll()) {
@@ -117,7 +118,7 @@ public class MoviesService {
     public List<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
-        for(Movie movie : movies) {
+        for (Movie movie : movies) {
             Imdb imdb = movie.getImdb();
             if (imdb.getRating() != null) {
                 Double movieRating = imdb.getRating();
@@ -128,12 +129,4 @@ public class MoviesService {
         }
         return selectedMovies;
     }
-
-
-
-
-
-
-
-
 }
