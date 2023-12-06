@@ -5,40 +5,34 @@ import com.sparta.thespringsons.finalapiproject.model.repositories.ApiKeyReposit
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
 
-    private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
-
-    private static ApiKeyRepository apiKeyRepository;
+    private final ApiKeyRepository apiKeyRepository;
 
     @Autowired
     public AuthenticationService(ApiKeyRepository apiKeyRepository) {
-        AuthenticationService.apiKeyRepository = apiKeyRepository;
+        this.apiKeyRepository = apiKeyRepository;
     }
 
-    public static Authentication getAuthentication(HttpServletRequest request) {
+    public boolean checkUserAccess(HttpServletRequest request) throws Exception {
         // Allow requests without an API key for HTTP GET methods
         if (HttpMethod.GET.matches(request.getMethod())) {
-            return null; // Return null to indicate no authentication is required for GET requests
+            return false;
+            // Maybe we want to throw status code or exception here instead
         }
-
         // For all other methods (POST, PUT, DELETE, etc.), require a valid API key
-        String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
+        String apiKey = request.getHeader("Key");
         if (apiKey == null || !isValidApiKey(apiKey)) {
-            throw new BadCredentialsException("Invalid API Key");
+            throw new Exception("Invalid API Key");
         }
 
-        return new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES);
+        return true;
     }
 
-    private static boolean isValidApiKey(String apiKey) {
-        // Check if the API key is present in the database
+    private boolean isValidApiKey(String apiKey) {
         return apiKeyRepository.findByApiKey(apiKey).isPresent();
     }
 
