@@ -133,10 +133,4 @@ public class MoviesService {
         List<Movie> selectedMovies = movieRepository.findByImdbRatingsBetween(lowerRating, upperRating);
         return selectedMovies;
     }
-
-
-
-
-
-
 }

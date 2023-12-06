@@ -27,5 +27,4 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 //    ArrayList<Movie> findAllByImdbRating(Double lowerRating, Double upperRating);
 //    List<Movie> findAllByImdbVotes(Integer votes);
 //        Double findImdbRating(Movie movie);
-
 }
