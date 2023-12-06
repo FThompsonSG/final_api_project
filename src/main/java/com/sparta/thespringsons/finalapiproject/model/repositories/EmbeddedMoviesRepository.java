@@ -12,8 +12,6 @@ public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie,
 
    List<EmbeddedMovie> findByCountries(String countryName);
 
-   List<EmbeddedMovie> findByCastContains(String actor);
-
    @Query("{'awards.nominations' : { $gte : ?0 } }")
    List<EmbeddedMovie> findEmbeddedMoviesByAwards_Nominations(Integer numberOfNomintations);
 

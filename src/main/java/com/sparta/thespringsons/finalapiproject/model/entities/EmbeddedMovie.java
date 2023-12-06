@@ -50,7 +50,8 @@ public class EmbeddedMovie {
 
     private String title;
 
-    private Tomato tomato;
+    @Field(name = "tomatoes")
+    private Tomato tomatoes;
 
     private String type;
 
@@ -133,7 +134,7 @@ public class EmbeddedMovie {
     }
 
     public Tomato getTomato() {
-        return tomato;
+        return tomatoes;
     }
 
     public String getType() {
@@ -172,7 +173,7 @@ public class EmbeddedMovie {
                 ", released=" + released +
                 ", runtime=" + runtime +
                 ", title='" + title + '\'' +
-                ", tomatoes=" + tomato +
+                ", tomatoes=" + tomatoes +
                 ", type='" + type + '\'' +
                 ", writers=" + Arrays.toString(writers) +
                 ", year=" + year +

@@ -30,7 +30,7 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(UserRepository userRepository,
+    public CommandLineRunner runner(UserRepository userRepository,EmbeddedMoviesService embeddedMoviesService,
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
         return args -> {
 
@@ -47,10 +47,10 @@ public class MflixApplication {
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
-            //System.out.println(embeddedMoviesService.findAllByTomatoesViewerRating(3.0, 4.0));
+            System.out.println(embeddedMoviesService.findAllByTomatoesFreshReviews(1, 6));
 
 //
-                List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");
+                /*List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");
                 ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
                 List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
                 List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
@@ -81,7 +81,7 @@ public class MflixApplication {
             List<String> str4 = moviesService.getNumberOfMovieImdbVotes("The Great Train Robbery");
             for(String s4 : str4){
                 System.out.println(s4);
-            }
+            }*/
 
         };
     }
