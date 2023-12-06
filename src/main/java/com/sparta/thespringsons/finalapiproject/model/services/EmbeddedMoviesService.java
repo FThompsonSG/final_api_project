@@ -35,6 +35,79 @@ public class EmbeddedMoviesService  {
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByAwardName(String awardName) {
-        return embeddedMoviesRepository.findByFieldNameContaining("Oscar");
+        return embeddedMoviesRepository.findByFieldNameContaining(awardName);
     }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByTitleContaining(String filmTitle) {
+        return embeddedMoviesRepository.findByTitleContaining(filmTitle);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByCastMember(String castMemberName) {
+        return embeddedMoviesRepository.findByCastMember(castMemberName);
+    }
+
+//    ------------------> Test from here <-----------------
+    public List<EmbeddedMovie> getEmbeddedMoviesByDirector(String directorName) {
+        return embeddedMoviesRepository.findByDirector(directorName);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByFullPlot(String fullPlot) {
+        return embeddedMoviesRepository.findByFullPlot(fullPlot);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByGenre(String genre) {
+        return embeddedMoviesRepository.findByGenre(genre);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByLanguage(String language) {
+        return embeddedMoviesRepository.findByLanguage(language);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfComments(Integer numberOfComments) {
+        return embeddedMoviesRepository.findByNumberOfComments(numberOfComments);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByPlot(String plot) {
+        return embeddedMoviesRepository.findByPlot(plot);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(Integer mins) {
+        return embeddedMoviesRepository.findByMaxRuntime(mins);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByWriter(String writerName) {
+        return embeddedMoviesRepository.findByWriter(writerName);
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByYearExact(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return embeddedMoviesRepository.findByYearExact(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByYearBefore(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return embeddedMoviesRepository.findByYearBefore(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<EmbeddedMovie> getEmbeddedMoviesByYearAfter(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return embeddedMoviesRepository.findByYearAfter(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+
 }
