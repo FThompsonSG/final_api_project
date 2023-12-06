@@ -39,4 +39,17 @@ public class TheaterService {
         }
     }
 
+    public Theater updateTheater(Theater theater, Integer theater_id) throws Exception {
+            Optional<Theater> retrievedTheater = getTheaterByTheaterId(theater_id);
+            if (retrievedTheater.isEmpty()) {
+                throw new Exception("Theater ID cannot be found");
+            } else {
+                Theater theaterToUpdate = retrievedTheater.get();
+                theaterToUpdate = theater;
+                theaterToUpdate.setTheaterId(theater_id);
+                theatersRepository.save(theaterToUpdate);
+                return theaterToUpdate;
+            }
+    }
+
 }
