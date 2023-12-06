@@ -92,7 +92,6 @@ public class EmbeddedMoviesService  {
     }
 
 
-
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
@@ -108,5 +107,4 @@ public class EmbeddedMoviesService  {
     public List<EmbeddedMovie> getEmbeddedMoviesByAwardName(String awardName) {
         return embeddedMoviesRepository.findByFieldNameContaining("Oscar");
     }
-
 }
