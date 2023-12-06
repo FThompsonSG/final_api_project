@@ -52,7 +52,7 @@ public class MflixApplication {
 //
                 List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");
                 ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
-                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
+                List<Movie> movies = moviesService.getMoviesByLanguages("French");
                 List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
                 ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
 //                System.out.println(imdbMovies);
@@ -63,25 +63,27 @@ public class MflixApplication {
                     System.out.println(movie.getTitle());
                 }
 
-
-
-            List<String> str = moviesService.getNumberOfMovieImdbVotes("Dead Weekend");
-                for(String s : str){
-                    System.out.println(s);
-                }
-
-            List<String> str2 = moviesService.getMovieImdbRatingByName("Dead Weekend");
-            for(String s2 : str2){
-                System.out.println(s2);
+            for(Movie movie : movies) {
+                System.out.println(movie.getTitle());
             }
-            List<String> str3 = moviesService.getMovieImdbRatingByName("The Great Train Robbery");
-            for(String s3 : str3){
-                System.out.println(s3);
-            }
-            List<String> str4 = moviesService.getNumberOfMovieImdbVotes("The Great Train Robbery");
-            for(String s4 : str4){
-                System.out.println(s4);
-            }
+//
+//            List<String> str = moviesService.getNumberOfMovieImdbVotes("Dead Weekend");
+//                for(String s : str){
+//                    System.out.println(s);
+//                }
+//
+//            List<String> str2 = moviesService.getMovieImdbRatingByName("Dead Weekend");
+//            for(String s2 : str2){
+//                System.out.println(s2);
+//            }
+//            List<String> str3 = moviesService.getMovieImdbRatingByName("The Great Train Robbery");
+//            for(String s3 : str3){
+//                System.out.println(s3);
+//            }
+//            List<String> str4 = moviesService.getNumberOfMovieImdbVotes("The Great Train Robbery");
+//            for(String s4 : str4){
+//                System.out.println(s4);
+//            }
 
         };
     }

@@ -22,10 +22,10 @@ public class EmbeddedMoviesService  {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
 
-    public Optional <List<EmbeddedMovie>> getEmbeddedMovieByActor(String actor){
-        List<EmbeddedMovie> EmbeddedMovies = embeddedMoviesRepository.findByCastContains(actor);
-        return Optional.of(EmbeddedMovies);
-    }
+//    public Optional <List<EmbeddedMovie>> getEmbeddedMovieByActor(String actor){
+//        List<EmbeddedMovie> EmbeddedMovies = embeddedMoviesRepository.findByCastContains(actor);
+//        return Optional.of(EmbeddedMovies);
+//    }
 
     public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();

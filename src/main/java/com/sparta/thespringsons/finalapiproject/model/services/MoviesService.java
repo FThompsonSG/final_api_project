@@ -58,17 +58,22 @@ public class MoviesService {
 //        return Optional.of(movies);
 //
 //    }
-
-    public Optional<List<Movie>> findAllByGenre(String genreName) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            for (String genre : movie.getGenres()) {
-                if (genre.equals(genreName)) {
-                    movies.add(movie);
-                }
-            }
-        }
-        return Optional.of(movies);
+    public List<Movie> getMoviesByGenre(String genreName) {
+        return movieRepository.findAllByGenres(genreName);
+    }
+//    public Optional<List<Movie>> findAllByGenre(String genreName) {
+//        List<Movie> movies = new ArrayList<>();
+//        for (Movie movie : movieRepository.findAll()) {
+//            for (String genre : movie.getGenres()) {
+//                if (genre.equals(genreName)) {
+//                    movies.add(movie);
+//                }
+//            }
+//        }
+//        return Optional.of(movies);
+//    }
+    public List<Movie> getMoviesByLanguages(String language) {
+        return movieRepository.findAllByLanguages(language);
     }
 
     public Optional<List<Movie>> findAllByLanguage(String languageName) {
