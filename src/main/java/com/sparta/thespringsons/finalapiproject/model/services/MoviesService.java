@@ -29,7 +29,7 @@ public class MoviesService {
         //return lists instead of optional
         Optional<Movie> movie = Optional.ofNullable(movieRepository.findByTitle(title));
 
-        if(movie.isPresent() && movie.get().toString().contains(title)) {
+        if (movie.isPresent() && movie.get().toString().contains(title)) {
             return movie;
         }
         return movie;
@@ -39,9 +39,23 @@ public class MoviesService {
         ArrayList<Movie> movies = movieRepository.findAllByDirectors(directors);
         return movies;
     }
+
     public List<Movie> getMoviesByWriter(String writerName) {
         return movieRepository.findAllByWriters(writerName);
+
     }
+//    public Optional<List<Movie>> findAllByWriter(String writerName) {
+//        List<Movie> movies = new ArrayList<>();
+//        for (Movie movie : movieRepository.findAll()) {
+//            for (String actor : movie.getCast()) {
+//                if (actor.equals(writerName)) {
+//                    movies.add(movie);
+//                }
+//            }
+//        }
+//        return Optional.of(movies);
+//
+//    }
 
     public Optional<List<Movie>> findAllByGenre(String genreName) {
         List<Movie> movies = new ArrayList<>();
@@ -110,7 +124,7 @@ public class MoviesService {
     public List<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
-        for(Movie movie : movies) {
+        for (Movie movie : movies) {
             Imdb imdb = movie.getImdb();
             if (imdb.getRating() != null) {
                 Double movieRating = imdb.getRating();
@@ -122,8 +136,16 @@ public class MoviesService {
         return selectedMovies;
     }
 
-    public List<Movie> getMoviesByImdbRatingsBetween(Double lowerRating, Double upperRating) {
-        List<Movie> selectedMovies = movieRepository.findByImdbRatingsBetween(lowerRating, upperRating);
-        return selectedMovies;
+    //String
+    public String getNumberOfMovieImdbVotes(String movieName) {
+        Movie movie = movieRepository.findByTitle(movieName);
+        Integer numVotes = movie.getImdb().getVotes();
+        return movieName + ": " + numVotes;
+    }
+
+    public String getMovieImdbRatingByName(String movieName) {
+        Movie movie = movieRepository.findByTitle(movieName);
+        Double numVotes = movie.getImdb().getRating();
+        return movieName + ": " + numVotes;
     }
 }

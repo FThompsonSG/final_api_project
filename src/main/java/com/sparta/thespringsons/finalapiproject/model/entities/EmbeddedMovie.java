@@ -50,6 +50,7 @@ public class EmbeddedMovie {
 
     private String title;
 
+    @Field(name = "tomatoes")
     private Tomato tomato;
 
     private String type;
@@ -179,4 +180,5 @@ public class EmbeddedMovie {
                 ", poster='" + poster + '\'' +
                 '}';
     }
+
 }
