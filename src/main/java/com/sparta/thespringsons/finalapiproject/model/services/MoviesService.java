@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MoviesService {
 
-    private MovieRepository movieRepository;
+    private static MovieRepository movieRepository;
 
     @Autowired
     public MoviesService(MovieRepository movieRepository) {
@@ -128,5 +129,51 @@ public class MoviesService {
             }
         }
         return selectedMovies;
+    }
+
+    public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> moviesInRange = new ArrayList<>();
+
+        try {
+            int lowDate = Integer.parseInt(lowerDate);
+            int highDate = Integer.parseInt(upperDate);
+
+            List<Movie> movieRangeList = movies.stream()
+                    .filter(movie -> {
+                        try {
+                            int movieYear = Integer.parseInt(movie.getYear());
+                            return movieYear >= lowDate && movieYear <= highDate;
+                        } catch (NumberFormatException e) {
+                            return false;
+                        }
+                    })
+                    .toList();
+
+            return movieRangeList;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid date format");
+        }
+
+//    public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws Exception {
+//        List<Movie> movies = movieRepository.findAll();
+//        List<Movie> moviesInRange = new ArrayList<>();
+//        int lowDate = Integer.parseInt(lowerDate);
+//        int highDate = Integer.parseInt(upperDate);
+//
+//        try {
+//           List<Movie> movieRangeList =  movies.stream()
+//                    .filter(movie -> {
+//                        int movieYear = Integer.parseInt(movie.getYear());
+//                        return movieYear >= lowDate && movieYear <= highDate;
+//                    })
+//                    .toList();
+//            return moviesInRange;
+//        }
+//        catch(NumberFormatException e){
+//            throw new NumberFormatException("Year wasn't formatted Correctly");
+//        }
+//
+//    }
     }
 }
