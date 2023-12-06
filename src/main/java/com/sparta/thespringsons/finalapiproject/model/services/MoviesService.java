@@ -249,4 +249,35 @@ public class MoviesService {
             return null;
         }
     }
+
+    public List<String> getPosterLinkByTitle(String name) {
+        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<String> movies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String posterLink = movie.getPoster();
+            String result = "";
+            if(posterLink != null){
+                result = name + "'s poster link: " + posterLink;
+                movies.add(result);
+            }
+        }
+        return movies;
+    }
+
+    public List<Movie> getMoviesByCastMember(String castMemberName) {
+        return movieRepository.findByCastMember(castMemberName);
+    }
+
+    public List<Movie> getEmbeddedMoviesByNumberOfNominations(Integer noms) {
+        return movieRepository.findMoviesByAwards_Nominations(noms);
+    }
+
+    public List<Movie> getEmbeddedMoviesByNumberOfWins(Integer wins) {
+        return movieRepository.findMoviesByAwards_Wins(wins);
+    }
+
+    public List<Movie> getEmbeddedMoviesByAwardName(String awardName) {
+        return movieRepository.findByFieldNameContaining(awardName);
+    }
+    
 }

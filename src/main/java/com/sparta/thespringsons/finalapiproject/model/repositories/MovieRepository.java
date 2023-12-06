@@ -34,4 +34,17 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     @Query("{'year' : { $gte : ?0 } }")
     List<Movie> findByYearAfter(Integer year);
 
+    @Query("{ 'cast' : { $regex: ?0, $options: 'i' } }")
+    List<Movie> findByCastMember(String subStringToSearch);
+
+    @Query("{'awards.nominations' : { $gte : ?0 } }")
+    List<Movie> findMoviesByAwards_Nominations(Integer numberOfNomintations);
+
+    @Query("{ 'awards.wins' : { $gte : ?0 } }")
+    List<Movie> findMoviesByAwards_Wins(Integer numberOfWins);
+
+    @Query("{ 'awards.text' : { $regex: ?0, $options: 'i' } }")
+    List<Movie> findByFieldNameContaining(String substringToSearch);
+
+
 }

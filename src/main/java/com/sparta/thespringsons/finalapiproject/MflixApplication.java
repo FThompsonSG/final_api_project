@@ -45,7 +45,7 @@ public class MflixApplication {
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
 //            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
 
-            List<String> movies = moviesService.getYearOfRelease("The Great Train Robbery");
+            List<String> movies = moviesService.getPosterLinkByTitle("The Great Train Robbery");
             for (String movie: movies) {
                 System.out.println(movie);
             }
