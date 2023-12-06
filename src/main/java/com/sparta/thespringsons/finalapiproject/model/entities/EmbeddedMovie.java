@@ -49,6 +49,7 @@ public class EmbeddedMovie {
 
     public String title;
 
+    @Field(name = "tomatoes")
     public Tomato tomato;
 
     public String type;

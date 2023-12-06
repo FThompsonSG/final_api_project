@@ -30,9 +30,12 @@ public class EmbeddedMoviesService  {
         List<String> embeddedMoviesTitles = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.tomato != null) {
-                if (embeddedMovie.tomato.getCritic().getRating() < maxRating && embeddedMovie.tomato.getCritic().getRating() > minRating) {
-                    embeddedMoviesTitles.add(embeddedMovie.getTitle());
-                }
+                if (embeddedMovie.tomato.getCritic() != null)
+                    if(embeddedMovie.tomato.getCritic().getRating() != null)
+                        if (embeddedMovie.tomato.getCritic().getRating() < maxRating && embeddedMovie.tomato.getCritic().getRating() > minRating) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
             }
         }
         return (embeddedMoviesTitles);
