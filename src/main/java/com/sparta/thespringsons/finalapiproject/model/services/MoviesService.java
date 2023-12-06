@@ -1,5 +1,4 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -58,29 +57,38 @@ public class MoviesService {
 //        return Optional.of(movies);
 //
 //    }
-
-    public Optional<List<Movie>> findAllByGenre(String genreName) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            for (String genre : movie.getGenres()) {
-                if (genre.equals(genreName)) {
-                    movies.add(movie);
-                }
-            }
-        }
-        return Optional.of(movies);
+    public List<Movie> getMoviesByGenre(String genreName) {
+        return movieRepository.findAllByGenres(genreName);
+    }
+//    public Optional<List<Movie>> findAllByGenre(String genreName) {
+//        List<Movie> movies = new ArrayList<>();
+//        for (Movie movie : movieRepository.findAll()) {
+//            for (String genre : movie.getGenres()) {
+//                if (genre.equals(genreName)) {
+//                    movies.add(movie);
+//                }
+//            }
+//        }
+//        return Optional.of(movies);
+//    }
+    public List<Movie> getMoviesByLanguages(String language) {
+        return movieRepository.findAllByLanguages(language);
     }
 
-    public Optional<List<Movie>> findAllByLanguage(String languageName) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            for (String langauge : movie.getLanguages()) {
-                if (langauge.equals(languageName)) {
-                    movies.add(movie);
-                }
-            }
-        }
-        return Optional.of(movies);
+//    public Optional<List<Movie>> findAllByLanguage(String languageName) {
+//        List<Movie> movies = new ArrayList<>();
+//        for (Movie movie : movieRepository.findAll()) {
+//            for (String langauge : movie.getLanguages()) {
+//                if (langauge.equals(languageName)) {
+//                    movies.add(movie);
+//                }
+//            }
+//        }
+//        return Optional.of(movies);
+//    }
+
+    public List<Movie> getMoviesByCountries(String country) {
+        return movieRepository.findAllByCountries(country);
     }
 
     public Optional<List<Movie>> findAllByTomatoesRotten() {
@@ -91,6 +99,30 @@ public class MoviesService {
             }
         }
         return Optional.of(movies);
+    }
+
+    public List<Movie> getAllByFullPlot(String fullPlot){
+        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> selectedMovies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String plot = movie.getFullplot();
+            if(plot != null && plot.contains(fullPlot)) {
+                selectedMovies.add(movie);
+            }
+        }
+        return selectedMovies;
+    }
+
+    public List<Movie> getAllByPlot(String keyWord) {
+        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> selectedMovies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String plot = movie.getPlot();
+            if(plot != null && plot.contains(keyWord)) {
+                selectedMovies.add(movie);
+            }
+        }
+        return selectedMovies;
     }
 
     public Optional<List<Movie>> findAllByTomatoesFresh() {
