@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,5 +15,4 @@ public class EmbeddedMovieController {
     public void getAllEmbeddedMovies() {
         // Gets all embedded movie
     }
-
 }
