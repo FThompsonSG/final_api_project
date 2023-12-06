@@ -22,14 +22,8 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
     List<Movie> findAllByLanguages(String language);
 
-    //@Query("{ $or: [ { 'Imdb.ratings' : { $gte: ?0, $lte: ?1 } }, { 'Imdb.ratings': null } ] }"
-//    List<Movie> findAllMoviesByCast(List<String> performers);
+    List<Movie> findAllByCountries(String country);
 
-//
-////    List<Movie> findAllMoviesByGenres(String genre);
-//
-//    List<Movie> findAllByImdbId(Integer id);
-//    ArrayList<Movie> findAllByImdbRating(Double lowerRating, Double upperRating);
-//    List<Movie> findAllByImdbVotes(Integer votes);
-//        Double findImdbRating(Movie movie);
+//    List<Movie> findAllByFullplot(String fullplot);
+
 }
