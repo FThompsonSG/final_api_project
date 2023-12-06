@@ -31,22 +31,21 @@ public class MflixApplication {
 
     @Bean
     public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
+                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository, CommentRepository commentRepository, EmbeddedMoviesService embeddedMoviesService){
         return args -> {
-
-//
-                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
-                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
-                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
-                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-//                System.out.println(imdbMovies);
-//                for(Movie movie : ratings) {
-//                    System.out.println(movie.getTitle());
-//                }
-            String newTest = moviesService.getNumberOfMovieImdbVotes("Dead Weekend");
-            System.out.println(newTest);
-
+//            User thisGuy = userRepository.findByName("Jon Snow");
+//            System.out.println(thisGuy.email);
+//            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
+//            System.out.println(movies.toString());
+//            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
+                //Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
+//            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
+//            System.out.println(thisMovie.getImdb().rating);
+//            System.out.println(thisMovie2.getTomatoes());
+//            System.out.println(noms.toString());
+//            System.out.println(thisGuy.email);
+//            System.out.println(commentRepository.findAll());
+            System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
         };
     }
 }

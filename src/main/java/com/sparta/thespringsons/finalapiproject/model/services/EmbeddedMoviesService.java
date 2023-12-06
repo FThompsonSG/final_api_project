@@ -22,6 +22,29 @@ public class EmbeddedMoviesService  {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
 
+    public Optional <List<EmbeddedMovie>> getEmbeddedMovieByActor(String actor){
+        List<EmbeddedMovie> EmbeddedMovies = embeddedMoviesRepository.findByCastContains(actor);
+        return Optional.of(EmbeddedMovies);
+    }
+
+    public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.tomato != null) {
+                if (embeddedMovie.tomato.getCritic() != null)
+                    if(embeddedMovie.tomato.getCritic().getRating() != null)
+                        if (embeddedMovie.tomato.getCritic().getRating() < maxRating && embeddedMovie.tomato.getCritic().getRating() > minRating) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
+            }
+        }
+        return (embeddedMoviesTitles);
+    }
+
+
+
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
@@ -37,4 +60,5 @@ public class EmbeddedMoviesService  {
     public List<EmbeddedMovie> getEmbeddedMoviesByAwardName(String awardName) {
         return embeddedMoviesRepository.findByFieldNameContaining("Oscar");
     }
+
 }

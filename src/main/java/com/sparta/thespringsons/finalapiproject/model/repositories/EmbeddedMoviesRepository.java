@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie, String> {
 
+   List<EmbeddedMovie>  findByTitle(String title);
+   List<EmbeddedMovie> findByAwardsNominations(Integer noms);
+
+   List<EmbeddedMovie> findByCastContains(String actor);
+  
    List<EmbeddedMovie> findByCountries(String countryName);
 
    @Query("{'awards.nominations' : { $gte : ?0 } }")
