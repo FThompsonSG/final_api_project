@@ -129,4 +129,17 @@ public class MoviesService {
         }
         return selectedMovies;
     }
+
+    //String
+    public String getNumberOfMovieImdbVotes(String movieName) {
+        Movie movie = movieRepository.findByTitle(movieName);
+        Integer numVotes = movie.getImdb().getVotes();
+        return movieName + ": " + numVotes;
+    }
+
+    public String getMovieImdbRatingByName(String movieName) {
+        Movie movie = movieRepository.findByTitle(movieName);
+        Double numVotes = movie.getImdb().getRating();
+        return movieName + ": " + numVotes;
+    }
 }

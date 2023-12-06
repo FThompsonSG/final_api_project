@@ -40,11 +40,12 @@ public class MflixApplication {
                 List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
                 List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
                 ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(1d,1.1d);
 //                System.out.println(imdbMovies);
-                for(Movie movie : ratings) {
-                    System.out.println(movie.getTitle());
-                }
+//                for(Movie movie : ratings) {
+//                    System.out.println(movie.getTitle());
+//                }
+            String newTest = moviesService.getNumberOfMovieImdbVotes("Dead Weekend");
+            System.out.println(newTest);
 
         };
     }
