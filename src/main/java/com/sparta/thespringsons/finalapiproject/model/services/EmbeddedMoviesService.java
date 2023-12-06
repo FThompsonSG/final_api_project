@@ -1,6 +1,7 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
+import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -35,7 +36,7 @@ public class EmbeddedMoviesService  {
 
             }
         }
-        return (embeddedMoviesTitles);
+        return embeddedMoviesTitles;
     }
 
     public List<String> findAllByTomatoesViewerRating(double minRating, double maxRating) {
@@ -51,7 +52,7 @@ public class EmbeddedMoviesService  {
 
             }
         }
-        return (embeddedMoviesTitles);
+        return embeddedMoviesTitles;
     }
 
     public List<String> findAllByTomatoesCriticMeter(double minMeter, double maxMeter) {
@@ -67,7 +68,7 @@ public class EmbeddedMoviesService  {
 
             }
         }
-        return (embeddedMoviesTitles);
+        return embeddedMoviesTitles;
     }
 
     public List<String> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
@@ -83,7 +84,52 @@ public class EmbeddedMoviesService  {
 
             }
         }
-        return (embeddedMoviesTitles);
+        return embeddedMoviesTitles;
+    }
+
+    public List<String> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getRotten() != null)
+                        if (embeddedMovie.getTomato().getRotten() < maxRotten && embeddedMovie.getTomato().getRotten() > minRotten) {
+                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        }
+
+            }
+        }
+        return embeddedMoviesTitles;
+    }
+
+    public List<String> findAllByTomatoesFreshReviews(int minFresh, int maxFresh) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getFresh() != null)
+                    if (embeddedMovie.getTomato().getFresh() < maxFresh && embeddedMovie.getTomato().getFresh() > minFresh) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
+            }
+        }
+        return embeddedMoviesTitles;
+    }
+
+    public List<String> findAllByTomatoesProduction(String production) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getProduction() != null)
+                    if (embeddedMovie.getTomato().getProduction().equals(production)) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
+            }
+        }
+        return embeddedMoviesTitles;
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
