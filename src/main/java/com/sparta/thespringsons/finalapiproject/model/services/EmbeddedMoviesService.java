@@ -117,6 +117,21 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesTitles;
     }
 
+    public List<String> findAllByTomatoesProduction(String production) {
+        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
+        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
+            if(embeddedMovie.getTomato() != null) {
+                if (embeddedMovie.getTomato().getProduction() != null)
+                    if (embeddedMovie.getTomato().getProduction().equals(production)) {
+                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                    }
+
+            }
+        }
+        return embeddedMoviesTitles;
+    }
+
 
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
