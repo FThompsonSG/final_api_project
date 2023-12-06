@@ -17,7 +17,7 @@ public class UserServiceTest {
     @Test
     @DisplayName("Test get User By Name")
     void testUserByName() {
-        Assertions.assertEquals("kit_harington@gameofthron.es", userService.getByName("Jon Snow").getEmail());
+        Assertions.assertEquals("kit_harington@gameofthron.es", userService.getByName("Jon Snow").get().getEmail());
     }
 
     @Test
