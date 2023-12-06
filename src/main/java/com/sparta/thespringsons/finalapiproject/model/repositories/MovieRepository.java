@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.repositories;
 
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -24,6 +25,13 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
     List<Movie> findAllByCountries(String country);
 
-//    List<Movie> findAllByFullplot(String fullplot);
+    @Query("{'year' : { $eq : ?0 } }")
+    List<Movie> findByYearExact(Integer year);
+
+    @Query("{'year' : { $lte : ?0 } }")
+    List<Movie> findByYearBefore(Integer year);
+
+    @Query("{'year' : { $gte : ?0 } }")
+    List<Movie> findByYearAfter(Integer year);
 
 }

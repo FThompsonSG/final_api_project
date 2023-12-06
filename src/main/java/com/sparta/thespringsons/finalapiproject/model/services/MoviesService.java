@@ -1,4 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -209,7 +210,7 @@ public class MoviesService {
         List<Movie> allMovies = movieRepository.findByTitle(name);
         List<String> movies = new ArrayList<>();
         for(Movie movie : allMovies) {
-            String year = movie.getReleased().substring(0,4);
+            String year = movie.getReleased().substring(24);
             String result = "";
             if(year != null){
                 result = name + "'s year of release: " + year;
@@ -217,5 +218,35 @@ public class MoviesService {
             }
         }
         return movies;
+    }
+
+    public List<Movie> getEmbeddedMoviesByYearExact(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearExact(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<Movie> getMoviesByYearBefore(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearBefore(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<Movie> getEmbeddedMoviesByYearAfter(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearAfter(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
     }
 }

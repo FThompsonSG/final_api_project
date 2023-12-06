@@ -5,6 +5,7 @@ import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepositor
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import com.sparta.thespringsons.finalapiproject.model.services.MoviesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +26,7 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(UserRepository userRepository,EmbeddedMoviesService embeddedMoviesService,
+    public CommandLineRunner runner(UserRepository userRepository, EmbeddedMoviesService embeddedMoviesService,
                                     EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
         return args -> {
 
@@ -42,7 +43,12 @@ public class MflixApplication {
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
-            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
+//            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
+
+            List<String> movies = moviesService.getYearOfRelease("The Great Train Robbery");
+            for (String movie: movies) {
+                System.out.println(movie);
+            }
 
 //
                 /*List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");
