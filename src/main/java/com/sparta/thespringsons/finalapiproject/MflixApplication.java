@@ -1,6 +1,7 @@
 package com.sparta.thespringsons.finalapiproject;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
@@ -38,20 +39,23 @@ public class MflixApplication {
 //            System.out.println(movies.toString());
 //            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-
+                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
                 List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
-                Optional<List<Movie>> ratings = moviesService.getAllMoviesByImdbRating(5d,8d);
-//                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-
+//                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(6.9,7d);
+                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
+                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(6.9,7d);
+                System.out.println(imdbMovies);
+                for(Movie movie : imdbMovies) {
+                    System.out.println(movie.getTitle());
+                }
 //                for(Movie rating : movies2){
 //                    System.out.println(rating.getTitle());
 //                }
-                for(int i = 0; i < ratings.get().size(); i++){
-                    System.out.println(rating.getTitle());
-                }
-                for(Movie movie : movies) {
-                    System.out.println(movie.getTitle());
-                }
+//                System.out.println(ratings);
+
+//                for(Movie movie : movies) {
+//                    System.out.println(movie.getTitle());
+//                }
 //                System.out.println(movies.get(0).getTitle());
 //                List<Movie> thisMovie2 = movieRepository.findAllByDirectors(directors);
 //

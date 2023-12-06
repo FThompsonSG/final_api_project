@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,16 +114,24 @@ public class MoviesService {
         return Optional.of(movies);
     }
 
-    public Optional<List<Movie>> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+    public List<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for(Movie movie : movies) {
-            Double movieRating = movie.getImdb().getRating();
-            if (movieRating >= lowerRating && movieRating <= upperRating) {
-                selectedMovies.add(movie);
+            Imdb imdb = movie.getImdb();
+            if (imdb.getRating() != null) {
+                Double movieRating = imdb.getRating();
+                if (movieRating >= lowerRating && movieRating <= upperRating) {
+                    selectedMovies.add(movie);
+                }
             }
         }
-        return Optional.of(selectedMovies);
+        return selectedMovies;
+    }
+
+    public List<Movie> getMoviesByImdbRatingsBetween(Double lowerRating, Double upperRating) {
+        List<Movie> selectedMovies = movieRepository.findByImdbRatingsBetween(lowerRating, upperRating);
+        return selectedMovies;
     }
 
 
