@@ -113,13 +113,18 @@ public class MoviesService {
         return Optional.of(movies);
     }
 
-    public ArrayList<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
-        ArrayList<Movie> movies = movieRepository.findAllByImdb();
-        ArrayList<Movie> selectedMovies = new ArrayList<>();
+    public Optional<List<Movie>> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> selectedMovies = new ArrayList<>();
+        for(Movie movie : movies) {
+            Double movieRating = movie.getImdb().getRating();
+            if (movieRating >= lowerRating && movieRating <= upperRating) {
                 selectedMovies.add(movie);
             }
         }
+        return Optional.of(selectedMovies);
     }
+
 
 
 

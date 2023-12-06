@@ -13,7 +13,7 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 //    List<Movie> findAllMovies();
     Movie findByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
-    ArrayList<Movie> findAllByImdb();
+
 //    List<Movie> findAllMoviesByCast(List<String> performers);
 //
 ////    List<Movie> findAllMoviesByGenres(String genre);

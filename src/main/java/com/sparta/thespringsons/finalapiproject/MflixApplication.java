@@ -40,8 +40,13 @@ public class MflixApplication {
                 Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
 
                 List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
-                ArrayList<Movie> ratings = moviesService.getAllMoviesByImdbRating(5d,8d);
-                for(Movie rating : ratings){
+                Optional<List<Movie>> ratings = moviesService.getAllMoviesByImdbRating(5d,8d);
+//                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
+
+//                for(Movie rating : movies2){
+//                    System.out.println(rating.getTitle());
+//                }
+                for(int i = 0; i < ratings.get().size(); i++){
                     System.out.println(rating.getTitle());
                 }
                 for(Movie movie : movies) {

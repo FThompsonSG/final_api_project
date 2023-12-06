@@ -34,7 +34,7 @@ public class Movie {
     private Tomato tomatoes;
     //could be enum
     private String type;
-    private Integer year;
+    private String year;
     private List<String> writers;
 
     public Movie() {}
@@ -46,7 +46,7 @@ public class Movie {
                  Integer num_mflix_comments, String plot,
                  String poster, String rated, String released,
                  Integer runtime, String title, Tomato tomatoes,
-                 String type, Integer year, List<String> writers) {
+                 String type, String year, List<String> writers) {
         this.id = id;
         this.awards = awards;
         this.cast = cast;
@@ -222,11 +222,11 @@ public class Movie {
         this.type = type;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
