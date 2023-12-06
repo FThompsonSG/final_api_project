@@ -43,7 +43,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets alL embedded movie by runtime range")
-    @GetMapping("/embeddedMovies")
+    @GetMapping("/embeddedMovies/runtime")
     public void getEmbeddedMovieByRuntimeRange
             (@RequestParam Integer lowerRuntime, @RequestParam Integer upperRuntime){
         // Gets all embedded movies within the specified runtime range

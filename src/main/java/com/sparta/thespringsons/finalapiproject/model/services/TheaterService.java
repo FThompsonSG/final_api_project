@@ -30,12 +30,19 @@ public class TheaterService {
         return theatersRepository.findById(id);
     }
 
-    public String saveTheater(Theater theater) {
+    public List<Theater> getTheatersByZipcode(String zipcode) {
+        List<Theater> zipcodesList = getAllTheaters().stream()
+                .filter(theater -> theater.getLocation().getAddress().getZipcode().contains(zipcode))
+                .toList();
+        return zipcodesList;
+    }
+
+    public Theater saveTheater(Theater theater) throws Exception {
         try {
             theatersRepository.save(theater);
-            return "Saved";
+            return theater;
         } catch (Exception e) {
-            return "Failed to save";
+            throw new Exception("Failed to save theater - invalid args");
         }
     }
 
@@ -50,6 +57,18 @@ public class TheaterService {
                 theatersRepository.save(theaterToUpdate);
                 return theaterToUpdate;
             }
+    }
+
+    public String deleteTheater(Integer theater_id) throws Exception {
+        Optional<Theater> theater = theatersRepository.getTheaterByTheaterId(theater_id);
+
+        if (theater.isEmpty()) {
+            throw new Exception("No theater found for given ID.");
+        } else {
+            theatersRepository.delete(theater.get());
+            return "Theater deleted";
+        }
+
     }
 
 }
