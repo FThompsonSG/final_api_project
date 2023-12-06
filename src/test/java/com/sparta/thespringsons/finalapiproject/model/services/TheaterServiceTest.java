@@ -1,6 +1,7 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
+import jakarta.validation.constraints.AssertTrue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -43,6 +44,17 @@ class TheaterServiceTest {
 
         Assertions.assertEquals("MN",
                 testTheater.get().getLocation().getAddress().getState());
+    }
+
+    @Test
+    @DisplayName("Testing find by zipcode partial matching")
+        public void testFindByZipcode() {
+        List<Theater> matchingTheaters = theaterService.getTheatersByZipcode("19");
+        Assertions.assertTrue(matchingTheaters.size() > 0);
+        System.out.println(matchingTheaters.size());
+
+        for (Theater theater : matchingTheaters)
+            System.out.println(theater.getLocation().getAddress().getZipcode());
     }
 
 }
