@@ -16,9 +16,6 @@ public class CommentServiceTests {
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private MovieRepository movieRepository;
-
     @Test
     @DisplayName("Test get all Comments By Name")
     void TestCommentByName(){
