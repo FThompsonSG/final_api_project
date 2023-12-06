@@ -26,17 +26,6 @@ public class CommentServiceTests {
     }
 
     @Test
-    @DisplayName("Test get all Comments By ID")
-    void TestCommentById(){
-        Assertions.assertEquals("Mercedes Tyler",commentService.getAllByMovieId("5a9427648b0beebeb69579e7").get(0).getName());
-    }
-//    @Test
-//    @DisplayName("Test get all Comments By ID")
-//    void bla(){
-//        Assertions.assertTrue(commentService.getBoool("573a1390f29313caabcd587d"));
-//    }
-
-    @Test
     @DisplayName("Test get all Comments By Movie Title")
     void TestCommentMovieTitle(){
         Assertions.assertEquals("John Bishop",commentService.getAllCommentsByMovieTitle("A Corner in Wheat").get(0).getName());

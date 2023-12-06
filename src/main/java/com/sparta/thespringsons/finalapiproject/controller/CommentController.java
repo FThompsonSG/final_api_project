@@ -32,12 +32,6 @@ public class CommentController {
     public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle){
         return commentService.getAllCommentsByMovieTitle(movieTitle);
     }
-
-    @GetMapping("/commentsbyid/{id}")
-    public List<Comment> getAllCommentsById(@PathVariable String id){
-        return commentService.getAllByMovieId(id);
-    }
-
 }
     //
 //

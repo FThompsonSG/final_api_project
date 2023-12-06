@@ -35,17 +35,4 @@ public class CommentService {
         Movie movie = movieRepository.findByTitle(movieTitle);
         return commentRepository.findAllByMovieId(movie.getId());
     }
-
-    public boolean getBoool(String movieId){
-        boolean bla = false;
-        List<Comment> sss = commentRepository.findAllByMovieId(movieId);
-        if(!sss.isEmpty()){
-            bla =  true;
-        }
-        return bla;
-    }
-
-    public List<Comment> getAllByMovieId(String id){
-        return commentRepository.findAllById(id);
-    }
 }
