@@ -7,6 +7,8 @@ import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import com.sparta.thespringsons.finalapiproject.model.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,8 @@ public class UserController {
         OurLogger.setUpLogger(logger);
     }
 
+    @Tag(name = "Get User by Name")
+    @Operation(summary = "Get User by Name")
     @GetMapping("/userbyname/{name}")
     public Optional<User> getUserByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get user by name method in users controller");
@@ -40,6 +44,8 @@ public class UserController {
         return user;
     }
 
+    @Tag(name = "Get User by ID")
+    @Operation(summary = "Get User by ID")
     @GetMapping("/userbyid/{id}")
     public Optional<User> getUserById(@PathVariable String id) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get user by id method in users controller");
