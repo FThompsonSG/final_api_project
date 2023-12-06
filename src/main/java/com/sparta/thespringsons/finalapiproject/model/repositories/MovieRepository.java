@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
-    List<Movie> findAllMovies();
-    Movie findByTitle(String title);
-    List<Movie> findAllByDirectors(List<String> directors);
+//    List<Movie> findAllMovies();
+//    Movie findByTitle(String title);
+//    List<Movie> findAllByDirectors(List<String> directors);
 
-    List<Movie> findAllMoviesByActors(String performer);
-
-    List<Movie> findAllMoviesByGenre(String genre);
+//    List<Movie> findAllMoviesByActors(String performer);
+//
+//    List<Movie> findAllMoviesByGenre(String genre);
 }

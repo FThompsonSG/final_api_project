@@ -14,50 +14,143 @@ import java.util.Date;
 @Document("embedded_movies")
 public class EmbeddedMovie {
     @Id
-    public String id;
+    private String id;
 
-    public Awards awards;
-    public String[] cast;
+    private Awards awards;
+    private String[] cast;
 
-    public String[] countries;
+    private String[] countries;
 
-    public String[] directors;
+    private String[] directors;
 
-    public String fullplot;
+    private String fullplot;
 
-    public String[] genres;
+    private String[] genres;
 
-    public Imdb imdb;
+    private Imdb imdb;
 
-    public String[] languages;
+    private String[] languages;
 
-    public String lastupdated;
+    private String lastupdated;
 
-    public Integer num_mflix_comments;
+    private Integer num_mflix_comments;
 
-    public String plot;
+    private String plot;
 
-    public String[] plot_embedding;
+    private String[] plot_embedding;
 
-    public String rating;
+    private String rating;
 
-    @Field("released")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date released;
+//    @Field("released")
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//    private Date released;
+    private String released;
 
-    public Integer runtime;
+    private Integer runtime;
 
-    public String title;
+    private String title;
 
-    public Tomato tomato;
+    private Tomato tomato;
 
-    public String type;
+    private String type;
 
-    public String[] writers;
+    private String[] writers;
 
-    public Integer year;
+    private String year;
 
-    public String poster;
+    private String poster;
+
+    public String getId() {
+        return id;
+    }
+
+    public Awards getAwards() {
+        return awards;
+    }
+
+    public String[] getCast() {
+        return cast;
+    }
+
+    public String[] getCountries() {
+        return countries;
+    }
+
+    public String[] getDirectors() {
+        return directors;
+    }
+
+    public String getFullplot() {
+        return fullplot;
+    }
+
+    public String[] getGenres() {
+        return genres;
+    }
+
+    public Imdb getImdb() {
+        return imdb;
+    }
+
+    public String[] getLanguages() {
+        return languages;
+    }
+
+    public String getLastupdated() {
+        return lastupdated;
+    }
+
+    public Integer getNum_mflix_comments() {
+        return num_mflix_comments;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public String[] getPlot_embedding() {
+        return plot_embedding;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+//    public Date getReleased() {
+//        return released;
+//    }
+
+    public String getReleased() {
+        return released;
+    }
+
+    public Integer getRuntime() {
+        return runtime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Tomato getTomato() {
+        return tomato;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String[] getWriters() {
+        return writers;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
 
     @Override
     public String toString() {

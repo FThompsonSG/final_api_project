@@ -7,6 +7,7 @@ import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,22 +26,8 @@ public class MflixApplication {
     }
 
     @Bean
-
-    public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository, CommentRepository commentRepository){
+    public CommandLineRunner runner(EmbeddedMoviesService embeddedMoviesService){
         return args -> {
-//            User thisGuy = userRepository.findByName("Jon Snow");
-//            System.out.println(thisGuy.email);
-//            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
-//            System.out.println(movies.toString());
-//            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
-                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-//            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
-//            System.out.println(thisMovie.getImdb().rating);
-//            System.out.println(thisMovie2.getTomatoes());
-//            System.out.println(noms.toString());
-//            System.out.println(thisGuy.email);
-//            System.out.println(commentRepository.findAll());
         };
     }
 }
