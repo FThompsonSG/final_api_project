@@ -1,26 +1,38 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
-import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
+import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 public class CommentController {
-    private final CommentRepository commentRepository;
+
+    private final CommentService commentService;
     @Autowired
-    public CommentController(CommentRepository commentRepository) {
-        this.commentRepository = commentRepository;
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
     @GetMapping("/comment")
     public List<Comment> getAllComments(){
-        return commentRepository.findAll();
+        return commentService.getAllComments();
     }
 
+    @GetMapping("/commentsbyname/{name}")
+    public List<Comment> getAllCommentsByName(@PathVariable String name){
+        return commentService.getAllByName(name);
+    }
+
+    @GetMapping("/commentsbymovietitle/{movieTitle}")
+    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle){
+        return commentService.getAllCommentsByMovieTitle(movieTitle);
+    }
+}
     //
 //
 //        // Assuming we'll have a service for handling comments
@@ -52,4 +64,3 @@ public class CommentController {
     // public void deleteComment(@PathVariable String commentId) {
     //    commentService.deleteComment(commentId);
     // }
-}
