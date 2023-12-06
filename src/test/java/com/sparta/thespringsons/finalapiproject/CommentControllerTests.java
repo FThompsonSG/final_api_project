@@ -44,6 +44,6 @@ public class CommentControllerTests {
     @Test
     @DisplayName("Test Get Comments By Name")
     void testGetCommentsByName() {
-        testClient.get().uri("https://localhost:8080//commentsbyname/Mercedes Tyler").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/commentsbyname/Mercedes Tyler").exchange().expectStatus().isEqualTo(200);
     }
 }
