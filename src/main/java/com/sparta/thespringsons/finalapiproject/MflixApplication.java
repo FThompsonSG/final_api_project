@@ -39,16 +39,20 @@ public class MflixApplication {
 //            List<EmbeddedMovie> movies = embeddedMoviesRepository.findByTitle("Beau Geste");
 //            System.out.println(movies.toString());
 //            List<EmbeddedMovie> noms = embeddedMoviesRepository.findByAwardsNominations(1);
-                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
-                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
+//                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
+//                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
+                List<Movie> movies = moviesService.getMoviesByWriter("Winsor McCay");
+            for (Movie movie :
+                    movies) {
+                System.out.println(movie.getTitle());
+            }
 //                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(6.9,7d);
-                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(6.9,7d);
-                System.out.println(imdbMovies);
-                for(Movie movie : imdbMovies) {
-                    System.out.println(movie.getTitle());
-                }
+//                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
+//                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(6.9,7d);
+//                System.out.println(imdbMovies);
+//                for(Movie movie : imdbMovies) {
+//                    System.out.println(movie.getTitle());
+//                }
 //                for(Movie rating : movies2){
 //                    System.out.println(rating.getTitle());
 //                }

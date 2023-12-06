@@ -1,4 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -38,16 +39,8 @@ public class MoviesService {
         ArrayList<Movie> movies = movieRepository.findAllByDirectors(directors);
         return movies;
     }
-    public Optional<List<Movie>> findAllByWriter(String writerName) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            for (String actor : movie.getCast()) {
-                if (actor.equals(writerName)) {
-                    movies.add(movie);
-                }
-            }
-        }
-        return Optional.of(movies);
+    public List<Movie> getMoviesByWriter(String writerName) {
+        return movieRepository.findAllByWriters(writerName);
     }
 
     public Optional<List<Movie>> findAllByGenre(String genreName) {
