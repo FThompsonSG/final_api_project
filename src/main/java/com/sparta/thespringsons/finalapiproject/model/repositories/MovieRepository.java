@@ -12,7 +12,7 @@ import java.util.List;
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
 //    List<Movie> findAllMovies();
-    Movie findByTitle(String title);
+    List<Movie> findByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
 
     //@Query("{ $or: [ { 'Imdb.ratings' : { $gte: ?0, $lte: ?1 } }, { 'Imdb.ratings': null } ] }"
