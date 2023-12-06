@@ -28,7 +28,7 @@ public class MflixApplication {
     @Bean
 
     public CommandLineRunner runner(UserRepository userRepository,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository, CommentRepository commentRepository){
+                                    EmbeddedMoviesRepository embeddedMoviesRepository,  MovieRepository movieRepository, CommentRepository commentRepository, EmbeddedMoviesService embeddedMoviesService){
         return args -> {
 //            User thisGuy = userRepository.findByName("Jon Snow");
 //            System.out.println(thisGuy.email);
@@ -42,6 +42,7 @@ public class MflixApplication {
 //            System.out.println(noms.toString());
 //            System.out.println(thisGuy.email);
 //            System.out.println(commentRepository.findAll());
+            System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
         };
     }
 }

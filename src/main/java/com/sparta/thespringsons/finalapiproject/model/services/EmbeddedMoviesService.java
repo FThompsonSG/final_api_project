@@ -25,24 +25,17 @@ public class EmbeddedMoviesService  {
         return Optional.of(EmbeddedMovies);
     }
 
-    public Optional<List<EmbeddedMovie>> findAllByTomatoesWithLowerRating(double rating) {
+    public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
+        List<String> embeddedMoviesTitles = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if (embeddedMovie.tomato.getRating() < rating) {
-                embeddedMovies.add(embeddedMovie);
+            if(embeddedMovie.tomato != null) {
+                if (embeddedMovie.tomato.getCritic().getRating() < maxRating && embeddedMovie.tomato.getCritic().getRating() > minRating) {
+                    embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                }
             }
         }
-        return Optional.of(embeddedMovies);
-    }
-
-    public Optional<List<EmbeddedMovie>> findAllByTomatoesWithHigherRating(double rating) {
-        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if (embeddedMovie.tomato.getRating() > rating) {
-                embeddedMovies.add(embeddedMovie);
-            }
-        }
-        return Optional.of(embeddedMovies);
+        return (embeddedMoviesTitles);
     }
 
 

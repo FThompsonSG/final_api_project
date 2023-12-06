@@ -25,15 +25,6 @@ public class Tomato {
 
     private Reviewer viewer;
 
-    private Double rating;
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
 
     public Reviewer getCritic() {
         return critic;
