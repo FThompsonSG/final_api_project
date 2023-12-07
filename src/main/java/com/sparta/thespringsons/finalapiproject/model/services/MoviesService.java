@@ -155,25 +155,5 @@ public class MoviesService {
             throw new NumberFormatException("Invalid date format");
         }
 
-//    public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws Exception {
-//        List<Movie> movies = movieRepository.findAll();
-//        List<Movie> moviesInRange = new ArrayList<>();
-//        int lowDate = Integer.parseInt(lowerDate);
-//        int highDate = Integer.parseInt(upperDate);
-//
-//        try {
-//           List<Movie> movieRangeList =  movies.stream()
-//                    .filter(movie -> {
-//                        int movieYear = Integer.parseInt(movie.getYear());
-//                        return movieYear >= lowDate && movieYear <= highDate;
-//                    })
-//                    .toList();
-//            return moviesInRange;
-//        }
-//        catch(NumberFormatException e){
-//            throw new NumberFormatException("Year wasn't formatted Correctly");
-//        }
-//
-//    }
     }
 }

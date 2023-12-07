@@ -29,23 +29,23 @@ public class MflixApplication {
         SpringApplication.run(MflixApplication.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner runner(UserRepository userRepository,
-//                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
-//        return args -> {
+    @Bean
+    public CommandLineRunner runner(UserRepository userRepository,
+                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
+        return args -> {
+
 //
-////
-//                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
-//                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
-//                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
-//                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
-//                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
-//                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(1d,1.1d);
-////                System.out.println(imdbMovies);
-//                for(Movie movie : ratings) {
-//                    System.out.println(movie.getTitle());
-//                }
-//
-//        };
-//    }
+                Movie thisMovie = movieRepository.findByTitle("The Four Horsemen of the Apocalypse");
+                ArrayList<Movie> allMovies = (ArrayList<Movie>) movieRepository.findAll();
+                List<Movie> movies = moviesService.getAllMoviesByDirector("Hal Roach");
+                List<Movie> ratings = moviesService.getAllMoviesByImdbRating(3d,3.1d);
+                ArrayList<Movie> movies2 = (ArrayList<Movie>) movieRepository.findAll();
+                ArrayList<Movie> imdbMovies = (ArrayList<Movie>) moviesService.getMoviesByImdbRatingsBetween(1d,1.1d);
+//                System.out.println(imdbMovies);
+                for(Movie movie : ratings) {
+                    System.out.println(movie.getTitle());
+                }
+
+        };
+    }
 }
