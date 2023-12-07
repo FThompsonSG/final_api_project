@@ -1,11 +1,13 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.thespringsons.finalapiproject.exceptions.norecordfound.NoRecordFoundException;
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
 import com.sparta.thespringsons.finalapiproject.model.services.TheaterService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,7 @@ class TheatreControllerTest {
     Theater mockTheater = new Theater("9999999", location, 999999);
 
     @Test
+    @DisplayName("Test get all theaters endpoint")
     public void getAllTheatres() throws Exception {
         ArrayList<Theater> theaterList = new ArrayList<>();
         theaterList.add(mockTheater);
@@ -55,7 +58,8 @@ class TheatreControllerTest {
     }
 
     @Test
-    void getAllTheatersByZipcode() throws Exception {
+    @DisplayName("Testing get all theaters by zipcode endpoint")
+    public void getAllTheatersByZipcode() throws Exception {
         ArrayList<Theater> theaterList = new ArrayList<>();
         theaterList.add(mockTheater);
         Mockito.when(theaterService.getTheatersByZipcode("1234567")).thenReturn(theaterList);
@@ -68,7 +72,8 @@ class TheatreControllerTest {
     }
 
     @Test
-    void testGetAllTheatres() throws Exception {
+    @DisplayName("Testing get theatre by theater_id endpoint")
+    public void testGetTheatreByTheaterId() throws Exception {
         Optional<Theater> mockTheaterOp = Optional.of(mockTheater);
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
         mockMvc
@@ -80,7 +85,8 @@ class TheatreControllerTest {
     }
 
     @Test
-    void addTheatre() throws Exception {
+    @DisplayName("Testing add theatre endpoint")
+    public void testAddTheatre() throws Exception {
         ArrayList<Theater> theaterList = new ArrayList<>();
         theaterList.add(mockTheater);
         mockTheater.setId("000111");
@@ -95,11 +101,42 @@ class TheatreControllerTest {
                 .andDo(print());
     }
 
+
+
     @Test
-    void deleteTheatre() {
-        // Artie
+    @DisplayName("Test delete theatre endpoint")
+    void testDeleteTheatre() throws Exception {
+        String returned = " ";
+        Optional<Theater> mockTheaterOp = Optional.of(mockTheater);
+
+        String mockMessage = "Theater deleted";
+        Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
+        Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
+        mockMvc
+                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theaters/delete/{theater_id}", Integer.valueOf(999999)))
+                .andExpect(status().is(200))
+                //.andExpect(content().string(mockMessage))
+                .andExpect(handler().methodName("deleteTheater"))
+                .andDo(print());
     }
 
+
+    @Test
+    @DisplayName("Test delete theatre throws exception endpoint")
+    void testDeleteTheatreThrowsException() throws Exception {
+        String returned = " ";
+        Optional<Theater> noRecord = Optional.empty();
+
+        String mockMessage = "Theater deleted";
+        Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
+        Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
+        mockMvc
+                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theaters/delete/{theater_id}", Integer.valueOf(999999)))
+                .andExpect(status().is(400))
+                //.andExpect(content().string(mockMessage))
+                .andExpect(handler().methodName("deleteTheater"))
+                .andDo(print());
+    }
     @Test
     void updateTheatre() {
         // Affoq
