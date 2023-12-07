@@ -51,19 +51,19 @@ public class UserService {
         return Optional.of(userRepository.save(newUser));
     }
 
-    public String deleteUser(String id) {
-        Optional<User> user = userRepository.findById(id);
-        userRepository.delete(user.get());
-        return "User deleted";
+    public Optional<User> deleteUser(String id) {
+        Optional<User> userToDelete = userRepository.findById(id);
+        userRepository.deleteById(id);
+        return userToDelete;
     }
 
-    public User updateUser(User user, String id) throws Exception {
+    public Optional<User> updateUser(User user, String id) throws Exception {
         Optional<User> retrievedUser = userRepository.findById(id);
         User userToUpdate = retrievedUser.get();
         userToUpdate = user;
         userToUpdate.setId(id);
         userRepository.save(userToUpdate);
-        return userToUpdate;
+        return Optional.of(userToUpdate);
     }
 
     public List<User> getByEmail(String email) {

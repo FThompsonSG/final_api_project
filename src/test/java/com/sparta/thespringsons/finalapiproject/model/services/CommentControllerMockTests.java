@@ -61,7 +61,7 @@ public class CommentControllerMockTests {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.deleteComment(mockComment.getId())).thenReturn("Comment has been deleted");
+        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
 
         mockMvc
                 .perform(delete("http://localhost:8080/comments/delete/5a9427648b0beebeb69810b6"))
@@ -77,7 +77,7 @@ public class CommentControllerMockTests {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.updateComment(Mockito.any(Comment.class), Mockito.anyString())).thenReturn(mockComment);
+        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
 
         mockMvc
                 .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")

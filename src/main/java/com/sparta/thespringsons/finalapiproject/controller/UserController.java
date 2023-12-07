@@ -84,7 +84,7 @@ public class UserController {
     @Tag(name = "Delete User")
     @Operation(summary = "Delete a User")
     @DeleteMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable String id) throws Exception {
+    public Optional<User> deleteUser(@PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered delete user method in user controller");
         Optional<User> userToDelete = userService.getById(id);
         if (userToDelete.isEmpty()) {
@@ -96,7 +96,7 @@ public class UserController {
     @Tag(name = "Update User Record")
     @Operation(summary = "Update user record")
     @PostMapping("/users/update/{id}")
-    public User updateUser(
+    public Optional<User> updateUser(
             @RequestBody User newUser,
             @PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered update user method in user controller");
@@ -104,7 +104,7 @@ public class UserController {
         if (userToUpdate.isEmpty()) {
             throw new NoRecordFoundException("user", "/users/update/{id}");
         }
-        return userService.updateUser(newUser, id);
+        return userToUpdate;
     }
 
 }

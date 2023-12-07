@@ -42,7 +42,7 @@ public class UserControllerMockTests {
         User mockUser = new User();
         mockUser.setId("TestID");
         mockUser.setName("Test Name");
-        Mockito.when(userService.saveUser(mockUser)).thenReturn(Optional.of(mockUser));
+        Mockito.when(userService.saveUser(Mockito.any(User.class))).thenReturn(Optional.of(mockUser));
 
         mockMvc
                 .perform(post("http://localhost:8080/users")
@@ -55,37 +55,35 @@ public class UserControllerMockTests {
                 .andDo(print());
     }
 
-//    @Test
-//    @DisplayName("Test Delete comment")
-//    void testDeleteComment() throws Exception {
-//        Comment mockComment = new Comment();
-//        mockComment.setId("5a9427648b0beebeb69810b6");
-//        mockComment.setText("This is text");
-//        Mockito.when(commentService.deleteComment(mockComment.getId())).thenReturn("Comment has been deleted");
-//
-//        mockMvc
-//                .perform(delete("http://localhost:8080/comments/delete/5a9427648b0beebeb69810b6"))
-//                .andExpect(status().is(200))
-//                .andExpect(content().contentType("application/json"))
-//                .andExpect(handler().methodName("deleteComment"))
-//                .andDo(print());
-//    }
-//
-//    @Test
-//    @DisplayName("Test update comment")
-//    void testUpdateComment() throws Exception {
-//        Comment mockComment = new Comment();
-//        mockComment.setId("5a9427648b0beebeb69810b6");
-//        mockComment.setText("This is text");
-//        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
-//
-//        mockMvc
-//                .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(mockComment)))
-//                .andExpect(status().is(200))
-//                .andExpect(content().contentType("application/json"))
-//                .andExpect(handler().methodName("updateComment"))
-//                .andDo(print());
-//    }
+    @Test
+    @DisplayName("Test Delete user")
+    void testDeleteUser() throws Exception {
+        User mockUser = new User();
+        mockUser.setId("5a9427648b0beebeb69810b6");
+        Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
+
+        mockMvc
+                .perform(delete("http://localhost:8080/users/delete/5a9427648b0beebeb69810b6"))
+                .andExpect(status().is(200))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(handler().methodName("deleteUser"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("Test update user")
+    void testUpdateUser() throws Exception {
+        User mockUser = new User();
+        mockUser.setId("5a9427648b0beebeb69810b6");
+        Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
+
+        mockMvc
+                .perform(post("http://localhost:8080/users/update/5a9427648b0beebeb69810b6")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mockUser)))
+                .andExpect(status().is(200))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(handler().methodName("updateUser"))
+                .andDo(print());
+    }
 }
