@@ -19,6 +19,18 @@ public class Awards {
         return wins;
     }
 
+    public void setWins(Integer wins) {
+        this.wins = wins;
+    }
+
+    public void setNominations(Integer nominations) {
+        this.nominations = nominations;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public String toString() {
         return "Awards{" +
