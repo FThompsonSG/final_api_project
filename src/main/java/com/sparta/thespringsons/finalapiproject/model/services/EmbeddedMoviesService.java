@@ -287,6 +287,41 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
-    
+    public EmbeddedMovie updateEmbeddedMovieLanguages(String Id, String newLanguage) {
+        EmbeddedMovie movie = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            movie = embeddedMoviesRepository.findById(Id).get();
+            List<String> languages = Arrays.asList(movie.getLanguages());
+            languages.add(newLanguage);
+            movie.setWriters(languages.toArray(new String[0]));
+        }
+        return embeddedMoviesRepository.save(movie);
+    }
+
+    public EmbeddedMovie updateEmbeddedMovieCountries(String Id, String newCountry) {
+        EmbeddedMovie movie = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            movie = embeddedMoviesRepository.findById(Id).get();
+            List<String> countries = Arrays.asList(movie.getCountries());
+            countries.add(newCountry);
+            movie.setWriters(countries.toArray(new String[0]));
+        }
+        return embeddedMoviesRepository.save(movie);
+    }
+
+    public EmbeddedMovie incrementCommentCount(String Id) {
+        EmbeddedMovie movie = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            movie = embeddedMoviesRepository.findById(Id).get();
+            Integer comments = movie.getNum_mflix_comments();
+            Integer newComments = comments++;
+            movie.setNum_mflix_comments(newComments);
+        }
+        return embeddedMoviesRepository.save(movie);
+    }
+
+
+
+
 
 }
