@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public User updateUser(User user, String id) throws Exception {
-        Optional<User> retrievedUser = getById(id);
+        Optional<User> retrievedUser = userRepository.findById(id);
         User userToUpdate = retrievedUser.get();
         userToUpdate = user;
         userToUpdate.setId(id);
