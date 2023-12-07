@@ -106,5 +106,119 @@ public class EmbeddedMoviesTests {
             }
         }
     }
-    
+
+    @Test
+    @DisplayName("Testing get movies by plot with rejected by his")
+    public void testingGetMoviesByPlotWithCar(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByPlot("rejected by his");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                Assertions.assertTrue(embeddedMovie.getPlot().contains("rejected by his"));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get number of comments with 8")
+    public void testingGetNumberOfCommentsWith8(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByNumberOfCommentsLowerBound(8);
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                Assertions.assertTrue(embeddedMovie.getNum_mflix_comments() > 8);
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by language with French")
+    public void testingGetMoviesByLanguageWithFrench(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByLanguage("French");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                List<String> languages = Arrays.asList(embeddedMovie.getLanguages());
+                Assertions.assertTrue(languages.stream().anyMatch(s -> s.toLowerCase().contains("french")));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by genre")
+    public void testingGetMoviesByGenre(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByGenre("Action");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                List<String> genres = Arrays.asList(embeddedMovie.getGenres());
+                Assertions.assertTrue(genres.stream().anyMatch(s -> s.toLowerCase().contains("action")));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by director")
+    public void testingGetMoviesByDirector(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByDirector("Howard Hawks");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                List<String> directors = Arrays.asList(embeddedMovie.getDirectors());
+                Assertions.assertTrue(directors.stream().anyMatch(s -> s.toLowerCase().contains("howard hawks")));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by cast member")
+    public void testingGetMoviesByCastMember(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByCastMember("Katherine");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                List<String> castMembers = Arrays.asList(embeddedMovie.getCast());
+                Assertions.assertTrue(castMembers.stream().anyMatch(s -> s.toLowerCase().contains("katherine")));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by title containing with harry potter")
+    public void testingGetMoviesByTitleContainingWithHarryPotter(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByTitleContaining("Harry Potter");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                Assertions.assertTrue(embeddedMovie.getTitle().contains("Harry Potter"));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movie by award name with Oscar")
+    public void testingGetMovieByAwardNameWithOscar(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByAwardName("Oscar");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                Assertions.assertTrue(embeddedMovie.getAwards().getText().contains("Oscar"));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by number of nominations with 8")
+    public void testingGetMoviesByNumberOfNominationsWith8(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByNumberOfNominations(8);
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                Assertions.assertTrue(embeddedMovie.getAwards().getNominations() >= 8);
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get movies by country with France")
+    public void testingGetMoviesByCountryWithFrance(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByCountry("France");
+        if(!result.isEmpty()) {
+            for(EmbeddedMovie embeddedMovie: result) {
+                List<String> countries = Arrays.asList(embeddedMovie.getCountries());
+                Assertions.assertTrue(countries.stream().anyMatch(s -> s.toLowerCase().contains("france")));
+            }
+        }
+    }
 }
