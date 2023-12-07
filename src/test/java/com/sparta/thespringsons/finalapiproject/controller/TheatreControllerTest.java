@@ -9,6 +9,7 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Location;
 import com.sparta.thespringsons.finalapiproject.model.services.TheaterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -87,10 +88,9 @@ class TheatreControllerTest {
     @Test
     @DisplayName("Testing add theatre endpoint")
     public void testAddTheatre() throws Exception {
-        ArrayList<Theater> theaterList = new ArrayList<>();
-        theaterList.add(mockTheater);
-        mockTheater.setId("000111");
-        Mockito.when(theaterService.getTheaterById("000111")).thenReturn(Optional.empty());
+        Optional<Theater> noRecord = Optional.empty();
+        Mockito.when(theaterService.getTheaterById(mockTheater.getId())).thenReturn(noRecord);
+        Mockito.when(theaterService.saveTheater(mockTheater)).thenReturn(mockTheater);
         mockMvc
                 .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -101,6 +101,22 @@ class TheatreControllerTest {
                 .andDo(print());
     }
 
+
+    @Test
+    @DisplayName("Testing add theatre record already exists exception endpoint")
+    public void testAddTheatreThrowsRecordExists() throws Exception {
+        Optional<Theater> existingRecord = Optional.ofNullable(mockTheater);
+        Mockito.when(theaterService.getTheaterById(mockTheater.getId())).thenReturn(existingRecord);
+        Mockito.when(theaterService.saveTheater(mockTheater)).thenReturn(mockTheater);
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                .andExpect(status().is(400))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(handler().methodName("addTheater"))
+                .andDo(print());
+    }
 
 
     @Test
@@ -122,8 +138,8 @@ class TheatreControllerTest {
 
 
     @Test
-    @DisplayName("Test delete theatre throws exception endpoint")
-    void testDeleteTheatreThrowsException() throws Exception {
+    @DisplayName("Test delete theatre throws record doesnt exist exception endpoint")
+    void testDeleteTheatreThrowsRecordDoesNotException() throws Exception {
         String returned = " ";
         Optional<Theater> noRecord = Optional.empty();
 
@@ -138,7 +154,34 @@ class TheatreControllerTest {
                 .andDo(print());
     }
     @Test
-    void updateTheatre() {
-        // Affoq
+    @DisplayName("Testing update theater endpoint")
+    void testUpdateTheatre() throws Exception {
+        Optional<Theater> existingRecord = Optional.ofNullable(mockTheater);
+
+        Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(existingRecord);
+        Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                .andExpect(status().is(200))
+                .andExpect(handler().methodName("updateTheater"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("Testing update theater throws exception endpoint")
+    void testUpdateTheatreThrowsException() throws Exception {
+        Optional<Theater> noRecord = Optional.empty();
+
+        Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
+        Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                .andExpect(status().is(400))
+                .andExpect(handler().methodName("updateTheater"))
+                .andDo(print());
     }
 }
