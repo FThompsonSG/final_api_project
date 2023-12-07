@@ -28,78 +28,78 @@ public class TheatreController {
         OurLogger.setUpLogger(logger);
     }
 
-    @Tag(name = "Get All Theatres")
-    @Operation(summary = "Gets all theatres")
-    @GetMapping("/theatres")
-    public List<Theater> getAllTheatres() throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get all theatres method in theatre controller");
-        List<Theater> allTheatres = theaterService.getAllTheaters();
-        if (allTheatres.isEmpty()) {
-            throw new NoRecordFoundException("theatres", "/theatres");
+    @Tag(name = "Get All Theaters")
+    @Operation(summary = "Gets all theaters")
+    @GetMapping("/theaters")
+    public List<Theater> getAllTheaters() throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered get all theaters method in theater controller");
+        List<Theater> allTheaters = theaterService.getAllTheaters();
+        if (allTheaters.isEmpty()) {
+            throw new NoRecordFoundException("theaters", "/theaters");
         }
-        return allTheatres;
+        return allTheaters;
     }
 
-    @Tag(name = "Get Theatre by zip code")
-    @Operation(summary = "Gets all theatres with a specific zipcode")
-    @GetMapping("/theatres/{zipcode}")
+    @Tag(name = "Get Theater by zip code")
+    @Operation(summary = "Gets all theaters with a specific zipcode")
+    @GetMapping("/theaters/{zipcode}")
     public List<Theater> getAllTheatersByZipcode(@PathVariable String zipcode) throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get all theatres by zipcode method in theatre controller");
+        logger.log(Level.INFO, "Entered get all theaters by zipcode method in theater controller");
         List<Theater> theatersMatchingZipcode = theaterService.getTheatersByZipcode(zipcode);
         if(theatersMatchingZipcode.isEmpty()) {
-            throw new NoRecordFoundException("theatres", "/theatres/{zipcode}");
+            throw new NoRecordFoundException("theaters", "/theaters/{zipcode}");
         }
         return theatersMatchingZipcode;
     }
 
-    @Tag(name = "Get Theatre by Id")
-    @Operation(summary = "Get Theatres by Id")
-    @GetMapping("/theatres/{theatre_id}")
-    public Optional<Theater> getTheatreById(@PathVariable Integer theatre_id) throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get theatres by id method in theatre controller");
-        Optional<Theater> theater = theaterService.getTheaterByTheaterId(theatre_id);
+    @Tag(name = "Get Theater by Id")
+    @Operation(summary = "Get Theaters by Id")
+    @GetMapping("/theaters/{theater_id}")
+    public Optional<Theater> getTheaterById(@PathVariable Integer theater_id) throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered get theaters by id method in theater controller");
+        Optional<Theater> theater = theaterService.getTheaterByTheaterId(theater_id);
         if(theater.isPresent()) {
-            throw new NoRecordFoundException("theatres", "/theatres/{theatre_id}");
+            throw new NoRecordFoundException("theaters", "/theaters/{theater_id}");
         }
         return theater;
     }
 
-    @Tag(name = "Add New Theatre")
-    @Operation(summary = "Add new Theatre")
-    @PostMapping("/theatres")
-    public Theater addTheatre(@RequestBody Theater newTheater) throws Exception {
-        logger.log(Level.INFO, "Entered add theatre method in theatre controller");
-        Optional<Theater> theatre = theaterService.getTheaterById(newTheater.getId());
-        if (theatre.isPresent()) {
-            throw new RecordAlreadyExistsException("theatre", "/theatres");
+    @Tag(name = "Add New Theater")
+    @Operation(summary = "Add new Theater")
+    @PostMapping("/theaters")
+    public Optional<Theater> addTheater(@RequestBody Theater newTheater) throws Exception {
+        logger.log(Level.INFO, "Entered add theater method in theater controller");
+        Optional<Theater> theater = theaterService.getTheaterById(newTheater.getId());
+        if (theater.isPresent()) {
+            throw new RecordAlreadyExistsException("theater", "/theaters");
         }
-        return theaterService.saveTheater(newTheater);
+        return Optional.ofNullable(theaterService.saveTheater(newTheater));
     }
 
-    @Tag(name = "Delete Theatre")
-    @Operation(summary = "Delete a Theatre")
-    @DeleteMapping("/theatres/delete/{theatre_id}")
-    public String deleteTheatre(@PathVariable Integer theatre_id) throws Exception {
-        logger.log(Level.INFO, "Entered delete theatre method in theatre controller");
-        Optional<Theater> theatreToDelete = theaterService.getTheaterByTheaterId(theatre_id);
-        if (theatreToDelete.isEmpty()) {
-            throw new NoRecordFoundException("theatre", "/theatres/delete/{theatre_id}");
+    @Tag(name = "Delete Theater")
+    @Operation(summary = "Delete a Theater")
+    @DeleteMapping("/theaters/delete/{theater_id}")
+    public String deleteTheater(@PathVariable Integer theater_id) throws Exception {
+        logger.log(Level.INFO, "Entered delete theater method in theater controller");
+        Optional<Theater> theaterToDelete = theaterService.getTheaterByTheaterId(theater_id);
+        if (theaterToDelete.isEmpty()) {
+            throw new NoRecordFoundException("theater", "/theaters/delete/{theater_id}");
         }
-        return theaterService.deleteTheater(theatre_id);
+        return theaterService.deleteTheater(theater_id);
     }
 
-    @Tag(name = "Update Theatre Record")
-    @Operation(summary = "Update theatre record")
-    @PostMapping("/theatres/update/{theatre_id}")
-    public Theater updateTheatre(
+    @Tag(name = "Update Theater Record")
+    @Operation(summary = "Update theater record")
+    @PostMapping("/theaters/update/{theater_id}")
+    public Optional<Theater> updateTheater(
             @RequestBody Theater newTheater,
-            @PathVariable Integer theatre_id) throws Exception {
-        logger.log(Level.INFO, "Entered update theatre method in theatre controller");
-        Optional<Theater> theatreToUpdate = theaterService.getTheaterByTheaterId(theatre_id);
-        if (theatreToUpdate.isEmpty()) {
-            throw new NoRecordFoundException("theatre", "/theatres/update/{theatre_id}");
+            @PathVariable Integer theater_id) throws Exception {
+        logger.log(Level.INFO, "Entered update theater method in theater controller");
+        Optional<Theater> theaterToUpdate = theaterService.getTheaterByTheaterId(theater_id);
+        if (theaterToUpdate.isEmpty()) {
+            throw new NoRecordFoundException("theatre", "/theaters/update/{theater_id}");
         }
-        return theaterService.updateTheater(newTheater, theatre_id);
+        return Optional.ofNullable(theaterService.updateTheater(newTheater, theater_id));
     }
 
 

@@ -1,17 +1,17 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
-import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.exceptions.norecordfound.NoRecordFoundException;
+import com.sparta.thespringsons.finalapiproject.exceptions.recordalreadyexists.RecordAlreadyExistsException;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
-import jakarta.persistence.NoResultException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +27,8 @@ public class CommentController {
         OurLogger.setUpLogger(logger);
     }
 
+    @Tag(name = "Get All Comments")
+    @Operation(summary = "Get All Comments")
     @GetMapping("/comment")
     public List<Comment> getAllComments() throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get all comments method in comments controller");
@@ -38,6 +40,8 @@ public class CommentController {
         return allComments;
     }
 
+    @Tag(name = "Get Comment By Name")
+    @Operation(summary = "Get Comment By Name")
     @GetMapping("/commentsbyname/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by user name method in comments controller");
@@ -48,6 +52,8 @@ public class CommentController {
         return allComments;
     }
 
+    @Tag(name = "Get All Comments For Movie")
+    @Operation(summary = "Get All Comments For Movie")
     @GetMapping("/commentsbymovietitle/{movieTitle}")
     public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
@@ -57,35 +63,43 @@ public class CommentController {
         }
         return allComments;
     }
+
+    @Tag(name = "Add New Comment")
+    @Operation(summary = "Add new Comment")
+    @PostMapping("/comment")
+    public Optional<Comment> addComment(@RequestBody Comment newComment) throws Exception {
+        logger.log(Level.INFO, "Entered add comment method in comment controller");
+        Optional<Comment> commentToAdd = commentService.getCommentById(newComment.getId());
+        if (commentToAdd.isPresent()) {
+            throw new RecordAlreadyExistsException("comment", "/comment");
+        }
+        return Optional.ofNullable(commentService.saveComment(newComment));
+    }
+
+    @Tag(name = "Delete Comment")
+    @Operation(summary = "Delete a Comment")
+    @DeleteMapping("/comments/delete/{id}")
+    public String deleteTheatre(@PathVariable String id) throws Exception {
+        logger.log(Level.INFO, "Entered delete comment method in comment controller");
+        Optional<Comment> commentToDelete = commentService.getCommentById(id);
+        if (commentToDelete.isEmpty()) {
+            throw new NoRecordFoundException("comment", "/comments/delete/{id}");
+        }
+        return commentService.deleteComment(id);
+    }
+
+    @Tag(name = "Update Comment Record")
+    @Operation(summary = "Update Comment record")
+    @PostMapping("/comment/update/{id}")
+    public Optional<Comment> updateTheatre(
+            @RequestBody Comment newComment,
+            @PathVariable String id) throws Exception {
+        logger.log(Level.INFO, "Entered update comment method in comment controller");
+        Optional<Comment> commentToUpdate = commentService.getCommentById(id);
+        if (commentToUpdate.isEmpty()) {
+            throw new NoRecordFoundException("comment", "/comment/update/{id}");
+        }
+        return Optional.ofNullable(commentService.updateComment(newComment, id));
+    }
 }
-    //
-//
-//        // Assuming we'll have a service for handling comments
-//        private final CommentService commentService;
-//
-//        @Autowired
-//        public CommentsController(CommentService commentService) {
-//            this.commentService = commentService;
-//        }
-//
-//        @Tag(name = "Comments API")
-//        @Operation(summary = "Get all comments")
-//        @GetMapping
-//        public List<Comment> getAllComments() {
-//            return commentService.getAllComments();
-//        }
 
-    // @PostMapping
-    // public Comment createComment(@RequestBody CommentRequest commentRequest) {
-    //    return commentService.createComment(commentRequest);
-    // }
-
-    // @PutMapping("/{commentId}")
-    // public Comment updateComment(@PathVariable String commentId, @RequestBody CommentRequest commentRequest) {
-    //    return commentService.updateComment(commentId, commentRequest);
-    // }
-
-    // @DeleteMapping("/{commentId}")
-    // public void deleteComment(@PathVariable String commentId) {
-    //    commentService.deleteComment(commentId);
-    // }
