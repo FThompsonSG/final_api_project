@@ -4,8 +4,12 @@ import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +21,12 @@ public class EmbeddedMoviesTests {
 
     @Autowired
     private EmbeddedMoviesService embeddedMoviesService;
+
+    @Mock
+    private EmbeddedMoviesRepository embeddedMoviesRepository;
+
+    @InjectMocks
+    private EmbeddedMoviesService embeddedMoviesServiceMock;
 
     @Test
     @DisplayName("Testing get by Rotten Reviews")
@@ -220,5 +230,29 @@ public class EmbeddedMoviesTests {
                 Assertions.assertTrue(countries.stream().anyMatch(s -> s.toLowerCase().contains("france")));
             }
         }
+    }
+
+    //-------->07/12/2023<--------------
+    @Test
+    @DisplayName("Testing add document to mock repository")
+    public void testingAddDocumentToMockRepository(){
+        EmbeddedMovie mockMovie = new EmbeddedMovie();
+        mockMovie.setYear("2002");
+        String[] directors = {"Luke Boorman"};
+        mockMovie.setDirectors(directors);
+        mockMovie.setCast(directors);
+        mockMovie.setTitle("The film");
+        mockMovie.setGenres(directors);
+        mockMovie.setLanguages(directors);
+
+        // Mock the repository behavior
+        Mockito.when(embeddedMoviesRepository.save(Mockito.any(EmbeddedMovie.class)))
+                .thenReturn(mockMovie);
+
+        EmbeddedMovie result = embeddedMoviesServiceMock.addEmbeddedMovie(mockMovie);
+
+        Mockito.verify(embeddedMoviesRepository, Mockito.times(1)).save(Mockito.eq(mockMovie));
+
+        Assertions.assertEquals(mockMovie, result);
     }
 }
