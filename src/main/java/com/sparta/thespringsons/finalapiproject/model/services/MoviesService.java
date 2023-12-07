@@ -469,6 +469,7 @@ public class MoviesService {
                 movieToUpdate = movieRepository.findById(code).get();
                 Awards award = movieToUpdate.getAwards();
                 award.setWins(wins);
+                award.setText(updateText(movieToUpdate));
                 movieToUpdate.setAwards(award);
                 updateLastUpdated(movieToUpdate);
             }
@@ -484,6 +485,7 @@ public class MoviesService {
                 movieToUpdate = movieRepository.findById(code).get();
                 Awards award = movieToUpdate.getAwards();
                 award.setNominations(nominations);
+                award.setText(updateText(movieToUpdate));
                 movieToUpdate.setAwards(award);
                 updateLastUpdated(movieToUpdate);
             }
@@ -498,6 +500,29 @@ public class MoviesService {
         movieToUpdate.setLastupdated(currentDate.format(formatter));
     }
 
+    private String updateText(Movie movieToUpdate) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Awards awards = movieToUpdate.getAwards();
+
+        if(awards.getWins() > 0) {
+            stringBuilder.append(awards.getWins()).append(" win");
+        } if (awards.getWins() > 1) {
+            stringBuilder.append("s");
+        }
+
+        if(awards.getNominations() > 0) {
+            if(awards.getWins() > 0) {
+                stringBuilder.append(" and ");
+            }
+            stringBuilder.append(awards.getNominations()).append(" nomination");
+            if(awards.getNominations() > 1) {
+                stringBuilder.append("s");
+            }
+        }
+        stringBuilder.append(".");
+        return stringBuilder.toString();
+
+    }
 
 
 
