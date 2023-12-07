@@ -460,6 +460,10 @@ public class MoviesService {
         Optional<Movie> movie = movieRepository.findById(Id);
         movie.ifPresent(movieRepository::delete);
     }
+    public void deleteMovieByTitle(String title) {
+        Optional<Movie> movie = movieRepository.findAllByTitle(title);
+        movie.ifPresent(movieRepository::delete);
+    }
 
     //Updates -----------------------------------------------------------------------------
     public Movie updateAwardsWins(String code, Integer wins) {
