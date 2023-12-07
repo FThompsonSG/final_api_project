@@ -19,6 +19,42 @@ public class EmbeddedMoviesTests {
     private EmbeddedMoviesService embeddedMoviesService;
 
     @Test
+    @DisplayName("Testing get by Rotten Reviews")
+    public void testingGetByTomatoRottenReviews() {
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllByTomatoesRottenReviews(3, 5);
+        Assertions.assertNotNull(result);
+        if(!result.isEmpty()) {
+            for (EmbeddedMovie embeddedMovie : result) {
+                Assertions.assertEquals(4, embeddedMovie.getTomato().getRotten());
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get by Fresh Reviews")
+    public void testingGetByTomatoFreshReviews() {
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllByTomatoesFreshReviews(3, 5);
+        Assertions.assertNotNull(result);
+        if(!result.isEmpty()) {
+            for (EmbeddedMovie embeddedMovie : result) {
+                Assertions.assertEquals(4, embeddedMovie.getTomato().getFresh());
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get by Tomato Production")
+    public void testingGetByTomatoProduction() {
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures");
+        Assertions.assertNotNull(result);
+        if(!result.isEmpty()) {
+            for (EmbeddedMovie embeddedMovie : result) {
+                Assertions.assertEquals("Paramount Pictures", embeddedMovie.getTomato().getProduction());
+            }
+        }
+    }
+
+    @Test
     @DisplayName("Testing get by year exact with 1994")
     public void testingGetByYearExactWith1994() {
         List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByYearExact("1994");

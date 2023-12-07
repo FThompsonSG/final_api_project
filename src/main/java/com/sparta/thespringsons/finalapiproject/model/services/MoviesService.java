@@ -1,4 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -204,4 +205,93 @@ public class MoviesService {
         }
         return resultList;
     }
+
+    public List<String> getYearOfRelease(String name) {
+        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<String> movies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String year = movie.getReleased().substring(24);
+            String result = "";
+            if(year != null){
+                result = name + "'s year of release: " + year;
+                movies.add(result);
+            }
+        }
+        return movies;
+    }
+
+    public List<Movie> getEmbeddedMoviesByYearExact(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearExact(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<Movie> getMoviesByYearBefore(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearBefore(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<Movie> getEmbeddedMoviesByYearAfter(String year) {
+        try {
+            Integer yearInt = Integer.parseInt(year);
+            return movieRepository.findByYearAfter(yearInt);
+        } catch (Exception e) {
+            System.out.println("Invalid String");
+            return null;
+        }
+    }
+
+    public List<String> getPosterLinkByTitle(String name) {
+        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<String> movies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            String posterLink = movie.getPoster();
+            String result = "";
+            if(posterLink != null){
+                result = name + "'s poster link: " + posterLink;
+                movies.add(result);
+            }
+        }
+        return movies;
+    }
+
+    public List<Movie> getMoviesByCastMember(String castMemberName) {
+        return movieRepository.findByCastMember(castMemberName);
+    }
+
+    public List<Movie> getMoviesByNumberOfNominations(Integer noms) {
+        return movieRepository.findMoviesByAwards_Nominations(noms);
+    }
+
+    public List<Movie> getMoviesByNumberOfWins(Integer wins) {
+        return movieRepository.findMoviesByAwards_Wins(wins);
+    }
+
+    public List<Movie> getMoviesByAwardName(String awardName) {
+        return movieRepository.findByFieldNameContaining(awardName);
+    }
+
+    public List<String> getLastUpdatedByMovieTitle(String name) {
+        List<Movie> movies = movieRepository.findByTitle(name);
+        List<String> resultList = new ArrayList<>();
+        String result = "";
+        for (Movie movie : movies){
+            result = name + " last updated on " + movie.getLastupdated();
+            if(result != null) {
+                resultList.add(result);
+            }
+        }
+        return resultList;
+    }
+
+
 }
