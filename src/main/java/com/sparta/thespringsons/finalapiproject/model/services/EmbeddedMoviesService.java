@@ -1,12 +1,14 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
+import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmbeddedMoviesService  {
@@ -215,4 +217,10 @@ public class EmbeddedMoviesService  {
             return null;
         }
     }
+
+    public void deleteEmbeddedMovieById(String Id) {
+        Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
+        movie.ifPresent(embeddedMoviesRepository::delete);
+    }
+
 }
