@@ -2,6 +2,7 @@ package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
+import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,24 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+
+    public Optional<User> saveUser(User newUser) {
+        return Optional.of(userRepository.save(newUser));
+    }
+
+    public String deleteUser(String id) {
+        Optional<User> user = userRepository.findById(id);
+        userRepository.delete(user.get());
+        return "User deleted";
+    }
+
+    public User updateUser(User user, String id) throws Exception {
+        Optional<User> retrievedUser = userRepository.findById(id);
+        User userToUpdate = retrievedUser.get();
+        userToUpdate = user;
+        userToUpdate.setId(id);
+        userRepository.save(userToUpdate);
+        return userToUpdate;
+    }
 
 }
