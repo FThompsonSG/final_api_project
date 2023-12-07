@@ -2,6 +2,8 @@ package com.sparta.thespringsons.finalapiproject.model.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.util.Date;
 
@@ -12,18 +14,10 @@ public class Comment {
 
     private Date date;
     private String email;
+    @Field(name = "movie_id", targetType = FieldType.OBJECT_ID)
     private String movieId;
     private String name;
     private String text;
-
-    public Comment(String id, Date date, String email, String movieId, String name, String text) {
-        this.id = id;
-        this.date = date;
-        this.email = email;
-        this.movieId = movieId;
-        this.name = name;
-        this.text = text;
-    }
 
     public String getId() {
         return id;
@@ -51,5 +45,9 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
