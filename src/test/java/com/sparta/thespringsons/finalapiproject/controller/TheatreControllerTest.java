@@ -73,7 +73,7 @@ class TheatreControllerTest {
                 .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatres/theater_id/{theater_id}", 999999))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(handler().methodName("getTheatersById"))
+                .andExpect(handler().methodName("getTheatresById"))
                 .andDo(print());
     }
 
