@@ -7,12 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
 //    List<Movie> findAllMovies();
     List<Movie> findByTitle(String title);
+
+    @Query("{ 'title' : { $regex: ?0, $options: 'i' } }")
+    Optional<Movie> findAllByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
 
 
