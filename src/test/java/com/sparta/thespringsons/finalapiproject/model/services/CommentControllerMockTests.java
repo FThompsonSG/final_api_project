@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.thespringsons.finalapiproject.controller.CommentController;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -34,20 +36,25 @@ public class CommentControllerMockTests {
     @MockBean
     private CommentController commentController;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
     @DisplayName("Test add comment")
     void testAddComment() throws Exception {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.getAllComments()).thenReturn(new ArrayList<>(List.of(mockComment)));
+        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
 
         mockMvc
-                .perform(post("http://localhost:8080/comment/")
-                        .contentType(mockComment.getText()))
+                .perform(post("http://localhost:3001/comment")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mockComment)))
                 .andExpect(status().is(200))
-//                .andExpect(content().contentType("application/json"))
-//                .andExpect(handler().methodName("addComment"))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(handler().methodName("addComment"))
+                .andExpect(content().string("This is text"))
                 .andDo(print());
     }
 
