@@ -1,7 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
-import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
