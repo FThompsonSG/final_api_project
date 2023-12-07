@@ -59,10 +59,11 @@ public class CommentService {
         return commentRepository.save(newComment);
     }
 
-    public String deleteComment(String id) {
+    public Optional<Comment> deleteComment(String id) {
         logger.log(Level.INFO, "Entered delete comment method in comment service");
+        Optional<Comment> commentToDelete = commentRepository.findById(id);
         commentRepository.deleteById(id);
-        return "Comment has been deleted";
+        return commentToDelete;
     }
 
     public Comment updateComment(Comment newComment, String id) throws Exception {
