@@ -293,5 +293,50 @@ public class MoviesService {
         return resultList;
     }
 
+//find the movie by rating
+    public List<Movie> getAllRatedMoviesByRating(String rating){
+        List<Movie> movies = movieRepository.findAllByRated(rating);
+        List<Movie> ratedMovies = new ArrayList<>();
+
+
+        for(Movie movie : movies){
+
+            if (movie.getRated() != null) {
+                ratedMovies.add(movie);}
+        }
+
+        return ratedMovies;
+    }
+
+//finds all rated movies
+    public List<Movie> getAllRatedMovies(){
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> ratedMovies = new ArrayList<>();
+
+        for(Movie movie : movies){
+
+            if (movie.getRated() != null) {
+                ratedMovies.add(movie);}
+        }
+
+        return ratedMovies;
+    }
+
+
+    public List<Movie> getAllUnratedMovies(){
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> unratedMovies = new ArrayList<>();
+
+
+        for(Movie movie : movies){
+
+            if (movie.getRated() == null) {
+                unratedMovies.add(movie);
+            }
+        }
+
+        return unratedMovies;
+    }
+
 
 }
