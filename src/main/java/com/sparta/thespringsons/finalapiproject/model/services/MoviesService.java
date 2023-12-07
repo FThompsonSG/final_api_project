@@ -1,10 +1,13 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +46,7 @@ public class MoviesService {
         return movies;
     }
 
-    public List<Movie> getMoviesByWriter(String writerName) {
+    public List<Movie> getAllMoviesByWriter(String writerName) {
         return movieRepository.findAllByWriters(writerName);
 
     }
@@ -457,4 +460,45 @@ public class MoviesService {
         Optional<Movie> movie = movieRepository.findById(Id);
         movie.ifPresent(movieRepository::delete);
     }
+
+    //Updates -----------------------------------------------------------------------------
+    public Movie updateAwardsWins(String code, Integer wins) {
+        Movie movieToUpdate = null;
+        if(wins != null && code != null){
+            if(movieRepository.findById(code).isPresent()){
+                movieToUpdate = movieRepository.findById(code).get();
+                Awards award = movieToUpdate.getAwards();
+                award.setWins(wins);
+                movieToUpdate.setAwards(award);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        movieRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
+    public Movie updateAwardsNominations(String code, Integer nominations) {
+        Movie movieToUpdate = null;
+        if(nominations != null && code != null){
+            if(movieRepository.findById(code).isPresent()){
+                movieToUpdate = movieRepository.findById(code).get();
+                Awards award = movieToUpdate.getAwards();
+                award.setNominations(nominations);
+                movieToUpdate.setAwards(award);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        movieRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
+    public static void updateLastUpdated(Movie movieToUpdate) {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+        movieToUpdate.setLastupdated(currentDate.format(formatter));
+    }
+
+
+
+
 }

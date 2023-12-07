@@ -38,9 +38,10 @@ public class MflixApplication {
 //            System.out.println(commentRepository.findAll());
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
 //            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
-            System.out.println("Hello");
-            //embeddedMoviesService.updateTomatoesLastUpdated("573a1391f29313caabcd8268");
-            //embeddedMoviesService.updateTomatoesCriticMeter("573a1391f29313caabcd8268", 100);
+//            System.out.println("Hello");
+
+
+
 //            List<Movie> movies = moviesService.getAllMoviesByWriter("Winsor McCay") ;
 //            for (Movie movie: movies) {
 //                System.out.println(movie.toString());
