@@ -524,6 +524,36 @@ public class MoviesService {
 
     }
 
+    public Movie updateImdbRating(String code, Double rating) {
+        Movie movieToUpdate = null;
+        if(rating != null && code != null) {
+            if(movieRepository.findById(code).isPresent()){
+                movieToUpdate = movieRepository.findById(code).get();
+                Imdb imdb = movieToUpdate.getImdb();
+                imdb.setRating(rating);
+                movieToUpdate.setImdb(imdb);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        movieRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
+    public Movie updateImdbVotes(String code, Integer votes) {
+        Movie movieToUpdate = null;
+        if(votes != null && code != null) {
+            if(movieRepository.findById(code).isPresent()){
+                movieToUpdate = movieRepository.findById(code).get();
+                Imdb imdb = movieToUpdate.getImdb();
+                imdb.setVotes(votes);
+                movieToUpdate.setImdb(imdb);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        movieRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
 
 
 }
