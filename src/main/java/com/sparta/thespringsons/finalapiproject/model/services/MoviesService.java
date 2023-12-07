@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Service
 public class MoviesService {
 
@@ -524,6 +522,23 @@ public class MoviesService {
 
     }
 
+    public Optional<Movie> updatePlot(String code, String plot) {
+        Optional<Movie> movie = movieRepository.findById(code);
+        if (movie.isPresent()){
+            movie.get().setPlot(plot);
+            movieRepository.save(movie.get());
+        }
+        updateLastUpdated(movie.get());
+        return movie;
+    }
 
-
+    public Optional<Movie> updateFullplot(String code, String plot) {
+        Optional<Movie> movie = movieRepository.findById(code);
+        if (movie.isPresent()){
+            movie.get().setFullplot(plot);
+            movieRepository.save(movie.get());
+        }
+        updateLastUpdated(movie.get());
+        return movie;
+    }
 }
