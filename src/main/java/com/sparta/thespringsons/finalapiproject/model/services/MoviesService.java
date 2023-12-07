@@ -449,5 +449,91 @@ public class MoviesService {
         }
     }
 
+    //Deletes --------------------------------------------------------------------------------------------------------------
 
+    public void deleteMovieById(String Id) {
+
+    }
+
+    public void deleteMovieCommentsById(String Id) {
+
+    }
+
+    public void deleteMovieAwardsById(String Id) {
+
+    }
+
+    public void deleteMovieTitleById(String Id) {
+
+    }
+
+    //or "actor" it could then make it delete a specific one in the array
+    public void deleteMovieCastById(String Id) {
+
+    }
+
+    //or "country" it could then make it delete a specific one in the array
+    public void deleteMovieCountriesById(String Id) {
+
+    }
+
+    //or "director" it could then make it delete a specific one in the array
+    public void deleteMovieDirectorsById(String Id) {
+
+    }
+
+    public void deleteMovieFullplotById(String Id) {
+
+    }
+
+    //or "genre" it could then make it delete a specific one in the array
+    public void deleteMovieGenresById(String Id) {
+
+    }
+
+    public void deleteMovieImdbById(String Id) {
+
+    }
+
+    //or "language" it could then make it delete a specific one in the array
+    public void deleteMovieLanguagesById(String Id) {
+
+    }
+
+    public void deleteMovieLastupdatedById(String Id) {
+
+    }
+
+    public void deleteMovieMflixCommentsById(String Id) {
+
+    }
+
+    public void deleteMoviePosterById(String Id) {
+
+    }
+
+    public void deleteMovieRatedById(String Id) {
+
+    }
+
+    public void deleteMovieReleasedById(String Id) {
+
+    }
+
+    public void deleteMovieRuntimeById(String Id) {
+
+    }
+
+    public void deleteMovieTypeById(String Id) {
+
+    }
+
+    public void deleteMovieYearById(String Id) {
+
+    }
+
+    //or "writer" it could then make it delete a specific one in the array
+    public void deleteMovieWritersById(String Id) {
+
+    }
 }
