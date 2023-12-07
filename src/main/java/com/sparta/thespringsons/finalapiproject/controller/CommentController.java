@@ -79,19 +79,19 @@ public class CommentController {
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
     @DeleteMapping("/comments/delete/{id}")
-    public String deleteTheatre(@PathVariable String id) throws Exception {
+    public Optional<String> deleteComment(@PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
         Optional<Comment> commentToDelete = commentService.getCommentById(id);
         if (commentToDelete.isEmpty()) {
             throw new NoRecordFoundException("comment", "/comments/delete/{id}");
         }
-        return commentService.deleteComment(id);
+        return commentService.deleteComment(id).describeConstable();
     }
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")
     @PostMapping("/comment/update/{id}")
-    public Optional<Comment> updateTheatre(
+    public Optional<Comment> updateComment(
             @RequestBody Comment newComment,
             @PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered update comment method in comment controller");

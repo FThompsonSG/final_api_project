@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.List;
@@ -28,13 +29,9 @@ import java.util.logging.Logger;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class,DataSourceAutoConfiguration.class})
 @EnableMongoRepositories
+@Import(MongoConfig.class)
 public class MflixApplication {
 
-    @Autowired
-    CommentService commentService;
-
-    @Autowired
-    UserService userService;
 
     public static final Logger logger = Logger.getLogger(MflixApplication.class.getName());
 
@@ -58,7 +55,6 @@ public class MflixApplication {
 //            System.out.println(commentService.getAllCommentsByMovieTitle("A Corner in Wheat"));
 //            Comment comment = commentRepository.findByMovieId(thisID);
 //            System.out.println(comment.getName());
-            System.out.println(userService.getByName("Jon Snow"));
 //            Movie thisMovie2 = movieRepository.findByTitle("Wild and Woolly");
 //            System.out.println(thisMovie.getImdb().rating);
 //            System.out.println(thisMovie2.getTomatoes());
