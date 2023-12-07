@@ -60,4 +60,6 @@ public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie,
 
    @Query("{'year' : { $gte : ?0 } }")
    List<EmbeddedMovie> findByYearAfter(Integer year);
+
+
 }
