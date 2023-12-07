@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,8 +80,20 @@ class TheatreControllerTest {
     }
 
     @Test
-    void addTheatre() {
-        // Bianca
+    void addTheatre() throws Exception {
+        ArrayList<Theater> theaterList = new ArrayList<>();
+        theaterList.add(mockTheater);
+        mockTheater.setId("000111");
+        Mockito.when(theaterService.getTheaterById("000111")).thenReturn(Optional.empty());
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(handler().methodName("addTheater"))
+                .andDo(print());
     }
 
     @Test
