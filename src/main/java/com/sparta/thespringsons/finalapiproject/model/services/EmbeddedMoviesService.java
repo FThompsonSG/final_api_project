@@ -3,18 +3,22 @@ package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
-import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmbeddedMoviesService  {
@@ -26,113 +30,114 @@ public class EmbeddedMoviesService  {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
 
-    public List<String> findAllByTomatoesCriticRating(double minRating, double maxRating) {
+    public List<EmbeddedMovie> findAllByTomatoesCriticRating(double minRating, double maxRating) {
+
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getCritic() != null)
                     if(embeddedMovie.getTomato().getCritic().getRating() != null)
                         if (embeddedMovie.getTomato().getCritic().getRating() < maxRating && embeddedMovie.getTomato().getCritic().getRating() > minRating) {
-                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        embeddedMoviesFinal.add(embeddedMovie);
                     }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesViewerRating(double minRating, double maxRating) {
+    public List<EmbeddedMovie> findAllByTomatoesViewerRating(double minRating, double maxRating) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getViewer() != null)
                     if(embeddedMovie.getTomato().getViewer().getRating() != null)
                         if (embeddedMovie.getTomato().getViewer().getRating() < maxRating && embeddedMovie.getTomato().getViewer().getRating() > minRating) {
-                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                            embeddedMoviesFinal.add(embeddedMovie);
                         }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesCriticMeter(double minMeter, double maxMeter) {
+    public List<EmbeddedMovie> findAllByTomatoesCriticMeter(double minMeter, double maxMeter) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getCritic() != null)
                     if(embeddedMovie.getTomato().getCritic().getMeter() != null)
                         if (embeddedMovie.getTomato().getCritic().getMeter() < maxMeter && embeddedMovie.getTomato().getCritic().getMeter() > minMeter) {
-                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                            embeddedMoviesFinal.add(embeddedMovie);
                         }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
+    public List<EmbeddedMovie> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getViewer() != null)
                     if(embeddedMovie.getTomato().getViewer().getMeter() != null)
                         if (embeddedMovie.getTomato().getViewer().getMeter() < maxMeter && embeddedMovie.getTomato().getViewer().getMeter() > minMeter) {
-                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                            embeddedMoviesFinal.add(embeddedMovie);
                         }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
+    public List<EmbeddedMovie> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getRotten() != null)
                         if (embeddedMovie.getTomato().getRotten() < maxRotten && embeddedMovie.getTomato().getRotten() > minRotten) {
-                            embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                            embeddedMoviesFinal.add(embeddedMovie);
                         }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesFreshReviews(int minFresh, int maxFresh) {
+    public List<EmbeddedMovie> findAllByTomatoesFreshReviews(int minFresh, int maxFresh) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getFresh() != null)
                     if (embeddedMovie.getTomato().getFresh() < maxFresh && embeddedMovie.getTomato().getFresh() > minFresh) {
-                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        embeddedMoviesFinal.add(embeddedMovie);
                     }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesFinal;
     }
 
-    public List<String> findAllByTomatoesProduction(String production) {
+    public List<EmbeddedMovie> findAllByTomatoesProduction(String production) {
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<String> embeddedMoviesTitles = new ArrayList<>();
+        List<EmbeddedMovie> embeddedMoviesfinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
             if(embeddedMovie.getTomato() != null) {
                 if (embeddedMovie.getTomato().getProduction() != null)
                     if (embeddedMovie.getTomato().getProduction().equals(production)) {
-                        embeddedMoviesTitles.add(embeddedMovie.getTitle());
+                        embeddedMoviesfinal.add(embeddedMovie);
                     }
 
             }
         }
-        return embeddedMoviesTitles;
+        return embeddedMoviesfinal;
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
@@ -222,7 +227,6 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    //------------------>07/12/2023<------------------------
     public EmbeddedMovie addEmbeddedMovie(EmbeddedMovie movie) {
         try {
             if(movie.getTitle().isEmpty() || movie.getTitle() == null) {
@@ -244,7 +248,6 @@ public class EmbeddedMoviesService  {
         }
     }
 
-//    --------------->Test from here<-----------------
     public EmbeddedMovie updateEmbeddedMovieTitle(String Id, String newTitle) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -320,8 +323,136 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
+    public void deleteEmbeddedMovieById(String Id) {
+        Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
+        movie.ifPresent(embeddedMoviesRepository::delete);
+    }
 
+    public Optional<EmbeddedMovie> updateTomatoesCriticMeter(String id, Integer meter ) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getCritic().setMeter(meter);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
 
+            return Optional.of(updateMovie);
+        }
 
+        return Optional.empty();
+    }
 
+    public Optional<EmbeddedMovie> updateTomatoesViewerMeter(String id, Integer meter ) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getViewer().setMeter(meter);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesViewerNumReviews(String id, Integer numReviews) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getViewer().setNumReviews(numReviews);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesCriticNumReviews(String id, Integer numReviews) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getCritic().setNumReviews(numReviews);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesCriticRating(String id, Double rating) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getCritic().setRating(rating);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesViewerRating(String id, Double rating) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().getViewer().setRating(rating);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesRotten(String id, Integer rotten) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().setRotten(rotten);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesFresh(String id, Integer fresh) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            updateMovie.getTomato().setFresh(fresh);
+            embeddedMoviesRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<EmbeddedMovie> updateTomatoesLastUpdated(String id) {
+        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
+
+        if(checkMovie.isPresent()) {
+            EmbeddedMovie updateMovie = checkMovie.get();
+            LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.of("UTC"));
+            Date currentDate = Date.from(currentDateTime.atZone(ZoneId.of("UTC")).toInstant());
+            updateMovie.getTomato().setLastUpdated(currentDate);
+            embeddedMoviesRepository.save(updateMovie);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
 }

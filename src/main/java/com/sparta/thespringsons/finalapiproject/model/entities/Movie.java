@@ -6,7 +6,6 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Document("movies")
@@ -236,5 +235,32 @@ public class Movie {
 
     public void setWriters(List<String> writers) {
         this.writers = writers;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id='" + id + '\'' +"\n"+
+                "awards=" + awards +
+                "cast=" + cast +"\n"+
+                "countries=" + countries +"\n"+
+                "directors=" + directors +"\n"+
+                "fullplot='" + fullplot + '\'' +"\n"+
+                "genres=" + genres +"\n"+
+                "imdb=" + imdb +"\n"+
+                "languages=" + languages +"\n"+
+                "lastupdated='" + lastupdated + '\'' +"\n"+
+                "num_mflix_comments=" + num_mflix_comments +"\n"+
+                "plot='" + plot + '\'' +"\n"+
+                "poster='" + poster + '\'' +"\n"+
+                "rated='" + rated + '\'' +"\n"+
+                "released='" + released + '\'' +"\n"+
+                "runtime=" + runtime +"\n"+
+                "title='" + title + '\'' +"\n"+
+                "tomatoes=" + tomatoes +"\n"+
+                "type='" + type + '\'' +"\n"+
+                "year='" + year + '\'' +"\n"+
+                "writers=" + writers +
+                '}'+"\n";
     }
 }
