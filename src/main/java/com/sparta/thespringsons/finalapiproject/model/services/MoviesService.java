@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MoviesService {
@@ -533,7 +532,7 @@ public class MoviesService {
     }
 
     //or "writer" it could then make it delete a specific one in the array
-    public void deleteMovieWritersById(String Id) {
-        Movie movie = movieRepository.findById();
-    }
+//    public void deleteMovieWritersById(String Id) {
+//        Movie movie = movieRepository.findById();
+//    }
 }
