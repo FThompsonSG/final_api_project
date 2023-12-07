@@ -222,7 +222,7 @@ public class MoviesService {
         return movies;
     }
 
-    public List<Movie> getEmbeddedMoviesByYearExact(String year) {
+    public List<Movie> getMoviesByYearExact(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return movieRepository.findByYearExact(yearInt);
@@ -242,7 +242,7 @@ public class MoviesService {
         }
     }
 
-    public List<Movie> getEmbeddedMoviesByYearAfter(String year) {
+    public List<Movie> getMoviesByYearAfter(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return movieRepository.findByYearAfter(yearInt);
@@ -288,14 +288,48 @@ public class MoviesService {
         String result = "";
         for (Movie movie : movies) {
             result = name + " last updated on " + movie.getLastupdated();
-            if (result != null) {
+
+            if(movie.getLastupdated() != null) {
                 resultList.add(result);
             }
         }
         return resultList;
     }
 
-    public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+
+    public List<Movie> getMoviesByNumberOfComments(Integer numberOfComments) {
+        return movieRepository.findByNumberOfComments(numberOfComments);
+    }
+    public List<Movie> getMoviesByMaxRuntime(Integer mins) {
+        return movieRepository.findByMaxRuntime(mins);
+    }
+
+    public List<Movie> getMoviesByRangeOfRuntime(Integer minRange, Integer maxRange) {
+        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> selectedMovies = new ArrayList<>();
+        for(Movie movie : allMovies) {
+            Integer movieRuntime = movie.getRuntime();
+            if(movieRuntime != null && movieRuntime >= minRange && movieRuntime <= maxRange) {
+                selectedMovies.add(movie);
+            }
+        }
+        return selectedMovies;
+    }
+
+    public List<String> getTypeByTitle(String title) {
+        List<Movie> movies = movieRepository.findByTitle(title);
+        List<String> resultList = new ArrayList<>();
+        String result = "";
+        for (Movie movie : movies){
+            result = title + " type: " + movie.getType();
+            if(movie.getType() != null) {
+                resultList.add(result);
+            }
+        }
+        return resultList;
+    }
+  
+      public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> moviesInRange = new ArrayList<>();
 
@@ -318,7 +352,4 @@ public class MoviesService {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Invalid date format");
         }
-
-
-    }
 }

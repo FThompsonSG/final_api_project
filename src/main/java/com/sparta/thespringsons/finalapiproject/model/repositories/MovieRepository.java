@@ -46,5 +46,10 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     @Query("{ 'awards.text' : { $regex: ?0, $options: 'i' } }")
     List<Movie> findByFieldNameContaining(String substringToSearch);
 
+    @Query("{'num_mflix_comments' : { $gte : ?0 } }")
+    List<Movie> findByNumberOfComments(Integer numberOfComments);
+    @Query("{'runtime' : { $lte : ?0 } }")
+    List<Movie> findByMaxRuntime(Integer mins);
+
 
 }
