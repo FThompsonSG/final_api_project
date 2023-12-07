@@ -85,7 +85,6 @@ class TheatreControllerTest {
         theaterList.add(mockTheater);
         mockTheater.setId("000111");
         Mockito.when(theaterService.getTheaterById("000111")).thenReturn(Optional.empty());
-
         mockMvc
                 .perform(MockMvcRequestBuilders.post("http://localhost:8080/theaters")
                         .contentType(MediaType.APPLICATION_JSON)
