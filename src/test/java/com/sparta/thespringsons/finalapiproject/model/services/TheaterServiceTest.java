@@ -33,7 +33,7 @@ class TheaterServiceTest {
         Geo geo = new Geo(coords, "Point");
         Address address = new Address("TestCity", "TestState","TestSt1","1234567");
         Location location = new Location(geo,address);
-        Theater theater = new Theater("99999", location, 9999999);
+        Theater theater = new Theater(null, location, 9999999);
         theaterService.saveTheater(theater);
     }
 

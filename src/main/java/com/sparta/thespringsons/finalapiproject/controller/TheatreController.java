@@ -20,6 +20,7 @@ public class TheatreController {
         this.theaterService = theaterService;
     }
 
+
     @Tag(name = "Get All Theatres")
     @Operation(summary = "Gets all theatres")
     @GetMapping("/theatres")
@@ -29,14 +30,14 @@ public class TheatreController {
 
     @Tag(name = "Get Theatre by zip code")
     @Operation(summary = "Gets all theatres with a specific zipcode")
-    @GetMapping("/theatres/{zipcode}")
+    @GetMapping("/theatres/zipcode/{zipcode}")
     public List<Theater> getAllTheatersByZipcode(@PathVariable String zipcode){
       return theaterService.getTheatersByZipcode(zipcode);
     }
 
     @Tag(name = "Get Theatre by Id")
     @Operation(summary = "Get Theatres by Id")
-    @GetMapping("/theatres/{theater_id}")
+    @GetMapping("/theatres/theater_id/{theater_id}")
     public Optional<Theater> getAllTheatres(@PathVariable Integer theater_id){
       return theaterService.getTheaterByTheaterId(theater_id);
     }
