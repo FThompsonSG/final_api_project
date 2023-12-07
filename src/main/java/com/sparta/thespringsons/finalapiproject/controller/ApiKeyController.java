@@ -21,7 +21,6 @@ public class ApiKeyController {
     public ApiKeyController(ApiKeyService apiKeyService, HttpServletRequest request) {
         this.apiKeyService = apiKeyService;
         this.request = request;
-
     }
 
     @GetMapping("/generate")
