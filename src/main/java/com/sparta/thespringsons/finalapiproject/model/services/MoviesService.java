@@ -1,5 +1,4 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
@@ -25,7 +24,7 @@ public class MoviesService {
         return movies;
     }
 
-    public List<Movie> getFilmByTitle(String title) {
+    public List<Movie> getMovieByTitle(String title) {
         //return lists instead of optional
         List<Movie> movies = movieRepository.findByTitle(title);
         List<Movie> selectedMovies = new ArrayList<>();
