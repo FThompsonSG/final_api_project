@@ -534,6 +534,6 @@ public class MoviesService {
 
     //or "writer" it could then make it delete a specific one in the array
     public void deleteMovieWritersById(String Id) {
-
+        Movie movie = movieRepository.findById();
     }
 }
