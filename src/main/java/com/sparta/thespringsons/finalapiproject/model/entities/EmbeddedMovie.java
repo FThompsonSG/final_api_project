@@ -117,10 +117,6 @@ public class EmbeddedMovie {
         return rating;
     }
 
-//    public Date getReleased() {
-//        return released;
-//    }
-
     public String getReleased() {
         return released;
     }
@@ -269,87 +265,4 @@ public class EmbeddedMovie {
                 '}';
     }
 
-    public void setAwards(Awards awards) {
-        this.awards = awards;
-    }
-
-    public void setCast(String[] cast) {
-        this.cast = cast;
-    }
-
-    public void setCountries(String[] countries) {
-        this.countries = countries;
-    }
-
-    public void setDirectors(String[] directors) {
-        this.directors = directors;
-    }
-
-    public void setFullplot(String fullplot) {
-        this.fullplot = fullplot;
-    }
-
-    public void setGenres(String[] genres) {
-        this.genres = genres;
-    }
-
-    public void setImdb(Imdb imdb) {
-        this.imdb = imdb;
-    }
-
-    public void setLanguages(String[] languages) {
-        this.languages = languages;
-    }
-
-    public void setLastupdated(String lastupdated) {
-        this.lastupdated = lastupdated;
-    }
-
-    public void setNum_mflix_comments(Integer num_mflix_comments) {
-        this.num_mflix_comments = num_mflix_comments;
-    }
-
-    public void setPlot(String plot) {
-        this.plot = plot;
-    }
-
-    public void setPlot_embedding(String[] plot_embedding) {
-        this.plot_embedding = plot_embedding;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public void setReleased(String released) {
-        this.released = released;
-    }
-
-    public void setRuntime(Integer runtime) {
-        this.runtime = runtime;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setTomatoes(Tomato tomatoes) {
-        this.tomatoes = tomatoes;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setWriters(String[] writers) {
-        this.writers = writers;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
 }
