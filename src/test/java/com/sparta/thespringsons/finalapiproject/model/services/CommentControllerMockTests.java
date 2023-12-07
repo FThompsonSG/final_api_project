@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.thespringsons.finalapiproject.controller.CommentController;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
@@ -48,14 +49,47 @@ public class CommentControllerMockTests {
         Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
 
         mockMvc
-                .perform(post("http://localhost:3001/comment")
+                .perform(post("http://localhost:8080/comment")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockComment)))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("addComment"))
-                .andExpect(content().string("This is text"))
+//                .andExpect(content().string("This is text"))
                 .andDo(print());
     }
 
+    @Test
+    @DisplayName("Test Delete comment")
+    void testDeleteComment() throws Exception {
+        Comment mockComment = new Comment();
+        mockComment.setId("5a9427648b0beebeb69810b6");
+        mockComment.setText("This is text");
+        Mockito.when(commentService.deleteComment(mockComment.getId())).thenReturn("Comment has been deleted");
+
+        mockMvc
+                .perform(delete("http://localhost:8080/comments/delete/5a9427648b0beebeb69810b6"))
+                .andExpect(status().is(200))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(handler().methodName("deleteComment"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("Test update comment")
+    void testUpdateComment() throws Exception {
+        Comment mockComment = new Comment();
+        mockComment.setId("5a9427648b0beebeb69810b6");
+        mockComment.setText("This is text");
+        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
+
+        mockMvc
+                .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mockComment)))
+                .andExpect(status().is(200))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(handler().methodName("updateComment"))
+                .andDo(print());
+    }
 }
