@@ -157,35 +157,6 @@ public class EmbeddedMovie {
         this.id = id;
     }
 
-
-    @Override
-    public String toString() {
-        return "EmbeddedMovies{" +
-                "id='" + id + '\'' +
-                ", awards=" + awards +
-                ", cast=" + Arrays.toString(cast) +
-                ", countries=" + Arrays.toString(countries) +
-                ", directors=" + Arrays.toString(directors) +
-                ", fullplot='" + fullplot + '\'' +
-                ", genres=" + Arrays.toString(genres) +
-                ", imdb=" + imdb +
-                ", languages=" + Arrays.toString(languages) +
-                ", lastupdated='" + lastupdated + '\'' +
-                ", num_mflix_comments=" + num_mflix_comments +
-                ", plot='" + plot + '\'' +
-                ", plot_embedding=" + Arrays.toString(plot_embedding) +
-                ", rating='" + rating + '\'' +
-                ", released=" + released +
-                ", runtime=" + runtime +
-                ", title='" + title + '\'' +
-                ", tomatoes=" + tomatoes +
-                ", type='" + type + '\'' +
-                ", writers=" + Arrays.toString(writers) +
-                ", year=" + year +
-                ", poster='" + poster + '\'' +
-                '}';
-    }
-
     public void setAwards(Awards awards) {
         this.awards = awards;
     }
@@ -269,4 +240,33 @@ public class EmbeddedMovie {
     public void setPoster(String poster) {
         this.poster = poster;
     }
+
+    @Override
+    public String toString() {
+        return "EmbeddedMovies{" +
+                "id='" + id + '\'' +
+                ", awards=" + awards +
+                ", cast=" + Arrays.toString(cast) +
+                ", countries=" + Arrays.toString(countries) +
+                ", directors=" + Arrays.toString(directors) +
+                ", fullplot='" + fullplot + '\'' +
+                ", genres=" + Arrays.toString(genres) +
+                ", imdb=" + imdb +
+                ", languages=" + Arrays.toString(languages) +
+                ", lastupdated='" + lastupdated + '\'' +
+                ", num_mflix_comments=" + num_mflix_comments +
+                ", plot='" + plot + '\'' +
+                ", plot_embedding=" + Arrays.toString(plot_embedding) +
+                ", rating='" + rating + '\'' +
+                ", released=" + released +
+                ", runtime=" + runtime +
+                ", title='" + title + '\'' +
+                ", tomatoes=" + tomatoes +
+                ", type='" + type + '\'' +
+                ", writers=" + Arrays.toString(writers) +
+                ", year=" + year +
+                ", poster='" + poster + '\'' +
+                '}';
+    }
+    
 }
