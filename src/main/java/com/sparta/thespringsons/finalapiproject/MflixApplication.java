@@ -1,6 +1,7 @@
 package com.sparta.thespringsons.finalapiproject;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import com.sparta.thespringsons.finalapiproject.model.services.MoviesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +21,7 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(MoviesService moviesService){
+    public CommandLineRunner runner(EmbeddedMoviesService embeddedMoviesService){
         return args -> {
 
 //            User thisGuy = userRepository.findByName("Jon Snow");
@@ -38,6 +39,8 @@ public class MflixApplication {
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
 //            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
             System.out.println("Hello");
+            //embeddedMoviesService.updateTomatoesLastUpdated("573a1391f29313caabcd8268");
+            //embeddedMoviesService.updateTomatoesCriticMeter("573a1391f29313caabcd8268", 100);
 //            List<Movie> movies = moviesService.getAllMoviesByWriter("Winsor McCay") ;
 //            for (Movie movie: movies) {
 //                System.out.println(movie.toString());
