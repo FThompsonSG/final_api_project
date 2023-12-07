@@ -17,7 +17,7 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
 
     @Query("{ 'writers' : { $regex: ?0, $options: 'i' } }")
-    List<Movie> findAllByWriter(String subStringToSearch);
+    List<Movie> findAllByWriters(String subStringToSearch);
 
     List<Movie> findAllByGenres(String genreName);
 

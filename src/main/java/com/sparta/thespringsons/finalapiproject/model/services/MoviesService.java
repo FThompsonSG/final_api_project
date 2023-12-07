@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class MoviesService {
 
-    private MovieRepository movieRepository;
+    private static MovieRepository movieRepository;
 
     @Autowired
     public MoviesService(MovieRepository movieRepository) {
