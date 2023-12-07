@@ -545,4 +545,24 @@ public class MoviesService {
         updateLastUpdated(movie.get());
         return movie;
     }
+
+    public Optional<Movie> updateRated(String code, String rating) {
+        Optional<Movie> movie = movieRepository.findById(code);
+        if (movie.isPresent()){
+            movie.get().setRated(rating);
+            movieRepository.save(movie.get());
+        }
+        updateLastUpdated(movie.get());
+        return movie;
+    }
+
+    public Optional<Movie> updatePoster(String code, String poster) {
+        Optional<Movie> movie = movieRepository.findById(code);
+        if (movie.isPresent()){
+            movie.get().setPoster(poster);
+            movieRepository.save(movie.get());
+        }
+        updateLastUpdated(movie.get());
+        return movie;
+    }
 }
