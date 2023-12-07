@@ -1,4 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -552,6 +556,135 @@ public class MoviesService {
         }
         movieRepository.save(movieToUpdate);
         return movieToUpdate;
+    }
+
+    //Copied methods
+    public Optional<Movie> updateTomatoesCriticMeter(String id, Integer meter ) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getCritic().setMeter(meter);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesViewerMeter(String id, Integer meter ) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getViewer().setMeter(meter);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesViewerNumReviews(String id, Integer numReviews) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getViewer().setNumReviews(numReviews);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesCriticNumReviews(String id, Integer numReviews) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getCritic().setNumReviews(numReviews);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesCriticRating(String id, Double rating) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getCritic().setRating(rating);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesViewerRating(String id, Double rating) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().getViewer().setRating(rating);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesRotten(String id, Integer rotten) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().setRotten(rotten);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesFresh(String id, Integer fresh) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            updateMovie.getTomatoes().setFresh(fresh);
+            movieRepository.save(updateMovie);
+            updateTomatoesLastUpdated(id);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Movie> updateTomatoesLastUpdated(String id) {
+        Optional<Movie> checkMovie = movieRepository.findById(id);
+
+        if(checkMovie.isPresent()) {
+            Movie updateMovie = checkMovie.get();
+            LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.of("UTC"));
+            Date currentDate = Date.from(currentDateTime.atZone(ZoneId.of("UTC")).toInstant());
+            updateMovie.getTomatoes().setLastUpdated(currentDate);
+            movieRepository.save(updateMovie);
+
+            return Optional.of(updateMovie);
+        }
+
+        return Optional.empty();
     }
 
 
