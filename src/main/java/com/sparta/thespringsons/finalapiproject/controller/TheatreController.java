@@ -45,7 +45,7 @@ public class TheatreController {
     @Tag(name = "Get Theatre by Id")
     @Operation(summary = "Get Theatres by Id")
     @GetMapping("/theatres/theater_id/{theater_id}")
-    public Optional<Theater> getAllTheatresById(@PathVariable Integer theater_id) {
+    public Optional<Theater> getTheatresById(@PathVariable Integer theater_id) {
         return theaterService.getTheaterByTheaterId(theater_id);
     }
 
