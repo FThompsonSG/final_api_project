@@ -299,4 +299,21 @@ class MoviesServiceTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Testing get all movies by writer Winsor MCcay")
+    public void getAllMoviesByWriter(){
+
+        List<Movie> movies = moviesService.getAllMoviesByWriter("Winsor mccay");
+        System.out.println(movies);
+        if(!movies.isEmpty()) {
+            for (Movie movie : movies) {
+                List<String> writers = movie.getWriters();
+                Assertions.assertTrue(writers.stream().anyMatch(x -> x.toLowerCase().contains("winsor mccay")));
+
+            }
+        }else{
+            Assertions.assertEquals(0, movies.size());
+        }
+    }
 }
