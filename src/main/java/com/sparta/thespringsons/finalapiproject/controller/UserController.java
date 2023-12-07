@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -34,14 +35,14 @@ public class UserController {
 
     @Tag(name = "Get User by Name")
     @Operation(summary = "Get User by Name")
-    @GetMapping("/userbyname/{name}")
-    public Optional<User> getUserByName(@PathVariable String name) throws NoRecordFoundException {
+    @GetMapping("/usersbyname/{name}")
+    public List<User> getUsersByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get user by name method in users controller");
-        Optional<User> user = userService.getByName(name);
-        if (user.isPresent()) {
-            throw new NoRecordFoundException("users", "/userbyname/{name}");
+        List<User> users = userService.getByName(name);
+        if (users.isEmpty()) {
+            throw new NoRecordFoundException("users", "/usersbyname/{name}");
         }
-        return user;
+        return users;
     }
 
     @Tag(name = "Get User by ID")
@@ -50,10 +51,22 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable String id) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get user by id method in users controller");
         Optional<User> user = userService.getById(id);
-        if (user.isPresent()) {
+        if (user.isEmpty()) {
             throw new NoRecordFoundException("users", "/userbyid/{id}");
         }
         return user;
+    }
+
+    @Tag(name = "Get User by Email")
+    @Operation(summary = "Get User by Email")
+    @GetMapping("/usersbyemail/{email}")
+    public List<User> getUsersByEmail(@PathVariable String email) throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered get user by email method in users controller");
+        List<User> users = userService.getByEmail(email);
+        if (users.isEmpty()) {
+            throw new NoRecordFoundException("users", "/usersbyemail/{email}");
+        }
+        return users;
     }
 
     @Tag(name = "Add New User")

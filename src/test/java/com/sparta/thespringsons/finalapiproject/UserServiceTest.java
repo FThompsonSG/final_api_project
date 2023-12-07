@@ -17,13 +17,19 @@ public class UserServiceTest {
     @Test
     @DisplayName("Test get User By Name")
     void testUserByName() {
-        Assertions.assertEquals("kit_harington@gameofthron.es", userService.getByName("Jon Snow").get().getEmail());
+        Assertions.assertEquals("kit_harington@gameofthron.es", userService.getByName("Jon Snow").get(0).getEmail());
     }
 
     @Test
     @DisplayName("Test get User By ID")
     void testUserById() {
         Assertions.assertEquals("kit_harington@gameofthron.es", userService.getById("59b99db9cfa9a34dcd7885bf").get().getEmail());
+    }
+
+    @Test
+    @DisplayName("Test get User By Email")
+    void testGetUserByEmail() {
+        Assertions.assertEquals("Jon Snow", userService.getByEmail("kit_harington@gameofthron.es").get(0).getName());
     }
 
 }

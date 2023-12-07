@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,9 +29,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Optional<User> getByName(String name) {
+    public List<User> getByName(String name) {
         logger.log(Level.INFO, "Entered get user by name method in user service");
-        return userRepository.findByName(name);
+        List<User> allUsers = userRepository.findAll();
+        List<User> matchingUsers = new ArrayList<>();
+        for (User user : allUsers) {
+            if (user.getName().contains(name)) {
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
     }
 
     public Optional<User> getById(String id) {
@@ -57,4 +66,15 @@ public class UserService {
         return userToUpdate;
     }
 
+    public List<User> getByEmail(String email) {
+        logger.log(Level.INFO, "Entered get user by email method in user service");
+        List<User> allUsers = userRepository.findAll();
+        List<User> matchingUsers = new ArrayList<>();
+        for (User user : allUsers) {
+            if (user.getEmail().contains(email)) {
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
+    }
 }

@@ -29,13 +29,10 @@ public class CommentControllerMockTests {
     private MockMvc mockMvc;
 
     @MockBean
-    private CommentRepository commentRepository;
-
-    @MockBean
     private CommentService commentService;
 
     @MockBean
-    private CommentController commentController;
+    private CommentRepository commentRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -46,17 +43,16 @@ public class CommentControllerMockTests {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
+        Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(mockComment);
 
         mockMvc
                 .perform(post("http://localhost:8080/comment")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockComment)))
-                .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("addComment"))
-//                .andExpect(content().string("This is text"))
-                .andDo(print());
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
@@ -81,7 +77,7 @@ public class CommentControllerMockTests {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
+        Mockito.when(commentService.updateComment(Mockito.any(Comment.class), Mockito.anyString())).thenReturn(mockComment);
 
         mockMvc
                 .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")

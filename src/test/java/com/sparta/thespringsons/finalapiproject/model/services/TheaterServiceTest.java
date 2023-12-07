@@ -5,12 +5,12 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
 import jakarta.validation.constraints.AssertTrue;
-import org.junit.FixMethodOrder;
+//import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.MethodSorters;
+//import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@FixMethodOrder(MethodSorters.DEFAULT)
+//@FixMethodOrder(MethodSorters.DEFAULT)
 class TheaterServiceTest {
 
     @Autowired
