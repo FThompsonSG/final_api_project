@@ -264,5 +264,4 @@ public class EmbeddedMovie {
                 ", poster='" + poster + '\'' +
                 '}';
     }
-
 }
