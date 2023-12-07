@@ -268,16 +268,30 @@ public class MoviesService {
         return movieRepository.findByCastMember(castMemberName);
     }
 
-    public List<Movie> getEmbeddedMoviesByNumberOfNominations(Integer noms) {
+    public List<Movie> getMoviesByNumberOfNominations(Integer noms) {
         return movieRepository.findMoviesByAwards_Nominations(noms);
     }
 
-    public List<Movie> getEmbeddedMoviesByNumberOfWins(Integer wins) {
+    public List<Movie> getMoviesByNumberOfWins(Integer wins) {
         return movieRepository.findMoviesByAwards_Wins(wins);
     }
 
-    public List<Movie> getEmbeddedMoviesByAwardName(String awardName) {
+    public List<Movie> getMoviesByAwardName(String awardName) {
         return movieRepository.findByFieldNameContaining(awardName);
     }
-    
+
+    public List<String> getLastUpdatedByMovieTitle(String name) {
+        List<Movie> movies = movieRepository.findByTitle(name);
+        List<String> resultList = new ArrayList<>();
+        String result = "";
+        for (Movie movie : movies){
+            result = name + " last updated on " + movie.getLastupdated();
+            if(result != null) {
+                resultList.add(result);
+            }
+        }
+        return resultList;
+    }
+
+
 }
