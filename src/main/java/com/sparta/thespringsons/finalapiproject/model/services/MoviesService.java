@@ -424,7 +424,7 @@ public class MoviesService {
         return resultList;
     }
 
-    public static List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+    public List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> moviesInRange = new ArrayList<>();
 
