@@ -117,10 +117,6 @@ public class EmbeddedMovie {
         return rating;
     }
 
-//    public Date getReleased() {
-//        return released;
-//    }
-
     public String getReleased() {
         return released;
     }
@@ -268,5 +264,4 @@ public class EmbeddedMovie {
                 ", poster='" + poster + '\'' +
                 '}';
     }
-    
 }

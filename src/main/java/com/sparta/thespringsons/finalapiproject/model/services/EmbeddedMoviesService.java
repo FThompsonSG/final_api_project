@@ -3,13 +3,17 @@ package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
+import jakarta.persistence.Embedded;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.swing.text.html.Option;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.LocalDateTime;
@@ -140,6 +144,58 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesfinal;
     }
 
+    public List<EmbeddedMovie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+        List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
+        List<EmbeddedMovie> selectedMovies = new ArrayList<>();
+        for (EmbeddedMovie movie : movies) {
+            Imdb imdb = movie.getImdb();
+            if (imdb.getRating() != null) {
+                Double movieRating = imdb.getRating();
+                if (movieRating >= lowerRating && movieRating <= upperRating) {
+                    selectedMovies.add(movie);
+                }
+            }
+        }
+        return selectedMovies;
+    }
+
+    //String
+    public List<String> getNumberOfMovieImdbVotes(String movieName) {
+        List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
+        List<String> resultList = new ArrayList<>();
+        for(EmbeddedMovie movie : movieList) {
+            Integer numVotes = movie.getImdb().getVotes();
+            String result = movieName + " IMDB Votes: " + numVotes;
+            resultList.add(result);
+        }
+
+        return resultList;
+    }
+
+    public List<String> getMovieImdbRatingByName(String movieName) {
+        List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
+        List<String> resultList = new ArrayList<>();
+        for(EmbeddedMovie movie : movieList) {
+            Double movieRating = movie.getImdb().getRating();
+            String result = movieName + " IMDB Rating: " + movieRating;
+            resultList.add(result);
+        }
+        return resultList;
+    }
+
+    public List<String> getMovieImdbIdByName(String movieName) {
+        List<EmbeddedMovie> movieList = embeddedMoviesRepository.findByTitle(movieName);
+        List<String> resultList = new ArrayList<>();
+        for(EmbeddedMovie movie : movieList) {
+            Integer movieId = movie.getImdb().getId();
+            if (movieId != null) {
+                String result = movieName + " IMDB ID : " + movieId;
+                resultList.add(result);
+            }
+        }
+        return resultList;
+    }
+
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
@@ -207,6 +263,20 @@ public class EmbeddedMoviesService  {
         }
     }
 
+    public List<String> getPosterLinkByTitle(String name) {
+        List<EmbeddedMovie> allMovies = embeddedMoviesRepository.findByTitle(name);
+        List<String> movies = new ArrayList<>();
+        for (EmbeddedMovie movie : allMovies) {
+            String posterLink = movie.getPoster();
+            String result = "";
+            if (posterLink != null) {
+                result = name + "'s poster link: " + posterLink;
+                movies.add(result);
+            }
+        }
+        return movies;
+    }
+
     public List<EmbeddedMovie> getEmbeddedMoviesByYearBefore(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
@@ -224,6 +294,31 @@ public class EmbeddedMoviesService  {
         } catch (Exception e) {
             System.out.println("Invalid String");
             return null;
+        }
+    }
+
+    public List<EmbeddedMovie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+        List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
+        List<EmbeddedMovie> moviesInRange = new ArrayList<>();
+
+        try {
+            int lowDate = Integer.parseInt(lowerDate);
+            int highDate = Integer.parseInt(upperDate);
+
+            List<EmbeddedMovie> movieRangeList = movies.stream()
+                    .filter(movie -> {
+                        try {
+                            int movieYear = Integer.parseInt(movie.getYear());
+                            return movieYear >= lowDate && movieYear <= highDate;
+                        } catch (NumberFormatException e) {
+                            return false;
+                        }
+                    })
+                    .toList();
+
+            return movieRangeList;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid date format");
         }
     }
 
@@ -253,6 +348,7 @@ public class EmbeddedMoviesService  {
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
             movie.setTitle(newTitle);
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -264,6 +360,7 @@ public class EmbeddedMoviesService  {
             List<String> writers = Arrays.asList(movie.getWriters());
             writers.add(newWriter);
             movie.setWriters(writers.toArray(new String[0]));
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -275,6 +372,7 @@ public class EmbeddedMoviesService  {
             List<String> cast = Arrays.asList(movie.getCast());
             cast.add(newMember);
             movie.setWriters(cast.toArray(new String[0]));
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -286,6 +384,7 @@ public class EmbeddedMoviesService  {
             List<String> genres = Arrays.asList(movie.getGenres());
             genres.add(newGenre);
             movie.setWriters(genres.toArray(new String[0]));
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -297,6 +396,7 @@ public class EmbeddedMoviesService  {
             List<String> languages = Arrays.asList(movie.getLanguages());
             languages.add(newLanguage);
             movie.setWriters(languages.toArray(new String[0]));
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -308,6 +408,7 @@ public class EmbeddedMoviesService  {
             List<String> countries = Arrays.asList(movie.getCountries());
             countries.add(newCountry);
             movie.setWriters(countries.toArray(new String[0]));
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -319,6 +420,7 @@ public class EmbeddedMoviesService  {
             Integer comments = movie.getNum_mflix_comments();
             Integer newComments = comments++;
             movie.setNum_mflix_comments(newComments);
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
@@ -408,7 +510,6 @@ public class EmbeddedMoviesService  {
 
             return Optional.of(updateMovie);
         }
-
         return Optional.empty();
     }
 
@@ -454,5 +555,72 @@ public class EmbeddedMoviesService  {
         }
 
         return Optional.empty();
+    }
+
+    public EmbeddedMovie updateAwardsWins(String code, Integer wins) {
+        EmbeddedMovie movieToUpdate = null;
+        if(wins != null && code != null){
+            if(embeddedMoviesRepository.findById(code).isPresent()){
+                movieToUpdate = embeddedMoviesRepository.findById(code).get();
+                Awards award = movieToUpdate.getAwards();
+                award.setWins(wins);
+                award.setText(updateText(movieToUpdate));
+                movieToUpdate.setAwards(award);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        embeddedMoviesRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
+    public EmbeddedMovie updateAwardsNominations(String code, Integer nominations) {
+        EmbeddedMovie movieToUpdate = null;
+        if(nominations != null && code != null){
+            if(embeddedMoviesRepository.findById(code).isPresent()){
+                movieToUpdate = embeddedMoviesRepository.findById(code).get();
+                Awards award = movieToUpdate.getAwards();
+                award.setNominations(nominations);
+                award.setText(updateText(movieToUpdate));
+                movieToUpdate.setAwards(award);
+                updateLastUpdated(movieToUpdate);
+            }
+        }
+        embeddedMoviesRepository.save(movieToUpdate);
+        return movieToUpdate;
+    }
+
+    public static void updateLastUpdated(EmbeddedMovie movieToUpdate) {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+        movieToUpdate.setLastupdated(currentDate.format(formatter));
+    }
+
+    private String updateText(EmbeddedMovie movieToUpdate) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Awards awards = movieToUpdate.getAwards();
+
+        if(awards.getWins() > 0) {
+            stringBuilder.append(awards.getWins()).append(" win");
+        } if (awards.getWins() > 1) {
+            stringBuilder.append("s");
+        }
+
+        if(awards.getNominations() > 0) {
+            if(awards.getWins() > 0) {
+                stringBuilder.append(" and ");
+            }
+            stringBuilder.append(awards.getNominations()).append(" nomination");
+            if(awards.getNominations() > 1) {
+                stringBuilder.append("s");
+            }
+        }
+        stringBuilder.append(".");
+        return stringBuilder.toString();
+    }
+
+    public void deleteMovieById(String Id) {
+        Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
+        movie.ifPresent(embeddedMovie -> embeddedMoviesRepository.delete(embeddedMovie));
+
     }
 }

@@ -525,7 +525,6 @@ public class MoviesService {
         }
         stringBuilder.append(".");
         return stringBuilder.toString();
-
     }
 
     public Movie updateImdbRating(String code, Double rating) {
