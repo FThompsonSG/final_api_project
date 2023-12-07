@@ -17,8 +17,9 @@ public class EmbeddedMoviesService  {
     public EmbeddedMoviesService(EmbeddedMoviesRepository embeddedMoviesRepository) {
         this.embeddedMoviesRepository = embeddedMoviesRepository;
     }
-  
+
     public List<EmbeddedMovie> findAllByTomatoesCriticRating(double minRating, double maxRating) {
+
         List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
         List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
         for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
@@ -127,7 +128,6 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesfinal;
     }
 
-
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
@@ -169,12 +169,13 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.findByLanguage(language);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfComments(Integer numberOfComments) {
+    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfCommentsLowerBound(Integer numberOfComments) {
         return embeddedMoviesRepository.findByNumberOfComments(numberOfComments);
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByPlot(String plot) {
-        return embeddedMoviesRepository.findByPlot(plot);
+        String plotPadded = " " + plot + " ";
+        return embeddedMoviesRepository.findByPlot(plotPadded);
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(Integer mins) {
@@ -214,5 +215,4 @@ public class EmbeddedMoviesService  {
             return null;
         }
     }
-
 }
