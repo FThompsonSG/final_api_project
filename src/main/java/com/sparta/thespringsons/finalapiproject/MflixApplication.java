@@ -1,11 +1,6 @@
 package com.sparta.thespringsons.finalapiproject;
 
-import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
-import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
-import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
-import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import com.sparta.thespringsons.finalapiproject.model.services.MoviesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +9,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
@@ -26,8 +20,7 @@ public class MflixApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(UserRepository userRepository, EmbeddedMoviesService embeddedMoviesService,
-                                    EmbeddedMoviesRepository embeddedMoviesRepository, MovieRepository movieRepository, CommentRepository commentRepository,MoviesService moviesService){
+    public CommandLineRunner runner(MoviesService moviesService){
         return args -> {
 
 //            User thisGuy = userRepository.findByName("Jon Snow");
@@ -44,11 +37,13 @@ public class MflixApplication {
 //            System.out.println(commentRepository.findAll());
             //System.out.println(embeddedMoviesService.findAllByTomatoesCriticRating(3.0, 4.0));
 //            System.out.println(embeddedMoviesService.findAllByTomatoesProduction("Paramount Pictures"));
-
-            List<String> movies = moviesService.getPosterLinkByTitle("The Great Train Robbery");
-            for (String movie: movies) {
-                System.out.println(movie);
+            System.out.println("Hello");
+            List<Movie> movies = moviesService.getAllMoviesByWriter("Winsor McCay") ;
+            for (Movie movie: movies) {
+                System.out.println(movie.toString());
             }
+//            List<String> movies = moviesService.getPosterLinkByTitle("The Great Train Robbery");
+
 
 //
                 /*List<Movie> thisMovie = movieRepository.findByTitle("The Great Train Robbery");

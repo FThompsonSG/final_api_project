@@ -6,10 +6,8 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Arrays;
-import java.util.Date;
 
 @Document("embedded_movies")
 public class EmbeddedMovie {

@@ -1,17 +1,12 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
-import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmbeddedMoviesService  {
