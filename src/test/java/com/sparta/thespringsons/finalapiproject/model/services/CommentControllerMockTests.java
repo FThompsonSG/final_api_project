@@ -15,6 +15,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(CommentController.class)
@@ -38,10 +40,11 @@ public class CommentControllerMockTests {
         Comment mockComment = new Comment();
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
-        Mockito.when(commentService.getCommentById(mockComment.getId())).thenReturn(Optional.of(mockComment));
+        Mockito.when(commentService.getAllComments()).thenReturn(new ArrayList<>(List.of(mockComment)));
 
         mockMvc
-                .perform(post("http://localhost:3001/comment"))
+                .perform(post("http://localhost:8080/comment/")
+                        .contentType(mockComment.getText()))
                 .andExpect(status().is(200))
 //                .andExpect(content().contentType("application/json"))
 //                .andExpect(handler().methodName("addComment"))
