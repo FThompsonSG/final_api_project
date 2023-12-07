@@ -1,5 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
+import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
@@ -11,10 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -684,6 +681,88 @@ public class MoviesService {
         }
 
         return Optional.empty();
+    }
+
+    public Movie updateMovieTitle(String Id, String newTitle) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            movie.setTitle(newTitle);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie updateMovieWriters(String Id, String newWriter) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            List<String> writers = movie.getWriters();
+            writers.add(newWriter);
+            movie.setWriters(writers);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie updateMovieCast(String Id, String newMember) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            List<String> cast = movie.getCast();
+            cast.add(newMember);
+            movie.setWriters(cast);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie updateMovieGenres(String Id, String newGenre) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            List<String> genres =movie.getGenres();
+            genres.add(newGenre);
+            movie.setWriters(genres);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie updateMovieLanguages(String Id, String newLanguage) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            List<String> languages = movie.getLanguages();
+            languages.add(newLanguage);
+            movie.setWriters(languages);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie updateMovieCountries(String Id, String newCountry) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            List<String> countries = movie.getCountries();
+            countries.add(newCountry);
+            movie.setWriters(countries);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
+    }
+
+    public Movie incrementCommentCount(String Id) {
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            Integer comments = movie.getNum_mflix_comments();
+            Integer newComments = comments++;
+            movie.setNum_mflix_comments(newComments);
+            updateLastUpdated(movie);
+        }
+        return movieRepository.save(movie);
     }
 
 
