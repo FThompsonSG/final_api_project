@@ -156,7 +156,41 @@ class MoviesServiceTest {
         }
     }
 
-    
+    @Test
+    @DisplayName("Testing get Number Of Movie Imdb Votes returns 1375")
+    public void testingGetNumberOfMovieImdbVotesReturns1375(){
+        List<String> result = moviesService.getNumberOfMovieImdbVotes("A Corner in Wheat");
+        if(!result.isEmpty()) {
+            for(String movie : result) {
+                Assertions.assertTrue(movie.equals("A Corner in Wheat IMDB Votes: 1375"));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get Movie Imdb Rating by Title returns 6")
+    public void testingGetMovieImdbRatingByTitleReturns6(){
+        List<String> result = moviesService.getMovieImdbRatingByName("Traffic in Souls");
+        if(!result.isEmpty()) {
+            for(String movie : result) {
+                Assertions.assertTrue(movie.contains("6"));
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Testing get Movie Imdb Id by Title returns 3471")
+    public void testingGetMovieImdbIdByTitleReturns3471(){
+        List<String> result = moviesService.getMovieImdbIdByName("Traffic in Souls");
+        if(!result.isEmpty()) {
+            for(String movie : result) {
+                Assertions.assertTrue(movie.contains(" IMDB ID : "));
+            }
+        }
+    }
+
+
+
 
 
 

@@ -236,8 +236,10 @@ public class MoviesService {
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Integer movieId = movie.getImdb().getId();
-            String result = movieName + " IMDB ID : " + movieId;
-            resultList.add(result);
+            if (movieId != null) {
+                String result = movieName + " IMDB ID : " + movieId;
+                resultList.add(result);
+            }
         }
         return resultList;
     }
