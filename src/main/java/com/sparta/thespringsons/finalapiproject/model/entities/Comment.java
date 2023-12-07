@@ -46,4 +46,8 @@ public class Comment {
     public void setText(String text) {
         this.text = text;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

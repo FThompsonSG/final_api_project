@@ -4,6 +4,7 @@ import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,5 +47,30 @@ public class CommentService {
         logger.log(Level.INFO, "Entered get all comments by movie title method in comment service");
         Movie movie = movieRepository.findByTitle(movieTitle);
         return commentRepository.findAllByMovieId(movie.getId());
+    }
+
+    public Optional<Comment> getCommentById(String id) {
+        logger.log(Level.INFO, "Entered get comment by id method in comment service");
+        return commentRepository.findById(id);
+    }
+
+    public Comment saveComment(Comment newComment) {
+        logger.log(Level.INFO, "Entered save new comment method in comment service");
+        return commentRepository.save(newComment);
+    }
+
+    public String deleteComment(String id) {
+        logger.log(Level.INFO, "Entered delete comment method in comment service");
+        commentRepository.deleteById(id);
+        return "Comment has been deleted";
+    }
+
+    public Comment updateComment(Comment newComment, String id) throws Exception {
+        Optional<Comment> retrievedComment = commentRepository.findById(id);
+        Comment commentToUpdate = retrievedComment.get();
+        commentToUpdate = newComment;
+        commentToUpdate.setId(id);
+        commentRepository.save(commentToUpdate);
+        return commentToUpdate;
     }
 }
