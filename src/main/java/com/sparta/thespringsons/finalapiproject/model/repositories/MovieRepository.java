@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.repositories;
 
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -12,16 +13,38 @@ import java.util.List;
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
 //    List<Movie> findAllMovies();
-    Movie findByTitle(String title);
+    List<Movie> findByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
 
-    //@Query("{ $or: [ { 'Imdb.ratings' : { $gte: ?0, $lte: ?1 } }, { 'Imdb.ratings': null } ] }"
-//    List<Movie> findAllMoviesByCast(List<String> performers);
-//
-////    List<Movie> findAllMoviesByGenres(String genre);
-//
-//    List<Movie> findAllByImdbId(Integer id);
-//    ArrayList<Movie> findAllByImdbRating(Double lowerRating, Double upperRating);
-//    List<Movie> findAllByImdbVotes(Integer votes);
-//        Double findImdbRating(Movie movie);
+
+    ArrayList<Movie> findAllByWriters(String writer);
+
+    List<Movie> findAllByGenres(String genreName);
+
+    List<Movie> findAllByLanguages(String language);
+
+    List<Movie> findAllByCountries(String country);
+
+    @Query("{'year' : { $eq : ?0 } }")
+    List<Movie> findByYearExact(Integer year);
+
+    @Query("{'year' : { $lte : ?0 } }")
+    List<Movie> findByYearBefore(Integer year);
+
+    @Query("{'year' : { $gte : ?0 } }")
+    List<Movie> findByYearAfter(Integer year);
+
+    @Query("{ 'cast' : { $regex: ?0, $options: 'i' } }")
+    List<Movie> findByCastMember(String subStringToSearch);
+
+    @Query("{'awards.nominations' : { $gte : ?0 } }")
+    List<Movie> findMoviesByAwards_Nominations(Integer numberOfNomintations);
+
+    @Query("{ 'awards.wins' : { $gte : ?0 } }")
+    List<Movie> findMoviesByAwards_Wins(Integer numberOfWins);
+
+    @Query("{ 'awards.text' : { $regex: ?0, $options: 'i' } }")
+    List<Movie> findByFieldNameContaining(String substringToSearch);
+
+
 }
