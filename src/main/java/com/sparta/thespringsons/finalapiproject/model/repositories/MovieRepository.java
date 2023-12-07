@@ -1,6 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.repositories;
 
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -17,7 +16,8 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     ArrayList<Movie> findAllByDirectors(String directors);
 
 
-    ArrayList<Movie> findAllByWriters(String writer);
+    @Query("{ 'writers' : { $regex: ?0, $options: 'i' } }")
+    List<Movie> findAllByWriters(String subStringToSearch);
 
     List<Movie> findAllByGenres(String genreName);
 

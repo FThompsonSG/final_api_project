@@ -28,7 +28,7 @@ public class MoviesService {
         //return lists instead of optional
         List<Movie> movies = movieRepository.findByTitle(title);
         List<Movie> selectedMovies = new ArrayList<>();
-        for (Movie movie : movies) {
+        for(Movie movie : movies) {
             if (movie != null && movie.getTitle().contains(title)) {
                 selectedMovies.add(movie);
             }
@@ -46,69 +46,24 @@ public class MoviesService {
 
     }
 
-    //    public Optional<List<Movie>> findAllByWriter(String writerName) {
-//        List<Movie> movies = new ArrayList<>();
-//        for (Movie movie : movieRepository.findAll()) {
-//            for (String actor : movie.getCast()) {
-//                if (actor.equals(writerName)) {
-//                    movies.add(movie);
-//                }
-//            }
-//        }
-//        return Optional.of(movies);
-//
-//    }
     public List<Movie> getMoviesByGenre(String genreName) {
         return movieRepository.findAllByGenres(genreName);
     }
 
-    //    public Optional<List<Movie>> findAllByGenre(String genreName) {
-//        List<Movie> movies = new ArrayList<>();
-//        for (Movie movie : movieRepository.findAll()) {
-//            for (String genre : movie.getGenres()) {
-//                if (genre.equals(genreName)) {
-//                    movies.add(movie);
-//                }
-//            }
-//        }
-//        return Optional.of(movies);
-//    }
     public List<Movie> getMoviesByLanguages(String language) {
         return movieRepository.findAllByLanguages(language);
     }
-
-//    public Optional<List<Movie>> findAllByLanguage(String languageName) {
-//        List<Movie> movies = new ArrayList<>();
-//        for (Movie movie : movieRepository.findAll()) {
-//            for (String langauge : movie.getLanguages()) {
-//                if (langauge.equals(languageName)) {
-//                    movies.add(movie);
-//                }
-//            }
-//        }
-//        return Optional.of(movies);
-//    }
 
     public List<Movie> getMoviesByCountries(String country) {
         return movieRepository.findAllByCountries(country);
     }
 
-    public Optional<List<Movie>> findAllByTomatoesRotten() {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            if (movie.getTomatoes().getRotten() == 0) {
-                movies.add(movie);
-            }
-        }
-        return Optional.of(movies);
-    }
-
-    public List<Movie> getAllByFullPlot(String fullPlot) {
+    public List<Movie> getAllByFullPlot(String fullPlot){
         List<Movie> allMovies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
-        for (Movie movie : allMovies) {
+        for(Movie movie : allMovies) {
             String plot = movie.getFullplot();
-            if (plot != null && plot.contains(fullPlot)) {
+            if(plot != null && plot.contains(fullPlot)) {
                 selectedMovies.add(movie);
             }
         }
@@ -118,43 +73,123 @@ public class MoviesService {
     public List<Movie> getAllByPlot(String keyWord) {
         List<Movie> allMovies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
-        for (Movie movie : allMovies) {
+        for(Movie movie : allMovies) {
             String plot = movie.getPlot();
-            if (plot != null && plot.contains(keyWord)) {
+            if(plot != null && plot.contains(keyWord)) {
                 selectedMovies.add(movie);
             }
         }
         return selectedMovies;
     }
 
-    public Optional<List<Movie>> findAllByTomatoesFresh() {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            if (movie.getTomatoes().getFresh() == 5) {
-                movies.add(movie);
+    public List<Movie> findAllByTomatoesCriticRating(double minRating, double maxRating) {
+
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getCritic() != null)
+                    if(Movie.getTomatoes().getCritic().getRating() != null)
+                        if (Movie.getTomatoes().getCritic().getRating() < maxRating && Movie.getTomatoes().getCritic().getRating() > minRating) {
+                            MoviesFinal.add(Movie);
+                        }
+
             }
         }
-        return Optional.of(movies);
+        return MoviesFinal;
     }
 
-    public Optional<List<Movie>> findAllByTomatoesNumReviewsLarger(double numReviews) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            if (movie.getTomatoes().getNumberReviews() > numReviews) {
-                movies.add(movie);
+    public List<Movie> findAllByTomatoesViewerRating(double minRating, double maxRating) {
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getViewer() != null)
+                    if(Movie.getTomatoes().getViewer().getRating() != null)
+                        if (Movie.getTomatoes().getViewer().getRating() < maxRating && Movie.getTomatoes().getViewer().getRating() > minRating) {
+                            MoviesFinal.add(Movie);
+                        }
+
             }
         }
-        return Optional.of(movies);
+        return MoviesFinal;
     }
 
-    public Optional<List<Movie>> findAllByTomatoesNumReviewsSmaller(double numReviews) {
-        List<Movie> movies = new ArrayList<>();
-        for (Movie movie : movieRepository.findAll()) {
-            if (movie.getTomatoes().getNumberReviews() < numReviews) {
-                movies.add(movie);
+    public List<Movie> findAllByTomatoesCriticMeter(double minMeter, double maxMeter) {
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getCritic() != null)
+                    if(Movie.getTomatoes().getCritic().getMeter() != null)
+                        if (Movie.getTomatoes().getCritic().getMeter() < maxMeter && Movie.getTomatoes().getCritic().getMeter() > minMeter) {
+                            MoviesFinal.add(Movie);
+                        }
+
             }
         }
-        return Optional.of(movies);
+        return MoviesFinal;
+    }
+
+    public List<Movie> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getViewer() != null)
+                    if(Movie.getTomatoes().getViewer().getMeter() != null)
+                        if (Movie.getTomatoes().getViewer().getMeter() < maxMeter && Movie.getTomatoes().getViewer().getMeter() > minMeter) {
+                            MoviesFinal.add(Movie);
+                        }
+
+            }
+        }
+        return MoviesFinal;
+    }
+
+    public List<Movie> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getRotten() != null)
+                    if (Movie.getTomatoes().getRotten() < maxRotten && Movie.getTomatoes().getRotten() > minRotten) {
+                        MoviesFinal.add(Movie);
+                    }
+
+            }
+        }
+        return MoviesFinal;
+    }
+
+    public List<Movie> findAllByTomatoesFreshReviews(int minFresh, int maxFresh) {
+        List<Movie> Movies = new ArrayList<>();
+        List<Movie> MoviesFinal = new ArrayList<>();
+        for (Movie Movie : movieRepository.findAll()) {
+            if(Movie.getTomatoes() != null) {
+                if (Movie.getTomatoes().getFresh() != null)
+                    if (Movie.getTomatoes().getFresh() < maxFresh && Movie.getTomatoes().getFresh() > minFresh) {
+                        MoviesFinal.add(Movie);
+                    }
+
+            }
+        }
+        return MoviesFinal;
+    }
+
+    public List<Movie> findAllByTomatoesProduction(String production) {
+        List<Movie> movies = new ArrayList<>();
+        List<Movie> moviesfinal = new ArrayList<>();
+        for (Movie movie : movieRepository.findAll()) {
+            if(movie.getTomatoes() != null) {
+                if (movie.getTomatoes().getProduction() != null)
+                    if (movie.getTomatoes().getProduction().equals(production)) {
+                        moviesfinal.add(movie);
+                    }
+
+            }
+        }
+        return moviesfinal;
     }
 
     public List<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
@@ -174,9 +209,9 @@ public class MoviesService {
 
     //String
     public List<String> getNumberOfMovieImdbVotes(String movieName) {
-        List<Movie> movieList = movieRepository.findByTitle(movieName);
+        List<Movie> movieList= movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
-        for (Movie movie : movieList) {
+        for(Movie movie : movieList) {
             Integer numVotes = movie.getImdb().getVotes();
             String result = movieName + " IMDB Votes: " + numVotes;
             resultList.add(result);
@@ -186,9 +221,9 @@ public class MoviesService {
     }
 
     public List<String> getMovieImdbRatingByName(String movieName) {
-        List<Movie> movieList = movieRepository.findByTitle(movieName);
+        List<Movie> movieList= movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
-        for (Movie movie : movieList) {
+        for(Movie movie : movieList) {
             Double movieRating = movie.getImdb().getRating();
             String result = movieName + " IMDB Rating: " + movieRating;
             resultList.add(result);
@@ -199,7 +234,7 @@ public class MoviesService {
     public List<String> getMovieImdbIdByName(String movieName) {
         List<Movie> movieList = movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
-        for (Movie movie : movieList) {
+        for(Movie movie : movieList) {
             Integer movieId = movie.getImdb().getId();
             String result = movieName + " IMDB ID : " + movieId;
             resultList.add(result);
@@ -210,10 +245,10 @@ public class MoviesService {
     public List<String> getYearOfRelease(String name) {
         List<Movie> allMovies = movieRepository.findByTitle(name);
         List<String> movies = new ArrayList<>();
-        for (Movie movie : allMovies) {
+        for(Movie movie : allMovies) {
             String year = movie.getReleased().substring(24);
             String result = "";
-            if (year != null) {
+            if(year != null){
                 result = name + "'s year of release: " + year;
                 movies.add(result);
             }
