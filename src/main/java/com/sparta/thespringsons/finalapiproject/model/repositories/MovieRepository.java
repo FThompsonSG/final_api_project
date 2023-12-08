@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
+
 //    List<Movie> findAllMovies();
     List<Movie> findByTitle(String title);
 
@@ -57,4 +58,5 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
 
     List<Movie> findAllByRated(String rating);
+
 }

@@ -5,6 +5,10 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.util.List;
 
@@ -27,7 +31,9 @@ public class Movie {
     private String poster;
     //could be enum
     private String rated;
-    private String released;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date released;
     private Integer runtime;
     private String title;
     private Tomato tomatoes;
@@ -43,7 +49,7 @@ public class Movie {
                  String fullplot, List<String> genres, Imdb imdb,
                  List<String> languages, String lastupdated,
                  Integer num_mflix_comments, String plot,
-                 String poster, String rated, String released,
+                 String poster, String rated, Date released,
                  Integer runtime, String title, Tomato tomatoes,
                  String type, String year, List<String> writers) {
         this.id = id;
@@ -181,11 +187,11 @@ public class Movie {
         this.rated = rated;
     }
 
-    public String getReleased() {
+    public Date getReleased() {
         return released;
     }
 
-    public void setReleased(String released) {
+    public void setReleased(Date released) {
         this.released = released;
     }
 
