@@ -81,7 +81,7 @@ public class CommentController {
 
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
-    @DeleteMapping("/comments/delete")
+    @DeleteMapping("/comment/delete")
     public ResponseEntity<String> deleteComment(@RequestBody List<String> id,
                                                 @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
@@ -89,7 +89,6 @@ public class CommentController {
         if (!confirmDelete) {
             return ResponseEntity.ok("Please confirm deletion by providing 'confirm=true' as a query parameter.");
         }
-
         commentService.bulkDeleteComments(id);
         return ResponseEntity.ok("Comment deleted successfully.");
     }
