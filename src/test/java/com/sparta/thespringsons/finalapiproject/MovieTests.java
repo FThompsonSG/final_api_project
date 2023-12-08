@@ -25,7 +25,7 @@ public class MovieTests {
     @DisplayName("FindMovieByRating")
     public void testingGetMoviesByRating(){
 
-        List<Movie> movies = moviesService.getAllRatedMoviesByRating("PASSED");
+        List<Movie> movies = moviesService.findAllRatedMoviesByRating("PASSED");
         //System.out.println(movies);
 
     }
@@ -34,7 +34,7 @@ public class MovieTests {
     @DisplayName("FindAllUnratedMovies")
     public void findAllUnratedMovies(){
 
-        List<Movie> movies = moviesService.getAllUnratedMovies();
+        List<Movie> movies = moviesService.findAllUnratedMovies();
         System.out.println(movies);
 
     }

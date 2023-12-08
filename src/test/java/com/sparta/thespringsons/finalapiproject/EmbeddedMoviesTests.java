@@ -69,7 +69,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get by year exact with 1994")
     public void testingGetByYearExactWith1994() {
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByYearExact("1994");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByYearExact("1994");
         Assertions.assertNotNull(result);
         if(!result.isEmpty()) {
             for (EmbeddedMovie embeddedMovie : result) {
@@ -81,7 +81,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get by year after with 1994")
     public void testingGetByYearAfterWith1994(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByYearAfter("1994");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByYearAfter("1994");
         Assertions.assertNotNull(result);
         if(!result.isEmpty()) {
             for (EmbeddedMovie embeddedMovie : result) {
@@ -93,13 +93,13 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get by year exact with 1994e1998")
     public void testingGetByYearExactWith1994E1998(){
-        Assertions.assertNull(embeddedMoviesService.getEmbeddedMoviesByYearExact("1994e1998"));
+        Assertions.assertNull(embeddedMoviesService.findAllEmbeddedMoviesByYearExact("1994e1998"));
     }
     
     @Test
     @DisplayName("Testing get movies by writer with Niven Busch")
     public void testingGetMoviesByWriterWithNivenBusch(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByWriter("Niven Busch");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByWriter("Niven Busch");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> writers = Arrays.asList(embeddedMovie.getWriters());
@@ -111,7 +111,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by max runtime with 120mins")
     public void testingGetMoviesByMaxRuntimeWith120Mins(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByMaxRuntime(120);
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByMaxRuntime(120);
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getRuntime() <= 120);
@@ -122,7 +122,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by plot with rejected by his")
     public void testingGetMoviesByPlotWithCar(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByPlot("rejected by his");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByPlot("rejected by his");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getPlot().contains("rejected by his"));
@@ -133,7 +133,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get number of comments with 8")
     public void testingGetNumberOfCommentsWith8(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByNumberOfCommentsLowerBound(8);
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByNumberOfCommentsLowerBound(8);
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getNum_mflix_comments() > 8);
@@ -144,7 +144,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by language with French")
     public void testingGetMoviesByLanguageWithFrench(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByLanguage("French");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByLanguage("French");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> languages = Arrays.asList(embeddedMovie.getLanguages());
@@ -156,7 +156,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by genre")
     public void testingGetMoviesByGenre(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByGenre("Action");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByGenre("Action");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> genres = Arrays.asList(embeddedMovie.getGenres());
@@ -168,7 +168,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by director")
     public void testingGetMoviesByDirector(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByDirector("Howard Hawks");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByDirector("Howard Hawks");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> directors = Arrays.asList(embeddedMovie.getDirectors());
@@ -180,7 +180,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by cast member")
     public void testingGetMoviesByCastMember(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByCastMember("Katherine");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByCastMember("Katherine");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> castMembers = Arrays.asList(embeddedMovie.getCast());
@@ -192,7 +192,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by title containing with harry potter")
     public void testingGetMoviesByTitleContainingWithHarryPotter(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByTitleContaining("Harry Potter");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByTitleContaining("Harry Potter");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getTitle().contains("Harry Potter"));
@@ -203,7 +203,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movie by award name with Oscar")
     public void testingGetMovieByAwardNameWithOscar(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByAwardName("Oscar");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByAwardName("Oscar");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getAwards().getText().contains("Oscar"));
@@ -214,7 +214,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by number of nominations with 8")
     public void testingGetMoviesByNumberOfNominationsWith8(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByNumberOfNominations(8);
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByNumberOfNominations(8);
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 Assertions.assertTrue(embeddedMovie.getAwards().getNominations() >= 8);
@@ -225,7 +225,7 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing get movies by country with France")
     public void testingGetMoviesByCountryWithFrance(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByCountry("France");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByCountry("France");
         if(!result.isEmpty()) {
             for(EmbeddedMovie embeddedMovie: result) {
                 List<String> countries = Arrays.asList(embeddedMovie.getCountries());
@@ -282,11 +282,11 @@ public class EmbeddedMoviesTests {
     @Test
     @DisplayName("Testing Delete Method")
     public void testingDeleteMethod(){
-        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByDirector("Luke Boorman");
+        List<EmbeddedMovie> result = embeddedMoviesService.findAllEmbeddedMoviesByDirector("Luke Boorman");
         for(EmbeddedMovie movie: result) {
             embeddedMoviesService.deleteMovieById(movie.getId());
         }
-        List<EmbeddedMovie> testResult = embeddedMoviesService.getEmbeddedMoviesByDirector("Luke Boorman");
+        List<EmbeddedMovie> testResult = embeddedMoviesService.findAllEmbeddedMoviesByDirector("Luke Boorman");
 
         Assertions.assertTrue(testResult.isEmpty());
     }

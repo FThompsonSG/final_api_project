@@ -22,7 +22,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("testMovieIsWithinRange")
     public void testMovieIsWithinRange() throws Exception {
-        List<Movie> movie = moviesService.getAllMoviesByReleaseRange("1900", "1915");
+        List<Movie> movie = moviesService.findAllMoviesByReleaseRange("1900", "1915");
         Assertions.assertNotEquals(0, movie.size());
 
         for (Movie movie1 : movie){
@@ -33,7 +33,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get by year exact with 1994")
     public void testingGetByYearExactWith1994() {
-        List<Movie> result = moviesService.getMoviesByYearExact("1994");
+        List<Movie> result = moviesService.findAllMoviesByYearExact("1994");
         Assertions.assertNotNull(result);
         if(!result.isEmpty()) {
             for (Movie movie : result) {
@@ -44,7 +44,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get by year after with 1994")
     public void testingGetByYearAfterWith1994(){
-        List<Movie> result = moviesService.getMoviesByYearAfter("1994");
+        List<Movie> result = moviesService.findAllMoviesByYearAfter("1994");
         Assertions.assertNotNull(result);
         if(!result.isEmpty()) {
             for (Movie movie : result) {
@@ -56,13 +56,13 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get by year exact with 1994e1998")
     public void testingGetByYearExactWith1994E1998(){
-        Assertions.assertNull(moviesService.getMoviesByYearExact("1994e1998"));
+        Assertions.assertNull(moviesService.findAllMoviesByYearExact("1994e1998"));
     }
 
     @Test
     @DisplayName("Testing get movies by max runtime with 120mins")
     public void testingGetMoviesByMaxRuntimeWith120Mins(){
-        List<Movie> result = moviesService.getMoviesByMaxRuntime(120);
+        List<Movie> result = moviesService.findAllMoviesByMaxRuntime(120);
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getRuntime() <= 120);
@@ -72,7 +72,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by plot with violin")
     public void testingGetMoviesByFullPlotWithCar(){
-        List<Movie> result = moviesService.getAllByFullPlot("violin");
+        List<Movie> result = moviesService.findAllByFullPlot("violin");
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getFullplot().contains("violin"));
@@ -83,7 +83,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by plot with violin")
     public void testingGetMoviesByPlotWithCar(){
-        List<Movie> result = moviesService.getAllByPlot("violin");
+        List<Movie> result = moviesService.findAllByPlot("violin");
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getPlot().contains("violin"));
@@ -94,7 +94,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Title returns The Great Train Robbery")
     public void testingGetMovieByTitleReturnsTheGreatTrainRobbery(){
-        List<Movie> result = moviesService.getMovieByTitle("The Great Train Robbery");
+        List<Movie> result = moviesService.findAllMovieByTitle("The Great Train Robbery");
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getTitle().contains("The Great Train Robbery"));
@@ -105,7 +105,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Director returns Hal Roach")
     public void testingGetMovieByDirectorReturnsHalRoach(){
-        List<Movie> result = moviesService.getAllMoviesByDirector("Hal Roach");
+        List<Movie> result = moviesService.findAllMoviesByDirector("Hal Roach");
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getDirectors().contains("Hal Roach"));
@@ -116,7 +116,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Genre returns Comedy")
     public void testingGetMovieByGenreReturnsComedy(){
-        List<Movie> result = moviesService.getMoviesByGenre("Comedy");
+        List<Movie> result = moviesService.findAllMoviesByGenre("Comedy");
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getGenres().contains("Comedy"));
@@ -127,7 +127,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Language returns English")
     public void testingGetMovieByLanguageReturnsEnglish(){
-        List<Movie> result = moviesService.getMoviesByLanguages("English");
+        List<Movie> result = moviesService.findAllMoviesByLanguages("English");
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getLanguages().contains("English"));
@@ -138,7 +138,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Country returns France")
     public void testingGetMovieByCountryReturnsFrance(){
-        List<Movie> result = moviesService.getMoviesByCountries("France");
+        List<Movie> result = moviesService.findAllMoviesByCountries("France");
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getCountries().contains("France"));
@@ -149,7 +149,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by Imdb Rating returns movies with 3 for rating")
     public void testingGetMovieByImdbRatingReturnsMoviesWith3Rating(){
-        List<Movie> result = moviesService.getAllMoviesByImdbRating(3d,3.0d);
+        List<Movie> result = moviesService.findAllMoviesByImdbRating(3d,3.0d);
         if(!result.isEmpty()) {
             for(Movie movie : result) {
                 Assertions.assertTrue(movie.getImdb().getRating().equals(3d));
@@ -160,7 +160,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Number Of Movie Imdb Votes returns 1375")
     public void testingGetNumberOfMovieImdbVotesReturns1375(){
-        List<String> result = moviesService.getNumberOfMovieImdbVotes("A Corner in Wheat");
+        List<String> result = moviesService.findAllNumberOfMovieImdbVotes("A Corner in Wheat");
         if(!result.isEmpty()) {
             for(String movie : result) {
                 Assertions.assertTrue(movie.equals("A Corner in Wheat IMDB Votes: 1375"));
@@ -171,7 +171,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Movie Imdb Rating by Title returns 6")
     public void testingGetMovieImdbRatingByTitleReturns6(){
-        List<String> result = moviesService.getMovieImdbRatingByName("Traffic in Souls");
+        List<String> result = moviesService.findAllMovieImdbRatingByName("Traffic in Souls");
         if(!result.isEmpty()) {
             for(String movie : result) {
                 Assertions.assertTrue(movie.contains("6"));
@@ -182,7 +182,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Movie Imdb Id by Title returns 3471")
     public void testingGetMovieImdbIdByTitleReturns3471(){
-        List<String> result = moviesService.getMovieImdbIdByName("Traffic in Souls");
+        List<String> result = moviesService.findAllMovieImdbIdByName("Traffic in Souls");
         if(!result.isEmpty()) {
             for(String movie : result) {
                 Assertions.assertTrue(movie.contains(" IMDB ID : "));
@@ -193,7 +193,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Year of Release returns 1914")
     public void testingGetYearOfReleaseReturns1914(){
-        List<String> result = moviesService.getYearOfRelease("Gertie the Dinosaur");
+        List<String> result = moviesService.findAllYearOfRelease("Gertie the Dinosaur");
         if(!result.isEmpty()) {
             for(String movie : result) {
                 Assertions.assertTrue(movie.contains("1914"));
@@ -204,7 +204,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Poster returns Link")
     public void testingGetPosterLinkReturnsLink(){
-        List<String> result = moviesService.getPosterLinkByTitle("Gertie the Dinosaur");
+        List<String> result = moviesService.findAllPosterLinkByTitle("Gertie the Dinosaur");
         if(!result.isEmpty()) {
             for(String movie : result) {
                 Assertions.assertTrue(movie.contains("https://m.media-amazon.com/images/M/MV5BMTQxNzI4ODQ3NF5BMl5BanBnXkFtZTgwNzY5NzMwMjE@._V1_SY1000_SX677_AL_.jpg"));
@@ -215,7 +215,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by cast member")
     public void testingGetMoviesByCastMember(){
-        List<Movie> result = moviesService.getMoviesByCastMember("Katherine");
+        List<Movie> result = moviesService.findAllMoviesByCastMember("Katherine");
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 List<String> castMembers = movie.getCast();
@@ -227,7 +227,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movie by award name with Oscar")
     public void testingGetMovieByAwardNameWithOscar(){
-        List<Movie> result = moviesService.getMoviesByAwardName("Oscar");
+        List<Movie> result = moviesService.findAllMoviesByAwardName("Oscar");
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getAwards().getText().contains("Oscar"));
@@ -238,7 +238,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by number of nominations with 8")
     public void testingGetMoviesByNumberOfNominationsWith8(){
-        List<Movie> result = moviesService.getMoviesByNumberOfNominations(8);
+        List<Movie> result = moviesService.findAllMoviesByNumberOfNominations(8);
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getAwards().getNominations() >= 8);
@@ -249,7 +249,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by number of wins with 1")
     public void testingGetMoviesByNumberOfWinsWith1(){
-        List<Movie> result = moviesService.getMoviesByNumberOfWins(1);
+        List<Movie> result = moviesService.findAllMoviesByNumberOfWins(1);
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getAwards().getWins() >= 1);
@@ -260,7 +260,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get last updated for movie Gertie the Dinosaur")
     public void testingGetLastUpdatedByMovieTitle(){
-        List<String> result = moviesService.getLastUpdatedByMovieTitle("Gertie the Dinosaur");
+        List<String> result = moviesService.findAllLastUpdatedByMovieTitle("Gertie the Dinosaur");
         if(!result.isEmpty()) {
             for(String movie: result) {
                 Assertions.assertTrue(movie.contains("2015-08-18 01:03:15.313000000"));
@@ -270,7 +270,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get Number of Comments for movie Gertie the Dinosaur")
     public void testingGetNumberOfCommentsByMovieTitle(){
-        List<String> result = moviesService.getNumberOfCommentsByTitle("Gertie the Dinosaur");
+        List<String> result = moviesService.findAllNumberOfCommentsByTitle("Gertie the Dinosaur");
         if(!result.isEmpty()) {
             for(String movie: result) {
                 Assertions.assertTrue(movie.contains("0"));
@@ -281,7 +281,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get movies by range of runtime")
     public void testingGetMoviesByRangeOfRuntime(){
-        List<Movie> result = moviesService.getMoviesByRangeOfRuntime(100,100);
+        List<Movie> result = moviesService.findAllMoviesByRangeOfRuntime(100,100);
         if(!result.isEmpty()) {
             for(Movie movie: result) {
                 Assertions.assertTrue(movie.getRuntime().equals(100));
@@ -292,7 +292,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Testing get type for movie Gertie the Dinosaur")
     public void testingGetTypeByMovieTitle(){
-        List<String> result = moviesService.getTypeByTitle("Gertie the Dinosaur");
+        List<String> result = moviesService.findAllTypeByTitle("Gertie the Dinosaur");
         if(!result.isEmpty()) {
             for(String movie: result) {
                 Assertions.assertTrue(movie.contains("movie"));
@@ -304,7 +304,7 @@ class MoviesServiceTest {
     @DisplayName("Testing get all movies by writer Winsor MCcay")
     public void getAllMoviesByWriter(){
 
-        List<Movie> movies = moviesService.getAllMoviesByWriter("Winsor mccay");
+        List<Movie> movies = moviesService.findAllMoviesByWriter("Winsor mccay");
         System.out.println(movies);
         if(!movies.isEmpty()) {
             for (Movie movie : movies) {
@@ -321,7 +321,7 @@ class MoviesServiceTest {
     @DisplayName("Testing get all movies with train in title")
     public void getAllMoviesByTitle(){
 
-        List<Movie> movies = moviesService.getMovieByTitle("train");
+        List<Movie> movies = moviesService.findAllMovieByTitle("train");
         System.out.println(movies);
         if(!movies.isEmpty()) {
             for (Movie movie : movies) {

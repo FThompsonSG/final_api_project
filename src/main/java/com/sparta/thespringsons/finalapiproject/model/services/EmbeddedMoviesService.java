@@ -342,7 +342,7 @@ public class EmbeddedMoviesService  {
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
             movie.setTitle(newTitle);
-//            updateLastUpdated(movie);
+            updateLastUpdated(movie);
         }
         embeddedMoviesRepository.save(movie);
     }
@@ -354,7 +354,7 @@ public class EmbeddedMoviesService  {
             List<String> writers = new ArrayList<>(List.of(movie.getWriters()));
             writers.add(newWriter);
             movie.setWriters(writers.toArray(new String[0]));
-//            updateLastUpdated(movie);
+            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
