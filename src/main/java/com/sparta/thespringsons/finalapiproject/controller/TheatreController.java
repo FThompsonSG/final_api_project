@@ -28,40 +28,25 @@ public class TheatreController {
         OurLogger.setUpLogger(logger);
     }
 
-    @Tag(name = "Get All Theaters")
-    @Operation(summary = "Gets all theaters")
-    @GetMapping("/theaters")
-    public List<Theater> getAllTheaters() throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get all theaters method in theater controller");
-        List<Theater> allTheaters = theaterService.getAllTheaters();
-        if (allTheaters.isEmpty()) {
-            throw new NoRecordFoundException("theaters", "/theaters");
-        }
-        return allTheaters;
+    @Tag(name = "Get All Theatres")
+    @Operation(summary = "Gets all theatres")
+    @GetMapping("/theatres")
+    public List<Theater> getAllTheatres(){
+      return theaterService.getAllTheaters();
     }
 
-    @Tag(name = "Get Theater by zip code")
-    @Operation(summary = "Gets all theaters with a specific zipcode")
-    @GetMapping("/theaters/{zipcode}")
-    public List<Theater> getAllTheatersByZipcode(@PathVariable String zipcode) throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get all theaters by zipcode method in theater controller");
-        List<Theater> theatersMatchingZipcode = theaterService.getTheatersByZipcode(zipcode);
-        if(theatersMatchingZipcode.isEmpty()) {
-            throw new NoRecordFoundException("theaters", "/theaters/{zipcode}");
-        }
-        return theatersMatchingZipcode;
+    @Tag(name = "Get Theatre by zip code")
+    @Operation(summary = "Gets all theatres with a specific zipcode")
+    @GetMapping("/theatres/zipcode/{zipcode}")
+    public List<Theater> getAllTheatersByZipcode(@PathVariable String zipcode){
+      return theaterService.getTheatersByZipcode(zipcode);
     }
 
-    @Tag(name = "Get Theater by Id")
-    @Operation(summary = "Get Theaters by Id")
-    @GetMapping("/theaters/{theater_id}")
-    public Optional<Theater> getTheaterById(@PathVariable Integer theater_id) throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered get theaters by id method in theater controller");
-        Optional<Theater> theater = theaterService.getTheaterByTheaterId(theater_id);
-        if(theater.isPresent()) {
-            throw new NoRecordFoundException("theaters", "/theaters/{theater_id}");
-        }
-        return theater;
+    @Tag(name = "Get Theatre by Id")
+    @Operation(summary = "Get Theatres by Id")
+    @GetMapping("/theatres/theater_id/{theater_id}")
+    public Optional<Theater> getTheatresById(@PathVariable Integer theater_id) {
+        return theaterService.getTheaterByTheaterId(theater_id);
     }
 
     @Tag(name = "Add New Theater")
