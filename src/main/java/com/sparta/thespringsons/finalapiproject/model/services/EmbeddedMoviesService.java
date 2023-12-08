@@ -138,7 +138,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesfinal;
     }
 
-    public List<EmbeddedMovie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+    public List<EmbeddedMovie> getAllMoviesByImdbRating(double lowerRating, double upperRating) {
         List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
         List<EmbeddedMovie> selectedMovies = new ArrayList<>();
         for (EmbeddedMovie movie : movies) {
