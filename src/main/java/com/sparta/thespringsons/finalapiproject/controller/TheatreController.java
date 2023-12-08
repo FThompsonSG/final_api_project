@@ -58,7 +58,7 @@ public class TheatreController {
     public Optional<Theater> getTheaterById(@PathVariable Integer theater_id) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered get theaters by id method in theater controller");
         Optional<Theater> theater = theaterService.getTheaterByTheaterId(theater_id);
-        if(theater.isPresent()) {
+        if(theater.isEmpty()) {
             throw new NoRecordFoundException("theaters", "/theater/byId/{theater_id}");
         }
         return theater;
