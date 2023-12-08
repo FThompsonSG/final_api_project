@@ -224,7 +224,7 @@ public class MoviesService {
 
     //String
     public List<String> findAllNumberOfMovieImdbVotes(String movieName) {
-        List<Movie> movieList= movieRepository.findByTitle(movieName);
+        List<Movie> movieList = movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Integer numVotes = movie.getImdb().getVotes();
@@ -236,7 +236,7 @@ public class MoviesService {
     }
 
     public List<String> findAllMovieImdbRatingByName(String movieName) {
-        List<Movie> movieList= movieRepository.findByTitle(movieName);
+        List<Movie> movieList= movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Double movieRating = movie.getImdb().getRating();
@@ -247,7 +247,7 @@ public class MoviesService {
     }
 
     public List<String> findAllMovieImdbIdByName(String movieName) {
-        List<Movie> movieList = movieRepository.findByTitle(movieName);
+        List<Movie> movieList = movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Integer movieId = movie.getImdb().getId();
@@ -260,7 +260,7 @@ public class MoviesService {
     }
 
     public List<String> findAllYearOfRelease(String name) {
-        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<Movie> allMovies = movieRepository.findAllByTitle(name);
         List<String> movies = new ArrayList<>();
         for(Movie movie : allMovies) {
             String year = movie.getReleased().substring(24);
@@ -304,7 +304,7 @@ public class MoviesService {
     }
 
     public List<String> findAllPosterLinkByTitle(String name) {
-        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<Movie> allMovies = movieRepository.findAllByTitle(name);
         List<String> movies = new ArrayList<>();
         for (Movie movie : allMovies) {
             String posterLink = movie.getPoster();
@@ -334,7 +334,7 @@ public class MoviesService {
     }
 
     public List<String> findAllLastUpdatedByMovieTitle(String name) {
-        List<Movie> movies = movieRepository.findByTitle(name);
+        List<Movie> movies = movieRepository.findAllByTitle(name);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
@@ -398,7 +398,7 @@ public class MoviesService {
     }
 
     public List<String> findAllNumberOfCommentsByTitle(String title) {
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAllByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
@@ -428,7 +428,7 @@ public class MoviesService {
 
 
     public List<String> findAllTypeByTitle(String title) {
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAllByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
