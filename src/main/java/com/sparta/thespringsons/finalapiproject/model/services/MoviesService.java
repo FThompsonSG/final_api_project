@@ -25,6 +25,15 @@ public class MoviesService {
         this.movieRepository = movieRepository;
     }
 
+    public Movie getMovieById(String Id) {
+        if(movieRepository.findById(Id).isPresent()) {
+            return movieRepository.findById(Id).get();
+        } else {
+            System.out.println("Movie not found. Please make sure you have the correct ID.");
+            return null;
+        }
+
+    }
     public List<Movie> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies;
@@ -765,6 +774,35 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    public Movie updateReleaseDate(String Id, String date) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+            LocalDate dateToUpdate = LocalDate.parse(date);
+            movieToUpdate.setReleased(dateToUpdate.format(formatter));
+        }
+        return movieRepository.save(movieToUpdate);
+    }
 
+    public Movie updateRuntime(String Id, Integer runtime) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            movieToUpdate.setRuntime(runtime);
+            updateLastUpdated(movieToUpdate);
+        }
+        return movieRepository.save(movieToUpdate);
+    }
+
+    public Movie updateYear(String Id, String year) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            movieToUpdate.setYear(year);
+            updateLastUpdated(movieToUpdate);
+        }
+        return movieRepository.save(movieToUpdate);
+    }
 
 }
