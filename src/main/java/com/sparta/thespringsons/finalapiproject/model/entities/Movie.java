@@ -42,38 +42,37 @@ public class Movie {
     private String year;
     private List<String> writers;
 
-    public Movie() {}
 
-    public Movie(String id, Awards awards, List<String> cast,
-                 List<String> countries, List<String> directors,
-                 String fullplot, List<String> genres, Imdb imdb,
-                 List<String> languages, String lastupdated,
-                 Integer num_mflix_comments, String plot,
-                 String poster, String rated, String released,
-                 Integer runtime, String title, Tomato tomatoes,
-                 String type, String year, List<String> writers) {
-        this.id = id;
-        this.awards = awards;
-        this.cast = cast;
-        this.countries = countries;
-        this.directors = directors;
-        this.fullplot = fullplot;
-        this.genres = genres;
-        this.imdb = imdb;
-        this.languages = languages;
-        this.lastupdated = lastupdated;
-        this.num_mflix_comments = num_mflix_comments;
-        this.plot = plot;
-        this.poster = poster;
-        this.rated = rated;
-        this.released = released;
-        this.runtime = runtime;
-        this.title = title;
-        this.tomatoes = tomatoes;
-        this.type = type;
-        this.year = year;
-        this.writers = writers;
-    }
+//    public Movie(String id, Awards awards, List<String> cast,
+//                 List<String> countries, List<String> directors,
+//                 String fullplot, List<String> genres, Imdb imdb,
+//                 List<String> languages, String lastupdated,
+//                 Integer num_mflix_comments, String plot,
+//                 String poster, String rated, String released,
+//                 Integer runtime, String title, Tomato tomatoes,
+//                 String type, String year, List<String> writers) {
+//        this.id = id;
+//        this.awards = awards;
+//        this.cast = cast;
+//        this.countries = countries;
+//        this.directors = directors;
+//        this.fullplot = fullplot;
+//        this.genres = genres;
+//        this.imdb = imdb;
+//        this.languages = languages;
+//        this.lastupdated = lastupdated;
+//        this.num_mflix_comments = num_mflix_comments;
+//        this.plot = plot;
+//        this.poster = poster;
+//        this.rated = rated;
+//        this.released = released;
+//        this.runtime = runtime;
+//        this.title = title;
+//        this.tomatoes = tomatoes;
+//        this.type = type;
+//        this.year = year;
+//        this.writers = writers;
+//    }
 
     public String getId() {
         return id;

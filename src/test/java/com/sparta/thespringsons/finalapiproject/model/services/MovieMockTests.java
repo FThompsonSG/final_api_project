@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,16 +25,15 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class MovieMockTests {
 
+    @Autowired
+    private MoviesService moviesService;
+
     @Mock
     private MovieRepository movieRepositoryMock;
 
     @InjectMocks
     private MoviesService moviesServiceMock;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
     @Test
     @DisplayName("Testing add document to mock repository")
     public void testingAddDocumentToMockRepository(){
@@ -71,5 +71,74 @@ public class MovieMockTests {
         verify(movieRepositoryMock, never()).findById(mockMovie.getId());
         verify(movieRepositoryMock, never()).delete(mockMovie);
 
+    }
+
+    @Test
+    @DisplayName("Testing Add Movie on Real Database")
+    public void testingAddMovieOnRealDatabase(){
+        Movie testMovie = new Movie();
+        testMovie.setYear("2002");
+        List<String> directors = new ArrayList<>();
+        directors.add("Luke Boorman");
+        testMovie.setDirectors(directors);
+        testMovie.setCast(directors);
+        testMovie.setTitle("The film");
+        testMovie.setGenres(directors);
+        testMovie.setLanguages(directors);
+
+        Movie filmToCheck = moviesService.addMovie(testMovie);
+
+        Optional<Movie> tester = movieRepositoryMock.findById(filmToCheck.getId());
+
+        if(tester.isPresent()) {
+            Assertions.assertEquals(filmToCheck, tester.get());
+        }
+    }
+    @Test
+    @DisplayName("Testing Delete Method")
+    public void testingDeleteMethod(){
+        List<Movie> result = moviesService.findAllMoviesByDirector("Luke Boorman");
+        for(Movie movie: result) {
+            moviesService.deleteMovieById(movie.getId());
+        }
+        List<Movie> testResult = moviesService.findAllMoviesByDirector("Luke Boorman");
+
+        Assertions.assertTrue(testResult.isEmpty());
+    }
+    @Test
+    @DisplayName("Testing Update Methods")
+    public void testingUpdateMethods(){
+        Movie testMovie = new Movie();
+        testMovie.setYear("2002");
+        String[] directors = {"Luke Boorman"};
+        testMovie.setDirectors(List.of(directors));
+        testMovie.setCast(List.of(directors));
+        testMovie.setTitle("The film");
+        testMovie.setGenres(List.of(directors));
+        testMovie.setLanguages(List.of(directors));
+
+        Movie filmToCheck = moviesService.addMovie(testMovie);
+
+
+        moviesService.updateMovieCast(filmToCheck.getId(), "Ryan MCc");
+        moviesService.updateMovieGenres(filmToCheck.getId(), "Action");
+        moviesService.updateMovieTitle(filmToCheck.getId(), "The film 2 electric boogaloo");
+        moviesService.updateYear(filmToCheck.getId(), "2003");
+
+        Optional<Movie> result = movieRepositoryMock.findById(filmToCheck.getId());
+
+        if(result.isPresent()) {
+            String[] cast = {"Luke Boorman", "Ryan MCc"};
+            String[] genres = {"Luke Boorman", "Action"};
+            Movie filmToTest = result.get();
+            Assertions.assertEquals("The film 2 electric boogaloo", filmToTest.getTitle());
+            Assertions.assertEquals(cast, filmToTest.getCast());
+            Assertions.assertEquals(genres, filmToTest.getGenres());
+            Assertions.assertEquals("2003", filmToTest.getYear());
+        }
+
+        //-------------------------------------
+
+        moviesService.deleteMovieById(filmToCheck.getId());
     }
 }
