@@ -9,6 +9,7 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -20,8 +21,9 @@ import java.util.*;
 @RestController
 public class EmbeddedMovieController {
 
-    EmbeddedMoviesService embeddedMoviesService;
+    private final EmbeddedMoviesService embeddedMoviesService;
 
+    @Autowired
     public EmbeddedMovieController(EmbeddedMoviesService embeddedMoviesService) {
         this.embeddedMoviesService = embeddedMoviesService;
     }
@@ -155,7 +157,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie Runtime")
-    @PatchMapping ("/embeddedMovie/UpdateYear")
+    @PatchMapping ("/embeddedMovie/UpdateRuntime")
     public void updateRuntime(@RequestParam String Id, @RequestParam Integer runtime) {
         embeddedMoviesService.updateRuntime(Id, runtime);
     }
@@ -308,14 +310,14 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/embeddedMovie/getEmbeddedMoviesByDirector")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByFullPlot")
     public  List<EmbeddedMovie> getEmbeddedMoviesByFullPlot(@RequestParam String fullPlot) {
         return embeddedMoviesService.findAllEmbeddedMoviesByFullPlot(fullPlot);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/embeddedMovie/getEmbeddedMoviesByDirector")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByGenre")
     public  List<EmbeddedMovie> getEmbeddedMoviesByGenre(@RequestParam String genre) {
         return embeddedMoviesService.findAllEmbeddedMoviesByGenre(genre);
     }

@@ -4,6 +4,7 @@ import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.services.MoviesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +12,10 @@ import java.util.List;
 @RestController
 public class MovieController {
 
-    MoviesService movieService;
 
+    private final MoviesService movieService;
+
+    @Autowired
     public MovieController(MoviesService movieService) {
         this.movieService = movieService;
     }
@@ -158,7 +161,7 @@ public class MovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie Runtime")
-    @PatchMapping ("/Movie/UpdateYear")
+    @PatchMapping ("/Movie/UpdateRuntime")
     public void updateRuntime(@RequestParam String Id, @RequestParam Integer runtime) {
         movieService.updateRuntime(Id, runtime);
     }
@@ -304,14 +307,14 @@ public class MovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/Movie/getMoviesByDirector")
+    @GetMapping("/Movie/getMoviesByFullPlot")
     public  List<Movie> getMoviesByFullPlot(@RequestParam String fullPlot) {
         return movieService.findAllByFullPlot(fullPlot);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/Movie/getMoviesByDirector")
+    @GetMapping("/Movie/getMoviesByGenre")
     public  List<Movie> getMoviesByGenre(@RequestParam String genre) {
         return movieService.findAllMoviesByGenre(genre);
     }

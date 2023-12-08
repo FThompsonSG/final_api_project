@@ -12,4 +12,5 @@ public interface TheatersRepository extends MongoRepository<Theater, String> {
 
     Optional<Theater> getTheaterByTheaterId(int theater_id);
 
+
 }
