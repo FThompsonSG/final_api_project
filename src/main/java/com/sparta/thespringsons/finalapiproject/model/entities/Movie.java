@@ -32,8 +32,8 @@ public class Movie {
     //could be enum
     private String rated;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date released;
+
+    private String released;
     private Integer runtime;
     private String title;
     private Tomato tomatoes;
@@ -49,7 +49,7 @@ public class Movie {
                  String fullplot, List<String> genres, Imdb imdb,
                  List<String> languages, String lastupdated,
                  Integer num_mflix_comments, String plot,
-                 String poster, String rated, Date released,
+                 String poster, String rated, String released,
                  Integer runtime, String title, Tomato tomatoes,
                  String type, String year, List<String> writers) {
         this.id = id;
@@ -187,11 +187,11 @@ public class Movie {
         this.rated = rated;
     }
 
-    public Date getReleased() {
+    public String getReleased() {
         return released;
     }
 
-    public void setReleased(Date released) {
+    public void setReleased(String released) {
         this.released = released;
     }
 
