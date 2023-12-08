@@ -5,6 +5,7 @@ import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,89 +65,57 @@ public class EmbeddedMovieController {
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato rating")
     @GetMapping("/embeddedMovie/ByTomatoesCriticRating")
-    public void findAllByTomatoesCriticRating(double minRating, double maxRating) {
+    public void findAllByTomatoesCriticRating(@RequestParam double minRating, @RequestParam double maxRating) {
         findAllByTomatoesCriticRating(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato viewer rating")
     @GetMapping("/embeddedMovie/ByTomatoesViewerRating")
-    public void findAllByTomatoesViewerRating(double minRating, double maxRating) {
+    public void findAllByTomatoesViewerRating(@RequestParam double minRating, @RequestParam double maxRating) {
         findAllByTomatoesViewerRating(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato meter rating")
     @GetMapping("/embeddedMovie/ByTomatoesCriticMeter")
-    public void findAllByTomatoesCriticMeter(double minRating, double maxRating) {
+    public void findAllByTomatoesCriticMeter(@RequestParam double minRating, @RequestParam double maxRating) {
         findAllByTomatoesCriticMeter(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by viewer meter rating")
     @GetMapping("/embeddedMovie/ByTomatoesViewerMeter")
-    public void findAllByTomatoesViewerMeter(double minRating, double maxRating) {
+    public void findAllByTomatoesViewerMeter(@RequestParam double minRating, @RequestParam double maxRating) {
         findAllByTomatoesViewerMeter(minRating, maxRating);
     }
 
-    public List<EmbeddedMovie> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
-        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
-        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if(embeddedMovie.getTomato() != null) {
-                if (embeddedMovie.getTomato().getRotten() != null)
-                    if (embeddedMovie.getTomato().getRotten() < maxRotten && embeddedMovie.getTomato().getRotten() > minRotten) {
-                        embeddedMoviesFinal.add(embeddedMovie);
-                    }
-
-            }
-        }
-        return embeddedMoviesFinal;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies By Tomatoes Rotten Reviews")
+    @GetMapping("/embeddedMovie/ByTomatoesRottenReviews")
+    public void findAllByTomatoesRottenReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
+        findAllByTomatoesRottenReviews(minRotten, maxRotten);
     }
 
-    public List<EmbeddedMovie> findAllByTomatoesFreshReviews(int minFresh, int maxFresh) {
-        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
-        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if(embeddedMovie.getTomato() != null) {
-                if (embeddedMovie.getTomato().getFresh() != null)
-                    if (embeddedMovie.getTomato().getFresh() < maxFresh && embeddedMovie.getTomato().getFresh() > minFresh) {
-                        embeddedMoviesFinal.add(embeddedMovie);
-                    }
-
-            }
-        }
-        return embeddedMoviesFinal;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies By Tomatoes Fresh Reviews")
+    @GetMapping("/embeddedMovie/ByTomatoesFreshReviews")
+    public void findAllByTomatoesFreshReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
+        findAllByTomatoesFreshReviews(minRotten, maxRotten);
     }
 
-    public List<EmbeddedMovie> findAllByTomatoesProduction(String production) {
-        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<EmbeddedMovie> embeddedMoviesfinal = new ArrayList<>();
-        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if(embeddedMovie.getTomato() != null) {
-                if (embeddedMovie.getTomato().getProduction() != null)
-                    if (embeddedMovie.getTomato().getProduction().equals(production)) {
-                        embeddedMoviesfinal.add(embeddedMovie);
-                    }
-
-            }
-        }
-        return embeddedMoviesfinal;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies By Tomatoes Production")
+    @GetMapping("/embeddedMovie/ByTomatoesProduction")
+    public void findAllByTomatoesProduction(@RequestParam String production) {
+        findAllByTomatoesProduction(production);
     }
 
-    public List<EmbeddedMovie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
-        List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
-        List<EmbeddedMovie> selectedMovies = new ArrayList<>();
-        for (EmbeddedMovie movie : movies) {
-            Imdb imdb = movie.getImdb();
-            if (imdb.getRating() != null) {
-                Double movieRating = imdb.getRating();
-                if (movieRating >= lowerRating && movieRating <= upperRating) {
-                    selectedMovies.add(movie);
-                }
-            }
-        }
-        return selectedMovies;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies By Imdb Rating")
+    @GetMapping("/embeddedMovie/ByImdbRating")
+    public void getAllMoviesByImdbRating(@RequestParam double lowerRating, @RequestParam double upperRating) {
+        getAllMoviesByImdbRating(lowerRating, upperRating);
     }
 
     //String
