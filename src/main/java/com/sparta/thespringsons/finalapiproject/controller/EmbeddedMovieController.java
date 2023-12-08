@@ -26,7 +26,6 @@ public class EmbeddedMovieController {
         this.embeddedMoviesService = embeddedMoviesService;
     }
 
-
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Title")
     @PatchMapping ("/embeddedMovie/UpdateTitle")
