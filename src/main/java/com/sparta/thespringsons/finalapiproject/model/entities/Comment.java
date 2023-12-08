@@ -53,4 +53,17 @@ public class Comment {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", deleted=" + deleted +
+                ", date=" + date +
+                ", email='" + email + '\'' +
+                ", movieId='" + movieId + '\'' +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

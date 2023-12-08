@@ -14,11 +14,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,17 +62,21 @@ public class CommentControllerMockTests {
     @Test
     @DisplayName("Test Delete comment")
     void testDeleteComment() throws Exception {
-        Comment mockComment = new Comment();
-        mockComment.setId("5a9427648b0beebeb69810b6");
-        mockComment.setText("This is text");
-        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
+//        Comment mockComment = new Comment();
+//        mockComment.setId("id1");
+//        mockComment.setText("This is text");
+//        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
 
-        mockMvc
-                .perform(delete("http://localhost:8080/comment/delete/5a9427648b0beebeb69810b6"))
-                .andExpect(status().is(200))
-                .andExpect(content().contentType("application/json"))
-                .andExpect(handler().methodName("deleteComment"))
-                .andDo(print());
+        List<String> commentIdsToDelete = List.of("id1");
+
+        mockMvc.perform(delete("/comment/delete")
+                        .param("confirm", "true")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(commentIdsToDelete)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.content().string("Comment deleted successfully."))
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
