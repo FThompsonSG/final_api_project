@@ -3,9 +3,8 @@ package com.sparta.thespringsons.finalapiproject.controller;
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
-import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
+import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +16,12 @@ import java.util.*;
 
 @RestController
 public class EmbeddedMovieController {
+
+    EmbeddedMoviesService embeddedMoviesService;
+
+    public EmbeddedMovieController(EmbeddedMoviesService embeddedMoviesService) {
+        this.embeddedMoviesService = embeddedMoviesService;
+    }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all the embedded movies from MongoDB")
@@ -65,94 +70,78 @@ public class EmbeddedMovieController {
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato rating")
     @GetMapping("/embeddedMovie/ByTomatoesCriticRating")
-    public void findAllByTomatoesCriticRating(@RequestParam double minRating, @RequestParam double maxRating) {
-        findAllByTomatoesCriticRating(minRating, maxRating);
+    public List<EmbeddedMovie> findAllByTomatoesCriticRating(@RequestParam double minRating, @RequestParam double maxRating) {
+        return embeddedMoviesService.findAllByTomatoesCriticRating(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato viewer rating")
     @GetMapping("/embeddedMovie/ByTomatoesViewerRating")
-    public void findAllByTomatoesViewerRating(@RequestParam double minRating, @RequestParam double maxRating) {
-        findAllByTomatoesViewerRating(minRating, maxRating);
+    public List<EmbeddedMovie> findAllByTomatoesViewerRating(@RequestParam double minRating, @RequestParam double maxRating) {
+        return embeddedMoviesService.findAllByTomatoesViewerRating(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato meter rating")
     @GetMapping("/embeddedMovie/ByTomatoesCriticMeter")
-    public void findAllByTomatoesCriticMeter(@RequestParam double minRating, @RequestParam double maxRating) {
-        findAllByTomatoesCriticMeter(minRating, maxRating);
+    public List<EmbeddedMovie> findAllByTomatoesCriticMeter(@RequestParam double minRating, @RequestParam double maxRating) {
+        return embeddedMoviesService.findAllByTomatoesCriticMeter(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by viewer meter rating")
     @GetMapping("/embeddedMovie/ByTomatoesViewerMeter")
-    public void findAllByTomatoesViewerMeter(@RequestParam double minRating, @RequestParam double maxRating) {
-        findAllByTomatoesViewerMeter(minRating, maxRating);
+    public List<EmbeddedMovie> findAllByTomatoesViewerMeter(@RequestParam double minRating, @RequestParam double maxRating) {
+        return embeddedMoviesService.findAllByTomatoesViewerMeter(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies By Tomatoes Rotten Reviews")
     @GetMapping("/embeddedMovie/ByTomatoesRottenReviews")
-    public void findAllByTomatoesRottenReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
-        findAllByTomatoesRottenReviews(minRotten, maxRotten);
+    public List<EmbeddedMovie> findAllByTomatoesRottenReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
+        return embeddedMoviesService.findAllByTomatoesRottenReviews(minRotten, maxRotten);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies By Tomatoes Fresh Reviews")
     @GetMapping("/embeddedMovie/ByTomatoesFreshReviews")
-    public void findAllByTomatoesFreshReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
-        findAllByTomatoesFreshReviews(minRotten, maxRotten);
+    public List<EmbeddedMovie> findAllByTomatoesFreshReviews(@RequestParam int minRotten, @RequestParam int maxRotten) {
+        return embeddedMoviesService.findAllByTomatoesFreshReviews(minRotten, maxRotten);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies By Tomatoes Production")
     @GetMapping("/embeddedMovie/ByTomatoesProduction")
-    public void findAllByTomatoesProduction(@RequestParam String production) {
-        findAllByTomatoesProduction(production);
+    public List<EmbeddedMovie> findAllByTomatoesProduction(@RequestParam String production) {
+        return embeddedMoviesService.findAllByTomatoesProduction(production);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies By Imdb Rating")
     @GetMapping("/embeddedMovie/ByImdbRating")
-    public void getAllMoviesByImdbRating(@RequestParam double lowerRating, @RequestParam double upperRating) {
-        getAllMoviesByImdbRating(lowerRating, upperRating);
+    public List<EmbeddedMovie> getAllMoviesByImdbRating(@RequestParam double lowerRating, @RequestParam double upperRating) {
+        return embeddedMoviesService.getAllMoviesByImdbRating(lowerRating, upperRating);
     }
 
-    //String
-    public List<String> getNumberOfMovieImdbVotes(String movieName) {
-        List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
-        List<String> resultList = new ArrayList<>();
-        for(EmbeddedMovie movie : movieList) {
-            Integer numVotes = movie.getImdb().getVotes();
-            String result = movieName + " IMDB Votes: " + numVotes;
-            resultList.add(result);
-        }
-
-        return resultList;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies, by Movie Imdb Votes")
+    @GetMapping("/embeddedMovie/ByMovieImdbVotes")
+    public List<String> getNumberOfMovieImdbVotes(@RequestParam String movieName) {
+        return embeddedMoviesService.getNumberOfMovieImdbVotes(movieName);
     }
 
-    public List<String> getMovieImdbRatingByName(String movieName) {
-        List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
-        List<String> resultList = new ArrayList<>();
-        for(EmbeddedMovie movie : movieList) {
-            Double movieRating = movie.getImdb().getRating();
-            String result = movieName + " IMDB Rating: " + movieRating;
-            resultList.add(result);
-        }
-        return resultList;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Movie Imdb Rating By Name")
+    @GetMapping("/embeddedMovie/getMovieImdbRatingByName")
+    public List<String> getMovieImdbRatingByName(@RequestParam String movieName) {
+        return embeddedMoviesService.getMovieImdbRatingByName(movieName);
     }
 
-    public List<String> getMovieImdbIdByName(String movieName) {
-        List<EmbeddedMovie> movieList = embeddedMoviesRepository.findByTitle(movieName);
-        List<String> resultList = new ArrayList<>();
-        for(EmbeddedMovie movie : movieList) {
-            Integer movieId = movie.getImdb().getId();
-            if (movieId != null) {
-                String result = movieName + " IMDB ID : " + movieId;
-                resultList.add(result);
-            }
-        }
-        return resultList;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Movie Imdb Id By Name")
+    @GetMapping("/embeddedMovie/getMovieImdbIdByName")
+    public List<String> getMovieImdbIdByName(@RequestParam String movieName) {
+        return embeddedMoviesService.getMovieImdbIdByName(movieName);
     }
 
     public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
