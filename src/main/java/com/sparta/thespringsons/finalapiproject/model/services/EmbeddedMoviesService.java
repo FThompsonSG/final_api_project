@@ -659,6 +659,6 @@ public class EmbeddedMoviesService  {
         for (int i = 0; i < originalEmbeds.length; i++) {
             total += Math.pow(originalEmbeds[i] - embeds[i], 2);
         }
-        return Math.sqrt(total);
+        return Math.abs(Math.sqrt(total));
     }
 }
