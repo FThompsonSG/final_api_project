@@ -35,6 +35,7 @@ public class MflixApplication {
 
     public static final Logger logger = Logger.getLogger(MflixApplication.class.getName());
 
+
     public static void main(String[] args) {
         OurLogger.setUpLogger(logger);
         SpringApplication.run(MflixApplication.class, args);
