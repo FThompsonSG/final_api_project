@@ -1,4 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
+import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
+import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
@@ -464,7 +466,7 @@ public class MoviesService {
         }
     }
 
-    //Deletes --------------------------------------------------------------------------------------------------------------
+    //Deletes ---------------------------------------------------------------------------------------------------------------
 
     public void deleteMovieById(String Id) {
         Movie movie = null;
@@ -474,7 +476,29 @@ public class MoviesService {
         }
     }
 
-    //Updates -----------------------------------------------------------------------------
+    //Create -----------------------------------------------------------------------------------------------------------------
+
+    public Movie addMovie(Movie movie) {
+        try {
+            if(movie.getTitle().isEmpty() || movie.getTitle() == null) {
+                throw new InvalidDocumentException("Movies must have title");
+            } else if (movie.getDirectors().size() == 0 || movie.getDirectors() == null) {
+                throw new InvalidDocumentException("Movies must have at least one director");
+            } else if (movie.getCast().size() == 0 || movie.getCast() == null) {
+                throw new InvalidDocumentException("Movies must have at least one cast member");
+            } else if (movie.getLanguages().size() == 0 || movie.getLanguages() == null) {
+                throw new InvalidDocumentException("Movies must be available in at least one language");
+            } else if (movie.getGenres().size() == 0 || movie.getGenres() == null) {
+                throw new InvalidDocumentException("Movies mush have at least one genre");
+            } else {
+                return movieRepository.save(movie);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            return null;
+        }
+    }
+    //Updates ----------------------------------------------------------------------------------------------------------------
     public Movie updateAwardsWins(String code, Integer wins) {
         Movie movieToUpdate = null;
         if(wins != null && code != null){
