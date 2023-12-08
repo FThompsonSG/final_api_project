@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.entities;
 
+import jakarta.persistence.Column;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -12,6 +13,8 @@ public class Comment {
     @Id
     private String id;
 
+    @Column(name = "is_deleted")
+    private boolean deleted;
     private Date date;
     private String email;
     @Field(name = "movie_id", targetType = FieldType.OBJECT_ID)
@@ -49,5 +52,18 @@ public class Comment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", deleted=" + deleted +
+                ", date=" + date +
+                ", email='" + email + '\'' +
+                ", movieId='" + movieId + '\'' +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

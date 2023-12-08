@@ -25,7 +25,7 @@ public class CommentServiceTests {
     @Test
     @DisplayName("Test get all Comments By Movie Title")
     void TestCommentMovieTitle(){
-        Assertions.assertEquals("John Bishop",commentService.getAllCommentsByMovieTitle("A Corner in Wheat").get(0).getName());
+        Assertions.assertEquals("John Bishop",commentService.getAllCommentsByMovieTitle("A Corner in Wheat").get("A Corner in Wheat 1909").get(0).getName());
     }
 
 

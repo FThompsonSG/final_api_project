@@ -138,7 +138,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesfinal;
     }
 
-    public List<EmbeddedMovie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+    public List<EmbeddedMovie> findAllMoviesByImdbRating(double lowerRating, double upperRating) {
         List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
         List<EmbeddedMovie> selectedMovies = new ArrayList<>();
         for (EmbeddedMovie movie : movies) {
@@ -154,7 +154,7 @@ public class EmbeddedMoviesService  {
     }
 
     //String
-    public List<String> getNumberOfMovieImdbVotes(String movieName) {
+    public List<String> findAllNumberOfMovieImdbVotes(String movieName) {
         List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(EmbeddedMovie movie : movieList) {
@@ -166,7 +166,7 @@ public class EmbeddedMoviesService  {
         return resultList;
     }
 
-    public List<String> getMovieImdbRatingByName(String movieName) {
+    public List<String> findAllMovieImdbRatingByName(String movieName) {
         List<EmbeddedMovie> movieList= embeddedMoviesRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(EmbeddedMovie movie : movieList) {
@@ -177,7 +177,7 @@ public class EmbeddedMoviesService  {
         return resultList;
     }
 
-    public List<String> getMovieImdbIdByName(String movieName) {
+    public List<String> findAllMovieImdbIdByName(String movieName) {
         List<EmbeddedMovie> movieList = embeddedMoviesRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(EmbeddedMovie movie : movieList) {
@@ -190,64 +190,64 @@ public class EmbeddedMoviesService  {
         return resultList;
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByCountry(String countryName) {
         return embeddedMoviesRepository.findByCountries(countryName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfNominations(Integer noms) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByNumberOfNominations(Integer noms) {
         return embeddedMoviesRepository.findEmbeddedMoviesByAwards_Nominations(noms);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfWins(Integer wins) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByNumberOfWins(Integer wins) {
         return embeddedMoviesRepository.findEmbeddedMoviesByAwards_Wins(wins);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByAwardName(String awardName) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByAwardName(String awardName) {
         return embeddedMoviesRepository.findByFieldNameContaining(awardName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByTitleContaining(String filmTitle) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByTitleContaining(String filmTitle) {
         return embeddedMoviesRepository.findByTitleContaining(filmTitle);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByCastMember(String castMemberName) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByCastMember(String castMemberName) {
         return embeddedMoviesRepository.findByCastMember(castMemberName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByDirector(String directorName) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByDirector(String directorName) {
         return embeddedMoviesRepository.findByDirector(directorName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByFullPlot(String fullPlot) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByFullPlot(String fullPlot) {
         return embeddedMoviesRepository.findByFullPlot(fullPlot);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByGenre(String genre) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByGenre(String genre) {
         return embeddedMoviesRepository.findByGenre(genre);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByLanguage(String language) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByLanguage(String language) {
         return embeddedMoviesRepository.findByLanguage(language);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfCommentsLowerBound(Integer numberOfComments) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByNumberOfCommentsLowerBound(Integer numberOfComments) {
         return embeddedMoviesRepository.findByNumberOfComments(numberOfComments);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByPlot(String plot) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByPlot(String plot) {
         String plotPadded = " " + plot + " ";
         return embeddedMoviesRepository.findByPlot(plotPadded);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(Integer mins) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByMaxRuntime(Integer mins) {
         return embeddedMoviesRepository.findByMaxRuntime(mins);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByWriter(String writerName) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByWriter(String writerName) {
         return embeddedMoviesRepository.findByWriter(writerName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearExact(String year) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByYearExact(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return embeddedMoviesRepository.findByYearExact(yearInt);
@@ -257,7 +257,7 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    public List<String> getPosterLinkByTitle(String name) {
+    public List<String> findAllPosterLinkByTitle(String name) {
         List<EmbeddedMovie> allMovies = embeddedMoviesRepository.findByTitle(name);
         List<String> movies = new ArrayList<>();
         for (EmbeddedMovie movie : allMovies) {
@@ -271,7 +271,7 @@ public class EmbeddedMoviesService  {
         return movies;
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearBefore(String year) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByYearBefore(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return embeddedMoviesRepository.findByYearBefore(yearInt);
@@ -281,7 +281,7 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearAfter(String year) {
+    public List<EmbeddedMovie> findAllEmbeddedMoviesByYearAfter(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return embeddedMoviesRepository.findByYearAfter(yearInt);
@@ -291,7 +291,7 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    public List<EmbeddedMovie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+    public List<EmbeddedMovie> findAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
         List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
         List<EmbeddedMovie> moviesInRange = new ArrayList<>();
 
@@ -337,21 +337,21 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    public EmbeddedMovie updateEmbeddedMovieTitle(String Id, String newTitle) {
+    public void updateEmbeddedMovieTitle(String Id, String newTitle) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
             movie.setTitle(newTitle);
             updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
     public EmbeddedMovie updateEmbeddedMovieWriters(String Id, String newWriter) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> writers = Arrays.asList(movie.getWriters());
+            List<String> writers = new ArrayList<>(List.of(movie.getWriters()));
             writers.add(newWriter);
             movie.setWriters(writers.toArray(new String[0]));
             updateLastUpdated(movie);
@@ -359,35 +359,35 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
-    public EmbeddedMovie updateEmbeddedMovieCast(String Id, String newMember) {
+    public void updateEmbeddedMovieCast(String Id, String newMember) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> cast = Arrays.asList(movie.getCast());
+            List<String> cast = new ArrayList<>(List.of(movie.getCast()));
             cast.add(newMember);
             movie.setWriters(cast.toArray(new String[0]));
             updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
-    public EmbeddedMovie updateEmbeddedMovieGenres(String Id, String newGenre) {
+    public void updateEmbeddedMovieGenres(String Id, String newGenre) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> genres = Arrays.asList(movie.getGenres());
+            List<String> genres = new ArrayList<>(List.of(movie.getGenres()));
             genres.add(newGenre);
             movie.setWriters(genres.toArray(new String[0]));
             updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
     public EmbeddedMovie updateEmbeddedMovieLanguages(String Id, String newLanguage) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> languages = Arrays.asList(movie.getLanguages());
+            List<String> languages = new ArrayList<>(List.of(movie.getLanguages()));
             languages.add(newLanguage);
             movie.setWriters(languages.toArray(new String[0]));
             updateLastUpdated(movie);
@@ -399,7 +399,7 @@ public class EmbeddedMoviesService  {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> countries = Arrays.asList(movie.getCountries());
+            List<String> countries = new ArrayList<>(List.of(movie.getCountries()));
             countries.add(newCountry);
             movie.setWriters(countries.toArray(new String[0]));
             updateLastUpdated(movie);
@@ -579,7 +579,7 @@ public class EmbeddedMoviesService  {
     }
 
     public static void updateLastUpdated(EmbeddedMovie movieToUpdate) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
         movieToUpdate.setLastupdated(currentDate.format(formatter));
     }
@@ -628,14 +628,14 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(embeddedMovieToUpdate);
     }
 
-    public EmbeddedMovie updateYear(String Id, String year) {
+    public void updateYear(String Id, String year) {
         EmbeddedMovie movieToUpdate = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movieToUpdate = embeddedMoviesRepository.findById(Id).get();
             movieToUpdate.setYear(year);
-            updateLastUpdated(movieToUpdate);
+//            updateLastUpdated(movieToUpdate);
         }
-        return embeddedMoviesRepository.save(movieToUpdate);
+        embeddedMoviesRepository.save(movieToUpdate);
     }
 
     public void deleteMovieById(String Id) {

@@ -1,20 +1,17 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
-import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,10 +40,16 @@ public class CommentService {
         return commentRepository.findAllByName(name);
     }
 
-    public List<Comment> getAllCommentsByMovieTitle(String movieTitle){
+    public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(String movieTitle) {
         logger.log(Level.INFO, "Entered get all comments by movie title method in comment service");
-        Movie movie = movieRepository.findByTitle(movieTitle);
-        return commentRepository.findAllByMovieId(movie.getId());
+        Map<String, ArrayList<Comment>> mapToReturn = new HashMap<>();
+        List<Movie> movies = movieRepository.findAllByTitle(movieTitle);
+        for (Movie movie : movies) {
+            List<Comment> comments = commentRepository.findAllByMovieId(movie.getId());
+            ArrayList<Comment> commentsToReturn = new ArrayList<>(comments);
+            mapToReturn.put(movie.getTitle() + " " + movie.getYear(), commentsToReturn);
+        }
+        return mapToReturn;
     }
 
     public Optional<Comment> getCommentById(String id) {
@@ -74,4 +77,11 @@ public class CommentService {
         commentRepository.save(commentToUpdate);
         return commentToUpdate;
     }
+
+    public void bulkDeleteComments(List<String> commentIds){
+        for(String id: commentIds){
+            commentRepository.deleteById(id);
+        }
+    }
+
 }
