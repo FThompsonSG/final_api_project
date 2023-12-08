@@ -14,7 +14,7 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
 
 //    List<Movie> findAllMovies();
-    List<Movie> findByTitle(String title);
+    Optional<Movie> findByTitle(String title);
 
     @Query("{ 'title' : { $regex: ?0, $options: 'i' } }")
     List<Movie> findAllByTitle(String title);

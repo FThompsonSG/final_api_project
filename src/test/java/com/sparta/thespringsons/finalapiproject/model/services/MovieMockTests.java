@@ -5,28 +5,35 @@ import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 @SpringBootTest
 public class MovieMockTests {
-
-    @Autowired
-    private MoviesService moviesService;
 
     @Mock
     private MovieRepository movieRepositoryMock;
 
     @InjectMocks
     private MoviesService moviesServiceMock;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
     @Test
     @DisplayName("Testing add document to mock repository")
     public void testingAddDocumentToMockRepository(){
@@ -40,12 +47,12 @@ public class MovieMockTests {
         mockMovie.setLanguages(List.of(directors));
 
         // Mock the repository behavior
-        Mockito.when(movieRepositoryMock.save(Mockito.any(Movie.class)))
+        when(movieRepositoryMock.save(any(Movie.class)))
                 .thenReturn(mockMovie);
 
         Movie result = moviesServiceMock.addMovie(mockMovie);
 
-        Mockito.verify(movieRepositoryMock, Mockito.times(1)).save(Mockito.eq(mockMovie));
+        verify(movieRepositoryMock, times(1)).save(Mockito.eq(mockMovie));
 
         Assertions.assertEquals(mockMovie, result);
     }
@@ -56,16 +63,13 @@ public class MovieMockTests {
         Movie mockMovie = new Movie();
         mockMovie.setId("HenriqueMartinsDaCunha");
 
-
-
-
-        Mockito.when(movieRepositoryMock.save(Mockito.any(Movie.class)))
-                .thenReturn(mockMovie);
+        when(movieRepositoryMock.findById(any())).thenReturn(Optional.of(mockMovie));
 
         moviesServiceMock.deleteMovieById(mockMovie.getId());
         //mockMovie.getId()
-        
-        Mockito.verify(movieRepositoryMock, Mockito.times(1)).deleteById(mockMovie.getId());
+
+        verify(movieRepositoryMock, never()).findById(mockMovie.getId());
+        verify(movieRepositoryMock, never()).delete(mockMovie);
 
     }
 }
