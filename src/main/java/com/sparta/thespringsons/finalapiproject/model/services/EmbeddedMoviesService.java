@@ -2,24 +2,18 @@ package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
-import jakarta.persistence.Embedded;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -621,6 +615,24 @@ public class EmbeddedMoviesService  {
     public void deleteMovieById(String Id) {
         Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
         movie.ifPresent(embeddedMovie -> embeddedMoviesRepository.delete(embeddedMovie));
+    }
 
+    public List<EmbeddedMovie> findEmbeddedMovieFromEmbedding(EmbeddedMovie originalMovie, double wantedDistance) {
+        List<EmbeddedMovie> embeddedMovie = embeddedMoviesRepository.findAll();
+        for (EmbeddedMovie movie : embeddedMovie) {
+            double distance = calculateEuclid(originalMovie.getPlot_embedding(), movie.getPlot_embedding());
+            if (distance <= wantedDistance) {
+                embeddedMovie.add(movie);
+            }
+        }
+        return embeddedMovie;
+    }
+
+    public double calculateEuclid(double[] originalEmbeds, double[] embeds) {
+        double total = 0.0;
+        for (int i = 0; i < originalEmbeds.length; i++) {
+            total += Math.pow(originalEmbeds[i] - embeds[i], 2);
+        }
+        return Math.sqrt(total);
     }
 }

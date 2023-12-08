@@ -37,7 +37,7 @@ public class EmbeddedMovie {
 
     private String plot;
 
-    private String[] plot_embedding;
+    private double[] plot_embedding;
 
     private String rating;
 
@@ -109,7 +109,7 @@ public class EmbeddedMovie {
         return plot;
     }
 
-    public String[] getPlot_embedding() {
+    public double[] getPlot_embedding() {
         return plot_embedding;
     }
 
@@ -197,7 +197,7 @@ public class EmbeddedMovie {
         this.plot = plot;
     }
 
-    public void setPlot_embedding(String[] plot_embedding) {
+    public void setPlot_embedding(double[] plot_embedding) {
         this.plot_embedding = plot_embedding;
     }
 
