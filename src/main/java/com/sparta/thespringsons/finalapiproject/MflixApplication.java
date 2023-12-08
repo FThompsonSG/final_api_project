@@ -1,17 +1,20 @@
 package com.sparta.thespringsons.finalapiproject;
 
+
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
+
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
+
 import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import com.sparta.thespringsons.finalapiproject.model.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,8 +36,8 @@ import java.util.logging.Logger;
 @Import(MongoConfig.class)
 public class MflixApplication {
 
-
     public static final Logger logger = Logger.getLogger(MflixApplication.class.getName());
+
 
     public static void main(String[] args) {
         OurLogger.setUpLogger(logger);

@@ -9,8 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
 
 @Document("movies")
@@ -40,7 +39,7 @@ public class Movie {
     private Tomato tomatoes;
     //could be enum
     private String type;
-    private Integer year;
+    private String year;
     private List<String> writers;
 
     public Movie() {}
@@ -52,7 +51,7 @@ public class Movie {
                  Integer num_mflix_comments, String plot,
                  String poster, String rated, Date released,
                  Integer runtime, String title, Tomato tomatoes,
-                 String type, Integer year, List<String> writers) {
+                 String type, String year, List<String> writers) {
         this.id = id;
         this.awards = awards;
         this.cast = cast;
@@ -228,11 +227,11 @@ public class Movie {
         this.type = type;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -242,5 +241,32 @@ public class Movie {
 
     public void setWriters(List<String> writers) {
         this.writers = writers;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id='" + id + '\'' +"\n"+
+                "awards=" + awards +
+                "cast=" + cast +"\n"+
+                "countries=" + countries +"\n"+
+                "directors=" + directors +"\n"+
+                "fullplot='" + fullplot + '\'' +"\n"+
+                "genres=" + genres +"\n"+
+                "imdb=" + imdb +"\n"+
+                "languages=" + languages +"\n"+
+                "lastupdated='" + lastupdated + '\'' +"\n"+
+                "num_mflix_comments=" + num_mflix_comments +"\n"+
+                "plot='" + plot + '\'' +"\n"+
+                "poster='" + poster + '\'' +"\n"+
+                "rated='" + rated + '\'' +"\n"+
+                "released='" + released + '\'' +"\n"+
+                "runtime=" + runtime +"\n"+
+                "title='" + title + '\'' +"\n"+
+                "tomatoes=" + tomatoes +"\n"+
+                "type='" + type + '\'' +"\n"+
+                "year='" + year + '\'' +"\n"+
+                "writers=" + writers +
+                '}'+"\n";
     }
 }
