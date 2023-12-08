@@ -425,11 +425,6 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
-    public void deleteEmbeddedMovieById(String Id) {
-        Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
-        movie.ifPresent(embeddedMoviesRepository::delete);
-    }
-
     public Optional<EmbeddedMovie> updateTomatoesCriticMeter(String id, Integer meter ) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -616,6 +611,37 @@ public class EmbeddedMoviesService  {
         }
         stringBuilder.append(".");
         return stringBuilder.toString();
+    }
+
+    public EmbeddedMovie updateReleaseDate(String Id, String date) {
+        EmbeddedMovie embeddedMovieToUpdate = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            embeddedMovieToUpdate = embeddedMoviesRepository.findById(Id).get();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+            LocalDate dateToUpdate = LocalDate.parse(date);
+            embeddedMovieToUpdate.setReleased(dateToUpdate.format(formatter));
+        }
+        return embeddedMoviesRepository.save(embeddedMovieToUpdate);
+    }
+
+    public EmbeddedMovie updateRuntime(String Id, Integer runtime) {
+        EmbeddedMovie embeddedMovieToUpdate = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            embeddedMovieToUpdate = embeddedMoviesRepository.findById(Id).get();
+            embeddedMovieToUpdate.setRuntime(runtime);
+            updateLastUpdated(embeddedMovieToUpdate);
+        }
+        return embeddedMoviesRepository.save(embeddedMovieToUpdate);
+    }
+
+    public EmbeddedMovie updateYear(String Id, String year) {
+        EmbeddedMovie movieToUpdate = null;
+        if(embeddedMoviesRepository.findById(Id).isPresent()) {
+            movieToUpdate = embeddedMoviesRepository.findById(Id).get();
+            movieToUpdate.setYear(year);
+            updateLastUpdated(movieToUpdate);
+        }
+        return embeddedMoviesRepository.save(movieToUpdate);
     }
 
     public void deleteMovieById(String Id) {
