@@ -31,6 +31,9 @@ public class UserControllerMockTests {
     private MockMvc mockMvc;
 
     @MockBean
+    private ApiKeyService apiKeyService;
+
+    @MockBean
     private UserService userService;
 
     @Autowired
@@ -61,9 +64,11 @@ public class UserControllerMockTests {
         User mockUser = new User();
         mockUser.setId("5a9427648b0beebeb69810b6");
         Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
-                .perform(delete("http://localhost:8080/user/delete/5a9427648b0beebeb69810b6"))
+                .perform(delete("http://localhost:8080/user/delete/5a9427648b0beebeb69810b6")
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("deleteUser"))
@@ -76,11 +81,13 @@ public class UserControllerMockTests {
         User mockUser = new User();
         mockUser.setId("5a9427648b0beebeb69810b6");
         Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
                 .perform(post("http://localhost:8080/user/update/5a9427648b0beebeb69810b6")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(mockUser)))
+                        .content(objectMapper.writeValueAsString(mockUser))
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("updateUser"))

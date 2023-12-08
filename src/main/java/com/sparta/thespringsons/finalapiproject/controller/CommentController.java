@@ -78,12 +78,6 @@ public class CommentController {
     @Operation(summary = "Add new Comment")
     @PostMapping("/comment/add")
     public Optional<Comment> addComment(@RequestBody Comment newComment) throws Exception {
-
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
-            return Optional.empty();
-        };
-
         logger.log(Level.INFO, "Entered add comment method in comment controller");
         Optional<Comment> commentToAdd = commentService.getCommentById(newComment.getId());
         if (commentToAdd.isPresent()) {

@@ -36,6 +36,9 @@ public class CommentControllerMockTests {
     private CommentService commentService;
 
     @MockBean
+    private ApiKeyService apiKeyService;
+
+    @MockBean
     private CommentRepository commentRepository;
 
     @Autowired
@@ -66,13 +69,15 @@ public class CommentControllerMockTests {
 //        mockComment.setId("id1");
 //        mockComment.setText("This is text");
 //        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         List<String> commentIdsToDelete = List.of("id1");
 
         mockMvc.perform(delete("/comment/delete")
                         .param("confirm", "true")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(commentIdsToDelete)))
+                        .content(new ObjectMapper().writeValueAsString(commentIdsToDelete))
+                        .header("Key","68660983"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string("Comment deleted successfully."))
@@ -86,11 +91,13 @@ public class CommentControllerMockTests {
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
         Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
                 .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(mockComment)))
+                        .content(objectMapper.writeValueAsString(mockComment))
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("updateComment"))
