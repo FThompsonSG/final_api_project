@@ -45,7 +45,7 @@ public class UserControllerMockTests {
         Mockito.when(userService.saveUser(Mockito.any(User.class))).thenReturn(Optional.of(mockUser));
 
         mockMvc
-                .perform(post("http://localhost:8080/users")
+                .perform(post("http://localhost:8080/user/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockUser)))
                 .andExpect(status().is(200))
@@ -63,7 +63,7 @@ public class UserControllerMockTests {
         Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
 
         mockMvc
-                .perform(delete("http://localhost:8080/users/delete/5a9427648b0beebeb69810b6"))
+                .perform(delete("http://localhost:8080/user/delete/5a9427648b0beebeb69810b6"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("deleteUser"))
@@ -78,7 +78,7 @@ public class UserControllerMockTests {
         Mockito.when(userService.getById(Mockito.anyString())).thenReturn(Optional.of(mockUser));
 
         mockMvc
-                .perform(post("http://localhost:8080/users/update/5a9427648b0beebeb69810b6")
+                .perform(post("http://localhost:8080/user/update/5a9427648b0beebeb69810b6")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockUser)))
                 .andExpect(status().is(200))
