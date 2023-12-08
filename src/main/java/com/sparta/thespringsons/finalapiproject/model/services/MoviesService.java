@@ -467,8 +467,11 @@ public class MoviesService {
     //Deletes --------------------------------------------------------------------------------------------------------------
 
     public void deleteMovieById(String Id) {
-        Optional<Movie> movie = movieRepository.findById(Id);
-        movie.ifPresent(movieRepository::delete);
+        Movie movie = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movie = movieRepository.findById(Id).get();
+            movieRepository.delete(movie);
+        }
     }
 
     //Updates -----------------------------------------------------------------------------
