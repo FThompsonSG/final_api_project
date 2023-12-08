@@ -217,98 +217,98 @@ public class MovieController {
     @Operation(summary = "Gets all embedded movies By Imdb Rating")
     @GetMapping("/Movie/ByImdbRating")
     public List<Movie> getAllMoviesByImdbRating(@RequestParam double lowerRating, @RequestParam double upperRating) {
-        return movieService.getAllMoviesByImdbRating(lowerRating, upperRating);
+        return movieService.findAllMoviesByImdbRating(lowerRating, upperRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies, by Movie Imdb Votes")
     @GetMapping("/Movie/ByMovieImdbVotes")
     public List<String> getNumberOfMovieImdbVotes(@RequestParam String movieName) {
-        return movieService.getNumberOfMovieImdbVotes(movieName);
+        return movieService.findAllNumberOfMovieImdbVotes(movieName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Movie Imdb Rating By Name")
     @GetMapping("/Movie/getMovieImdbRatingByName")
     public List<String> getMovieImdbRatingByName(@RequestParam String movieName) {
-        return movieService.getMovieImdbRatingByName(movieName);
+        return movieService.findAllMovieImdbRatingByName(movieName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Movie Imdb Id By Name")
     @GetMapping("/Movie/getMovieImdbIdByName")
     public List<String> getMovieImdbIdByName(@RequestParam String movieName) {
-        return movieService.getMovieImdbIdByName(movieName);
+        return movieService.findAllMovieImdbIdByName(movieName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Movie Imdb Id By Name")
     @GetMapping("/Movie/getMoviesByCountry")
     public  List<Movie> getMoviesByCountry(@RequestParam String movieName) {
-        return movieService.getMoviesByLanguages(movieName);
+        return movieService.findAllMoviesByLanguages(movieName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Nominations")
     @GetMapping("/Movie/getMoviesByNumberOfNominations")
     public  List<Movie> getMoviesByNumberOfNominations(@RequestParam Integer noms) {
-        return movieService.getMoviesByNumberOfNominations(noms);
+        return movieService.findAllMoviesByNumberOfNominations(noms);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Wins")
     @GetMapping("/Movie/getMoviesByNumberOfWins")
     public  List<Movie> getMoviesByNumberOfWins(@RequestParam Integer noms) {
-        return movieService.getMoviesByNumberOfWins(noms);
+        return movieService.findAllMoviesByNumberOfWins(noms);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Award Name")
     @GetMapping("/Movie/getMoviesByAwardName")
     public  List<Movie> getMoviesByAwardName(@RequestParam String awardName) {
-        return movieService.getMoviesByAwardName(awardName);
+        return movieService.findAllMoviesByAwardName(awardName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Title Containing")
     @GetMapping("/Movie/getMoviesByTitleContaining")
     public  List<Movie> getMoviesByTitleContaining(@RequestParam String filmTitle) {
-        return movieService.getMovieByTitle(filmTitle);
+        return movieService.findAllMovieByTitle(filmTitle);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Cast Member")
     @GetMapping("/Movie/getMoviesByCastMember")
     public  List<Movie> getMoviesByCastMember(@RequestParam String castMemberName) {
-        return movieService.getMoviesByCastMember(castMemberName);
+        return movieService.findAllMoviesByCastMember(castMemberName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Director")
     @GetMapping("/Movie/getMoviesByDirector")
     public  List<Movie> getMoviesByDirector(@RequestParam String directorName) {
-        return movieService.getAllMoviesByDirector(directorName);
+        return movieService.findAllMoviesByDirector(directorName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
     @GetMapping("/Movie/getMoviesByDirector")
     public  List<Movie> getMoviesByFullPlot(@RequestParam String fullPlot) {
-        return movieService.getAllByFullPlot(fullPlot);
+        return movieService.findAllByFullPlot(fullPlot);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
     @GetMapping("/Movie/getMoviesByDirector")
     public  List<Movie> getMoviesByGenre(@RequestParam String genre) {
-        return movieService.getMoviesByGenre(genre);
+        return movieService.findAllMoviesByGenre(genre);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Language")
     @GetMapping("/Movie/getMoviesByLanguage")
     public  List<Movie> getMoviesByLanguage(@RequestParam String language) {
-        return movieService.getMoviesByLanguages(language);
+        return movieService.findAllMoviesByLanguages(language);
     }
 
     //we have no comments upper and lower bounds, we only have exact comments.
@@ -316,63 +316,63 @@ public class MovieController {
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Comments")
     @GetMapping("/Movie/getMoviesByNumberOfComments")
     public  List<Movie> getMoviesByNumberOfComments(@RequestParam Integer numberOfComments) {
-        return movieService.getMoviesByNumberOfComments(numberOfComments);
+        return movieService.findAllMoviesByNumberOfComments(numberOfComments);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Plot")
     @GetMapping("/Movie/getMoviesByPlot")
     public  List<Movie> getMoviesByPlot(@RequestParam String plot) {
-        return movieService.getAllByPlot(plot);
+        return movieService.findAllByPlot(plot);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Max Runtime")
     @GetMapping("/Movie/getMoviesByMaxRuntime")
     public  List<Movie> getMoviesByMaxRuntime(@RequestParam Integer mins) {
-        return movieService.getMoviesByMaxRuntime(mins);
+        return movieService.findAllMoviesByMaxRuntime(mins);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Writer")
     @GetMapping("/Movie/getMoviesByWriter")
     public List<Movie> getMoviesByWriter(@RequestParam String writerName) {
-        return movieService.getAllMoviesByWriter(writerName);
+        return movieService.findAllMoviesByWriter(writerName);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year Exact")
     @GetMapping("/Movie/getMoviesByYearExact")
     public  List<Movie> getMoviesByYearExact(@RequestParam String year) {
-        return movieService.getMoviesByYearExact(year);
+        return movieService.findAllMoviesByYearExact(year);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Poster Link By Title")
     @GetMapping("/Movie/getPosterLinkByTitle")
     public List<String> getPosterLinkByTitle(@RequestParam String name) {
-        return movieService.getPosterLinkByTitle(name);
+        return movieService.findAllPosterLinkByTitle(name);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year Before")
     @GetMapping("/Movie/getMoviesByYearBefore")
     public  List<Movie> getMoviesByYearBefore(@RequestParam String year) {
-        return movieService.getMoviesByYearBefore(year);
+        return movieService.findAllMoviesByYearBefore(year);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year After")
     @GetMapping("/Movie/getMoviesByYearAfter")
     public  List<Movie> getMoviesByYearAfter(@RequestParam String year) {
-        return movieService.getMoviesByYearAfter(year);
+        return movieService.findAllMoviesByYearAfter(year);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get All Movies By ReleaseRange")
     @GetMapping("/Movie/getAllMoviesByReleaseRange")
     public List<Movie> getAllMoviesByReleaseRange(@RequestParam String lowerDate, @RequestParam String upperDate) {
-        return movieService.getAllMoviesByReleaseRange(lowerDate,upperDate);
+        return movieService.findAllMoviesByReleaseRange(lowerDate,upperDate);
     }
 
     @Tag(name = "Embedded Movie API")

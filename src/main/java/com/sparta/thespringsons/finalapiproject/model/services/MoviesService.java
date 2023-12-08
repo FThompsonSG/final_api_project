@@ -27,7 +27,7 @@ public class MoviesService {
         this.movieRepository = movieRepository;
     }
 
-    public Movie getMovieById(String Id) {
+    public Movie findAllMovieById(String Id) {
         if(movieRepository.findById(Id).isPresent()) {
             return movieRepository.findById(Id).get();
         } else {
@@ -36,12 +36,12 @@ public class MoviesService {
         }
 
     }
-    public List<Movie> getAllMovies() {
+    public List<Movie> findAllAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies;
     }
 
-    public List<Movie> getMovieByTitle(String title) {
+    public List<Movie> findAllMovieByTitle(String title) {
         //return lists instead of optional
         List<Movie> movies = movieRepository.findByTitle(title);
         List<Movie> selectedMovies = new ArrayList<>();
@@ -53,29 +53,29 @@ public class MoviesService {
         return movies;
     }
 
-    public ArrayList<Movie> getAllMoviesByDirector(String directors) {
+    public ArrayList<Movie> findAllMoviesByDirector(String directors) {
         ArrayList<Movie> movies = movieRepository.findAllByDirectors(directors);
         return movies;
     }
 
-    public List<Movie> getAllMoviesByWriter(String writerName) {
+    public List<Movie> findAllMoviesByWriter(String writerName) {
         return movieRepository.findAllByWriters(writerName);
 
     }
 
-    public List<Movie> getMoviesByGenre(String genreName) {
+    public List<Movie> findAllMoviesByGenre(String genreName) {
         return movieRepository.findAllByGenres(genreName);
     }
 
-    public List<Movie> getMoviesByLanguages(String language) {
+    public List<Movie> findAllMoviesByLanguages(String language) {
         return movieRepository.findAllByLanguages(language);
     }
 
-    public List<Movie> getMoviesByCountries(String country) {
+    public List<Movie> findAllMoviesByCountries(String country) {
         return movieRepository.findAllByCountries(country);
     }
 
-    public List<Movie> getAllByFullPlot(String fullPlot){
+    public List<Movie> findAllByFullPlot(String fullPlot){
         List<Movie> allMovies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for(Movie movie : allMovies) {
@@ -87,7 +87,7 @@ public class MoviesService {
         return selectedMovies;
     }
 
-    public List<Movie> getAllByPlot(String keyWord) {
+    public List<Movie> findAllByPlot(String keyWord) {
         List<Movie> allMovies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for(Movie movie : allMovies) {
@@ -209,7 +209,7 @@ public class MoviesService {
         return moviesfinal;
     }
 
-    public List<Movie> getAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
+    public List<Movie> findAllMoviesByImdbRating(Double lowerRating, Double upperRating) {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for (Movie movie : movies) {
@@ -225,7 +225,7 @@ public class MoviesService {
     }
 
     //String
-    public List<String> getNumberOfMovieImdbVotes(String movieName) {
+    public List<String> findAllNumberOfMovieImdbVotes(String movieName) {
         List<Movie> movieList= movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
@@ -237,7 +237,7 @@ public class MoviesService {
         return resultList;
     }
 
-    public List<String> getMovieImdbRatingByName(String movieName) {
+    public List<String> findAllMovieImdbRatingByName(String movieName) {
         List<Movie> movieList= movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
@@ -248,7 +248,7 @@ public class MoviesService {
         return resultList;
     }
 
-    public List<String> getMovieImdbIdByName(String movieName) {
+    public List<String> findAllMovieImdbIdByName(String movieName) {
         List<Movie> movieList = movieRepository.findByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
@@ -261,7 +261,7 @@ public class MoviesService {
         return resultList;
     }
 
-    public List<String> getYearOfRelease(String name) {
+    public List<String> findAllYearOfRelease(String name) {
         List<Movie> allMovies = movieRepository.findByTitle(name);
         List<String> movies = new ArrayList<>();
         for(Movie movie : allMovies) {
@@ -275,7 +275,7 @@ public class MoviesService {
         return movies;
     }
 
-    public List<Movie> getMoviesByYearExact(String year) {
+    public List<Movie> findAllMoviesByYearExact(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return movieRepository.findByYearExact(yearInt);
@@ -285,7 +285,7 @@ public class MoviesService {
         }
     }
 
-    public List<Movie> getMoviesByYearBefore(String year) {
+    public List<Movie> findAllMoviesByYearBefore(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return movieRepository.findByYearBefore(yearInt);
@@ -295,7 +295,7 @@ public class MoviesService {
         }
     }
 
-    public List<Movie> getMoviesByYearAfter(String year) {
+    public List<Movie> findAllMoviesByYearAfter(String year) {
         try {
             Integer yearInt = Integer.parseInt(year);
             return movieRepository.findByYearAfter(yearInt);
@@ -305,7 +305,7 @@ public class MoviesService {
         }
     }
 
-    public List<String> getPosterLinkByTitle(String name) {
+    public List<String> findAllPosterLinkByTitle(String name) {
         List<Movie> allMovies = movieRepository.findByTitle(name);
         List<String> movies = new ArrayList<>();
         for (Movie movie : allMovies) {
@@ -319,23 +319,23 @@ public class MoviesService {
         return movies;
     }
 
-    public List<Movie> getMoviesByCastMember(String castMemberName) {
+    public List<Movie> findAllMoviesByCastMember(String castMemberName) {
         return movieRepository.findByCastMember(castMemberName);
     }
 
-    public List<Movie> getMoviesByNumberOfNominations(Integer noms) {
+    public List<Movie> findAllMoviesByNumberOfNominations(Integer noms) {
         return movieRepository.findMoviesByAwards_Nominations(noms);
     }
 
-    public List<Movie> getMoviesByNumberOfWins(Integer wins) {
+    public List<Movie> findAllMoviesByNumberOfWins(Integer wins) {
         return movieRepository.findMoviesByAwards_Wins(wins);
     }
 
-    public List<Movie> getMoviesByAwardName(String awardName) {
+    public List<Movie> findAllMoviesByAwardName(String awardName) {
         return movieRepository.findByFieldNameContaining(awardName);
     }
 
-    public List<String> getLastUpdatedByMovieTitle(String name) {
+    public List<String> findAllLastUpdatedByMovieTitle(String name) {
         List<Movie> movies = movieRepository.findByTitle(name);
         List<String> resultList = new ArrayList<>();
         String result = "";
@@ -350,7 +350,7 @@ public class MoviesService {
     }
 
 //find the movie by rating
-    public List<Movie> getAllRatedMoviesByRating(String rating){
+    public List<Movie> findAllRatedMoviesByRating(String rating){
         List<Movie> movies = movieRepository.findAllByRated(rating);
         List<Movie> ratedMovies = new ArrayList<>();
 
@@ -365,7 +365,7 @@ public class MoviesService {
     }
 
 //finds all rated movies
-    public List<Movie> getAllRatedMovies(){
+    public List<Movie> findAllRatedMovies(){
         List<Movie> movies = movieRepository.findAll();
         List<Movie> ratedMovies = new ArrayList<>();
 
@@ -379,7 +379,7 @@ public class MoviesService {
     }
 
 
-    public List<Movie> getAllUnratedMovies(){
+    public List<Movie> findAllUnratedMovies(){
         List<Movie> movies = movieRepository.findAll();
         List<Movie> unratedMovies = new ArrayList<>();
 
@@ -395,11 +395,11 @@ public class MoviesService {
     }
 
 
-    public List<Movie> getMoviesByNumberOfComments(Integer numberOfComments) {
+    public List<Movie> findAllMoviesByNumberOfComments(Integer numberOfComments) {
         return movieRepository.findByNumberOfComments(numberOfComments);
     }
 
-    public List<String> getNumberOfCommentsByTitle(String title) {
+    public List<String> findAllNumberOfCommentsByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
@@ -412,11 +412,11 @@ public class MoviesService {
         return resultList;
     }
 
-    public List<Movie> getMoviesByMaxRuntime(Integer mins) {
+    public List<Movie> findAllMoviesByMaxRuntime(Integer mins) {
         return movieRepository.findByMaxRuntime(mins);
     }
 
-    public List<Movie> getMoviesByRangeOfRuntime(Integer minRange, Integer maxRange) {
+    public List<Movie> findAllMoviesByRangeOfRuntime(Integer minRange, Integer maxRange) {
         List<Movie> allMovies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for (Movie movie : allMovies) {
@@ -428,7 +428,7 @@ public class MoviesService {
         return selectedMovies;
     }
 
-    public List<String> getTypeByTitle(String title) {
+    public List<String> findAllTypeByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
@@ -441,7 +441,7 @@ public class MoviesService {
         return resultList;
     }
 
-    public List<Movie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
+    public List<Movie> findAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
         List<Movie> movies = movieRepository.findAll();
         List<Movie> moviesInRange = new ArrayList<>();
 
