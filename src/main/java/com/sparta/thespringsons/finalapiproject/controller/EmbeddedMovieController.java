@@ -9,7 +9,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all the embedded movies from MongoDB")
-    @GetMapping("/embeddedMovies")
+    @GetMapping("/embeddedMovie")
     public void getAllEmbeddedMovies() {
         // Gets all embedded movie
         // Should return list.
@@ -17,7 +17,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets an embedded movie by its ID.")
-    @GetMapping("/embeddedMovie/{movie_id}")
+    @GetMapping("/embeddedMovie/byId/{movie_id}")
     public void getEmbeddedMovieById(@PathVariable String movie_id) {
         // Gets embedded movie by id
         // Should return Optional.
@@ -25,7 +25,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets an embedded movie by date range")
-    @GetMapping("/embeddedMovie/")
+    @GetMapping("/embeddedMovie/byDateRange")
     public void getEmbeddedMovieByDateRange
             (@RequestParam Integer lowerYear, @RequestParam Integer upperYear) {
         // Gets an embedded movie by date range
@@ -35,7 +35,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Creates a new EmbeddedMovie record into the database.")
-    @PostMapping("/embeddedMovie")
+    @PostMapping("/embeddedMovie/add")
     public void createEmbeddedMovie() { // We need a body in here somewhere
         // Gets all embedded movie
         // Maybe returns the JSON body of created object?
@@ -43,7 +43,7 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets alL embedded movie by runtime range")
-    @GetMapping("/embeddedMovies/runtime")
+    @GetMapping("/embeddedMovie/byRuntime")
     public void getEmbeddedMovieByRuntimeRange
             (@RequestParam Integer lowerRuntime, @RequestParam Integer upperRuntime){
         // Gets all embedded movies within the specified runtime range

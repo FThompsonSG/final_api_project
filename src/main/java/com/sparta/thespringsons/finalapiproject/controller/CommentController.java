@@ -42,43 +42,43 @@ public class CommentController {
 
     @Tag(name = "Get Comment By Name")
     @Operation(summary = "Get Comment By Name")
-    @GetMapping("/commentsbyname/{name}")
+    @GetMapping("/comment/byName/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         List<Comment> allComments = commentService.getAllByName(name);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/commentsbyname/{name}");
+            throw new NoRecordFoundException("comments", "/comment/ByName/{name}");
         }
         return allComments;
     }
 
     @Tag(name = "Get All Comments For Movie")
     @Operation(summary = "Get All Comments For Movie")
-    @GetMapping("/commentsbymovietitle/{movieTitle}")
+    @GetMapping("/comment/byMovieTitle/{movieTitle}")
     public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
         List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/commentsbymovietitle/{movieTitle}");
+            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
         }
         return allComments;
     }
 
     @Tag(name = "Add New Comment")
     @Operation(summary = "Add new Comment")
-    @PostMapping("/comment")
+    @PostMapping("/comment/add")
     public Optional<Comment> addComment(@RequestBody Comment newComment) throws Exception {
         logger.log(Level.INFO, "Entered add comment method in comment controller");
         Optional<Comment> commentToAdd = commentService.getCommentById(newComment.getId());
         if (commentToAdd.isPresent()) {
-            throw new RecordAlreadyExistsException("comment", "/comment");
+            throw new RecordAlreadyExistsException("comment", "/comment/add");
         }
         return Optional.ofNullable(commentService.saveComment(newComment));
     }
 
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
-    @DeleteMapping("/comments/delete/{id}")
+    @DeleteMapping("/comment/delete/{id}")
     public Optional<Comment> deleteComment(@PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
         Optional<Comment> commentToDelete = commentService.getCommentById(id);
