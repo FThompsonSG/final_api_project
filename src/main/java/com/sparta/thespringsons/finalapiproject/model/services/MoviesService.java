@@ -8,13 +8,11 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
@@ -43,14 +41,14 @@ public class MoviesService {
 
     public List<Movie> findAllMovieByTitle(String title) {
         //return lists instead of optional
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for(Movie movie : movies) {
-            if (movie != null && movie.getTitle().contains(title)) {
+            if (movie != null && movie.getTitle().toLowerCase().contains(title)) {
                 selectedMovies.add(movie);
             }
         }
-        return movies;
+        return selectedMovies;
     }
 
     public ArrayList<Movie> findAllMoviesByDirector(String directors) {
@@ -427,6 +425,7 @@ public class MoviesService {
         }
         return selectedMovies;
     }
+
 
     public List<String> findAllTypeByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);

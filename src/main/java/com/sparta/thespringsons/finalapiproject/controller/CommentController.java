@@ -8,9 +8,12 @@ import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,9 +58,9 @@ public class CommentController {
     @Tag(name = "Get All Comments For Movie")
     @Operation(summary = "Get All Comments For Movie")
     @GetMapping("/comment/byMovieTitle/{movieTitle}")
-    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+    public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
-        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
+        Map<String, ArrayList<Comment>> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
             throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
         }
@@ -78,15 +81,20 @@ public class CommentController {
 
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
-    @DeleteMapping("/comment/delete/{id}")
-    public Optional<Comment> deleteComment(@PathVariable String id) throws Exception {
+    @DeleteMapping("/comments/delete")
+    public ResponseEntity<String> deleteComment(@RequestBody List<String> id,
+                                                @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
-        Optional<Comment> commentToDelete = commentService.getCommentById(id);
-        if (commentToDelete.isEmpty()) {
-            throw new NoRecordFoundException("comment", "/comments/delete/{id}");
+
+        if (!confirmDelete) {
+            return ResponseEntity.ok("Please confirm deletion by providing 'confirm=true' as a query parameter.");
         }
-        return commentService.deleteComment(id);
+
+        commentService.bulkDeleteComments(id);
+        return ResponseEntity.ok("Comment deleted successfully.");
     }
+
+
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")
