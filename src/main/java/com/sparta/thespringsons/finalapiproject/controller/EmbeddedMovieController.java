@@ -70,32 +70,23 @@ public class EmbeddedMovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato viewer rating")
-    @GetMapping("/embeddedMovie/ByTomatoesCriticRating")
+    @GetMapping("/embeddedMovie/ByTomatoesViewerRating")
     public void findAllByTomatoesViewerRating(double minRating, double maxRating) {
         findAllByTomatoesViewerRating(minRating, maxRating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato meter rating")
-    @GetMapping("/embeddedMovie/ByTomatoesCriticRating")
+    @GetMapping("/embeddedMovie/ByTomatoesCriticMeter")
     public void findAllByTomatoesCriticMeter(double minRating, double maxRating) {
         findAllByTomatoesCriticMeter(minRating, maxRating);
     }
 
-    public List<EmbeddedMovie> findAllByTomatoesViewerMeter(double minMeter, double maxMeter) {
-        List<EmbeddedMovie> embeddedMovies = new ArrayList<>();
-        List<EmbeddedMovie> embeddedMoviesFinal = new ArrayList<>();
-        for (EmbeddedMovie embeddedMovie : embeddedMoviesRepository.findAll()) {
-            if(embeddedMovie.getTomato() != null) {
-                if (embeddedMovie.getTomato().getViewer() != null)
-                    if(embeddedMovie.getTomato().getViewer().getMeter() != null)
-                        if (embeddedMovie.getTomato().getViewer().getMeter() < maxMeter && embeddedMovie.getTomato().getViewer().getMeter() > minMeter) {
-                            embeddedMoviesFinal.add(embeddedMovie);
-                        }
-
-            }
-        }
-        return embeddedMoviesFinal;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded movies by viewer meter rating")
+    @GetMapping("/embeddedMovie/ByTomatoesViewerMeter")
+    public void findAllByTomatoesViewerMeter(double minRating, double maxRating) {
+        findAllByTomatoesViewerMeter(minRating, maxRating);
     }
 
     public List<EmbeddedMovie> findAllByTomatoesRottenReviews(int minRotten, int maxRotten) {
