@@ -51,10 +51,10 @@ class TheatreControllerTest {
         theaterList.add(mockTheater);
         Mockito.when(theaterService.getAllTheaters()).thenReturn(theaterList);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre"))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(handler().methodName("getAllTheatres"))
+                .andExpect(handler().methodName("getAllTheaters"))
                 .andDo(print());
     }
 
@@ -65,7 +65,7 @@ class TheatreControllerTest {
         theaterList.add(mockTheater);
         Mockito.when(theaterService.getTheatersByZipcode("1234567")).thenReturn(theaterList);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre/byZipcode/{zipcode}", "1234567"))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater/byZipCode/{zipcode}", "1234567"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(handler().methodName("getAllTheatersByZipcode"))
@@ -78,10 +78,10 @@ class TheatreControllerTest {
         Optional<Theater> mockTheaterOp = Optional.of(mockTheater);
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre/byId/{theater_id}", 999999))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater/byId/{theater_id}", 999999))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(handler().methodName("getTheatresById"))
+                .andExpect(handler().methodName("getTheaterById"))
                 .andDo(print());
     }
 
