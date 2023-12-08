@@ -18,12 +18,12 @@ public class MovieController {
 
 
     //Partial search for movie title
-    @Tag(name = "Movie Controller API")
-    @Operation(summary = "")
-    @GetMapping("/movies/title")
-    public void getFilmByTitle(@RequestParam(name = "title", required = true) String title) {
-        //return lists instead of optional
-        Optional<MovieDTO> movie = movieRepository.findByTitle(title);
+//    @Tag(name = "Movie Controller API")
+//    @Operation(summary = "")
+//    @GetMapping("/movies/title")
+//    public void getFilmByTitle(@RequestParam(name = "title", required = true) String title) {
+//        //return lists instead of optional
+//        Optional<MovieDTO> movie = movieRepository.findByTitle(title);
 
 
 

@@ -14,10 +14,10 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
 
 //    List<Movie> findAllMovies();
-    List<Movie> findByTitle(String title);
+    Optional<Movie> findByTitle(String title);
 
     @Query("{ 'title' : { $regex: ?0, $options: 'i' } }")
-    Optional<Movie> findAllByTitle(String title);
+    List<Movie> findAllByTitle(String title);
     ArrayList<Movie> findAllByDirectors(String directors);
 
 

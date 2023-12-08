@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,9 +57,9 @@ public class CommentController {
     @Tag(name = "Get All Comments For Movie")
     @Operation(summary = "Get All Comments For Movie")
     @GetMapping("/comment/byMovieTitle/{movieTitle}")
-    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+    public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
-        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
+        Map<String, ArrayList<Comment>> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
             throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
         }
