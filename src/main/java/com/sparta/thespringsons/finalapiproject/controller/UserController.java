@@ -82,11 +82,6 @@ public class UserController {
     @PostMapping("/user/add")
     public Optional<User> addUser(@RequestBody User newUser) throws Exception {
 
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
-            return Optional.empty();
-        };
-
         logger.log(Level.INFO, "Entered add user method in user controller");
         Optional<User> user = userService.getById(newUser.getId());
         if (user.isPresent()) {
