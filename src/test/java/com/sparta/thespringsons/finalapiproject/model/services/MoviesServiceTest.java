@@ -316,4 +316,21 @@ class MoviesServiceTest {
             Assertions.assertEquals(0, movies.size());
         }
     }
+
+    @Test
+    @DisplayName("Testing get all movies with train in title")
+    public void getAllMoviesByTitle(){
+
+        List<Movie> movies = moviesService.getMovieByTitle("train");
+        System.out.println(movies);
+        if(!movies.isEmpty()) {
+            for (Movie movie : movies) {
+                String movieTitle = movie.getTitle();
+                Assertions.assertTrue(movieTitle.toLowerCase().contains("train"));
+
+            }
+        }else{
+            Assertions.assertEquals(0, movies.size());
+        }
+    }
 }

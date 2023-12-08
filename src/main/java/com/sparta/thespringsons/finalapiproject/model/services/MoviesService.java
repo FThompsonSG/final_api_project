@@ -43,14 +43,14 @@ public class MoviesService {
 
     public List<Movie> getMovieByTitle(String title) {
         //return lists instead of optional
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAll();
         List<Movie> selectedMovies = new ArrayList<>();
         for(Movie movie : movies) {
-            if (movie != null && movie.getTitle().contains(title)) {
+            if (movie != null && movie.getTitle().toLowerCase().contains(title)) {
                 selectedMovies.add(movie);
             }
         }
-        return movies;
+        return selectedMovies;
     }
 
     public ArrayList<Movie> getAllMoviesByDirector(String directors) {
@@ -226,7 +226,7 @@ public class MoviesService {
 
     //String
     public List<String> getNumberOfMovieImdbVotes(String movieName) {
-        List<Movie> movieList= movieRepository.findByTitle(movieName);
+        List<Movie> movieList= movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Integer numVotes = movie.getImdb().getVotes();
@@ -238,7 +238,7 @@ public class MoviesService {
     }
 
     public List<String> getMovieImdbRatingByName(String movieName) {
-        List<Movie> movieList= movieRepository.findByTitle(movieName);
+        List<Movie> movieList= movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Double movieRating = movie.getImdb().getRating();
@@ -249,7 +249,7 @@ public class MoviesService {
     }
 
     public List<String> getMovieImdbIdByName(String movieName) {
-        List<Movie> movieList = movieRepository.findByTitle(movieName);
+        List<Movie> movieList = movieRepository.findAllByTitle(movieName);
         List<String> resultList = new ArrayList<>();
         for(Movie movie : movieList) {
             Integer movieId = movie.getImdb().getId();
@@ -262,7 +262,7 @@ public class MoviesService {
     }
 
     public List<String> getYearOfRelease(String name) {
-        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<Movie> allMovies = movieRepository.findAllByTitle(name);
         List<String> movies = new ArrayList<>();
         for(Movie movie : allMovies) {
             String year = movie.getReleased().substring(24);
@@ -306,7 +306,7 @@ public class MoviesService {
     }
 
     public List<String> getPosterLinkByTitle(String name) {
-        List<Movie> allMovies = movieRepository.findByTitle(name);
+        List<Movie> allMovies = movieRepository.findAllByTitle(name);
         List<String> movies = new ArrayList<>();
         for (Movie movie : allMovies) {
             String posterLink = movie.getPoster();
@@ -336,7 +336,7 @@ public class MoviesService {
     }
 
     public List<String> getLastUpdatedByMovieTitle(String name) {
-        List<Movie> movies = movieRepository.findByTitle(name);
+        List<Movie> movies = movieRepository.findAllByTitle(name);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
@@ -400,7 +400,7 @@ public class MoviesService {
     }
 
     public List<String> getNumberOfCommentsByTitle(String title) {
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAllByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
@@ -429,7 +429,7 @@ public class MoviesService {
     }
 
     public List<String> getTypeByTitle(String title) {
-        List<Movie> movies = movieRepository.findByTitle(title);
+        List<Movie> movies = movieRepository.findAllByTitle(title);
         List<String> resultList = new ArrayList<>();
         String result = "";
         for (Movie movie : movies) {
