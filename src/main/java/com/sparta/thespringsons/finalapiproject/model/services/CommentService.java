@@ -43,11 +43,11 @@ public class CommentService {
         return commentRepository.findAllByName(name);
     }
 
-    public List<Comment> getAllCommentsByMovieTitle(String movieTitle){
-        logger.log(Level.INFO, "Entered get all comments by movie title method in comment service");
-        Movie movie = movieRepository.findByTitle(movieTitle);
-        return commentRepository.findAllByMovieId(movie.getId());
-    }
+//    public List<Comment> getAllCommentsByMovieTitle(String movieTitle){
+//        logger.log(Level.INFO, "Entered get all comments by movie title method in comment service");
+//        Movie movie = movieRepository.findByTitle(movieTitle);
+//        return commentRepository.findAllByMovieId(movie.getId());
+//    }
 
     public Optional<Comment> getCommentById(String id) {
         logger.log(Level.INFO, "Entered get comment by id method in comment service");

@@ -532,7 +532,7 @@ public class MoviesService {
     }
 
     public static void updateLastUpdated(Movie movieToUpdate) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
         movieToUpdate.setLastupdated(currentDate.format(formatter));
     }

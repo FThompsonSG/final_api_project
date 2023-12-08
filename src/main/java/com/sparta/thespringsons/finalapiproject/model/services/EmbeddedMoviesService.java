@@ -337,57 +337,57 @@ public class EmbeddedMoviesService  {
         }
     }
 
-    public EmbeddedMovie updateEmbeddedMovieTitle(String Id, String newTitle) {
+    public void updateEmbeddedMovieTitle(String Id, String newTitle) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
             movie.setTitle(newTitle);
-            updateLastUpdated(movie);
+//            updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
     public EmbeddedMovie updateEmbeddedMovieWriters(String Id, String newWriter) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> writers = Arrays.asList(movie.getWriters());
+            List<String> writers = new ArrayList<>(List.of(movie.getWriters()));
             writers.add(newWriter);
             movie.setWriters(writers.toArray(new String[0]));
-            updateLastUpdated(movie);
+//            updateLastUpdated(movie);
         }
         return embeddedMoviesRepository.save(movie);
     }
 
-    public EmbeddedMovie updateEmbeddedMovieCast(String Id, String newMember) {
+    public void updateEmbeddedMovieCast(String Id, String newMember) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> cast = Arrays.asList(movie.getCast());
+            List<String> cast = new ArrayList<>(List.of(movie.getCast()));
             cast.add(newMember);
             movie.setWriters(cast.toArray(new String[0]));
             updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
-    public EmbeddedMovie updateEmbeddedMovieGenres(String Id, String newGenre) {
+    public void updateEmbeddedMovieGenres(String Id, String newGenre) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> genres = Arrays.asList(movie.getGenres());
+            List<String> genres = new ArrayList<>(List.of(movie.getGenres()));
             genres.add(newGenre);
             movie.setWriters(genres.toArray(new String[0]));
             updateLastUpdated(movie);
         }
-        return embeddedMoviesRepository.save(movie);
+        embeddedMoviesRepository.save(movie);
     }
 
     public EmbeddedMovie updateEmbeddedMovieLanguages(String Id, String newLanguage) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> languages = Arrays.asList(movie.getLanguages());
+            List<String> languages = new ArrayList<>(List.of(movie.getLanguages()));
             languages.add(newLanguage);
             movie.setWriters(languages.toArray(new String[0]));
             updateLastUpdated(movie);
@@ -399,7 +399,7 @@ public class EmbeddedMoviesService  {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> countries = Arrays.asList(movie.getCountries());
+            List<String> countries = new ArrayList<>(List.of(movie.getCountries()));
             countries.add(newCountry);
             movie.setWriters(countries.toArray(new String[0]));
             updateLastUpdated(movie);
@@ -579,7 +579,7 @@ public class EmbeddedMoviesService  {
     }
 
     public static void updateLastUpdated(EmbeddedMovie movieToUpdate) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
         movieToUpdate.setLastupdated(currentDate.format(formatter));
     }
@@ -628,14 +628,14 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(embeddedMovieToUpdate);
     }
 
-    public EmbeddedMovie updateYear(String Id, String year) {
+    public void updateYear(String Id, String year) {
         EmbeddedMovie movieToUpdate = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
             movieToUpdate = embeddedMoviesRepository.findById(Id).get();
             movieToUpdate.setYear(year);
-            updateLastUpdated(movieToUpdate);
+//            updateLastUpdated(movieToUpdate);
         }
-        return embeddedMoviesRepository.save(movieToUpdate);
+        embeddedMoviesRepository.save(movieToUpdate);
     }
 
     public void deleteMovieById(String Id) {
