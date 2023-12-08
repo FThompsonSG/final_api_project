@@ -158,7 +158,7 @@ public class MovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie Runtime")
-    @PatchMapping ("/Movie/UpdateYear")
+    @PatchMapping ("/Movie/UpdateRuntime")
     public void updateRuntime(@RequestParam String Id, @RequestParam Integer runtime) {
         movieService.updateRuntime(Id, runtime);
     }
@@ -304,14 +304,14 @@ public class MovieController {
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/Movie/getMoviesByDirector")
+    @GetMapping("/Movie/getMoviesByFullPlot")
     public  List<Movie> getMoviesByFullPlot(@RequestParam String fullPlot) {
         return movieService.findAllByFullPlot(fullPlot);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
-    @GetMapping("/Movie/getMoviesByDirector")
+    @GetMapping("/Movie/getMoviesByGenre")
     public  List<Movie> getMoviesByGenre(@RequestParam String genre) {
         return movieService.findAllMoviesByGenre(genre);
     }
