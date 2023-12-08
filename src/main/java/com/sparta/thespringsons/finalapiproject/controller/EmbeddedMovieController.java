@@ -144,479 +144,143 @@ public class EmbeddedMovieController {
         return embeddedMoviesService.getMovieImdbIdByName(movieName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByCountry(String countryName) {
-        return embeddedMoviesRepository.findByCountries(countryName);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Movie Imdb Id By Name")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByCountry")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByCountry(@RequestParam String movieName) {
+        return embeddedMoviesService.getEmbeddedMoviesByCountry(movieName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfNominations(Integer noms) {
-        return embeddedMoviesRepository.findEmbeddedMoviesByAwards_Nominations(noms);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Nominations")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByNumberOfNominations")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByNumberOfNominations(@RequestParam Integer noms) {
+        return embeddedMoviesService.getEmbeddedMoviesByNumberOfNominations(noms);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfWins(Integer wins) {
-        return embeddedMoviesRepository.findEmbeddedMoviesByAwards_Wins(wins);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Wins")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByNumberOfWins")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByNumberOfWins(@RequestParam Integer noms) {
+        return embeddedMoviesService.getEmbeddedMoviesByNumberOfWins(noms);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByAwardName(String awardName) {
-        return embeddedMoviesRepository.findByFieldNameContaining(awardName);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Award Name")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByAwardName")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByAwardName(@RequestParam String awardName) {
+        return embeddedMoviesService.getEmbeddedMoviesByAwardName(awardName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByTitleContaining(String filmTitle) {
-        return embeddedMoviesRepository.findByTitleContaining(filmTitle);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Title Containing")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByTitleContaining")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByTitleContaining(@RequestParam String filmTitle) {
+        return embeddedMoviesService.getEmbeddedMoviesByTitleContaining(filmTitle);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByCastMember(String castMemberName) {
-        return embeddedMoviesRepository.findByCastMember(castMemberName);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Cast Member")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByCastMember")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByCastMember(@RequestParam String castMemberName) {
+        return embeddedMoviesService.getEmbeddedMoviesByCastMember(castMemberName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByDirector(String directorName) {
-        return embeddedMoviesRepository.findByDirector(directorName);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Director")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByDirector")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByDirector(@RequestParam String directorName) {
+        return embeddedMoviesService.getEmbeddedMoviesByDirector(directorName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByFullPlot(String fullPlot) {
-        return embeddedMoviesRepository.findByFullPlot(fullPlot);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByDirector")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByFullPlot(@RequestParam String fullPlot) {
+        return embeddedMoviesService.getEmbeddedMoviesByFullPlot(fullPlot);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByGenre(String genre) {
-        return embeddedMoviesRepository.findByGenre(genre);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Full Plot")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByDirector")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByGenre(@RequestParam String genre) {
+        return embeddedMoviesService.getEmbeddedMoviesByGenre(genre);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByLanguage(String language) {
-        return embeddedMoviesRepository.findByLanguage(language);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Language")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByLanguage")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByLanguage(@RequestParam String language) {
+        return embeddedMoviesService.getEmbeddedMoviesByLanguage(language);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByNumberOfCommentsLowerBound(Integer numberOfComments) {
-        return embeddedMoviesRepository.findByNumberOfComments(numberOfComments);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Number Of Comments Lower Bound")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByNumberOfCommentsLowerBound")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByNumberOfCommentsLowerBound(@RequestParam Integer numberOfComments) {
+        return embeddedMoviesService.getEmbeddedMoviesByNumberOfCommentsLowerBound(numberOfComments);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByPlot(String plot) {
-        String plotPadded = " " + plot + " ";
-        return embeddedMoviesRepository.findByPlot(plotPadded);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Plot")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByPlot")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByPlot(@RequestParam String plot) {
+        return embeddedMoviesService.getEmbeddedMoviesByPlot(plot);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(Integer mins) {
-        return embeddedMoviesRepository.findByMaxRuntime(mins);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Max Runtime")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByMaxRuntime")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByMaxRuntime(@RequestParam Integer mins) {
+        return embeddedMoviesService.getEmbeddedMoviesByMaxRuntime(mins);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByWriter(String writerName) {
-        return embeddedMoviesRepository.findByWriter(writerName);
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Writer")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByWriter")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByWriter(@RequestParam String writerName) {
+        return embeddedMoviesService.getEmbeddedMoviesByWriter(writerName);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearExact(String year) {
-        try {
-            Integer yearInt = Integer.parseInt(year);
-            return embeddedMoviesRepository.findByYearExact(yearInt);
-        } catch (Exception e) {
-            System.out.println("Invalid String");
-            return null;
-        }
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year Exact")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByYearExact")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByYearExact(@RequestParam String year) {
+        return embeddedMoviesService.getEmbeddedMoviesByYearExact(year);
     }
 
-    public List<String> getPosterLinkByTitle(String name) {
-        List<EmbeddedMovie> allMovies = embeddedMoviesRepository.findByTitle(name);
-        List<String> movies = new ArrayList<>();
-        for (EmbeddedMovie movie : allMovies) {
-            String posterLink = movie.getPoster();
-            String result = "";
-            if (posterLink != null) {
-                result = name + "'s poster link: " + posterLink;
-                movies.add(result);
-            }
-        }
-        return movies;
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Poster Link By Title")
+    @GetMapping("/embeddedMovie/getPosterLinkByTitle")
+    public List<String> getPosterLinkByTitle(@RequestParam String name) {
+        return embeddedMoviesService.getPosterLinkByTitle(name);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearBefore(String year) {
-        try {
-            Integer yearInt = Integer.parseInt(year);
-            return embeddedMoviesRepository.findByYearBefore(yearInt);
-        } catch (Exception e) {
-            System.out.println("Invalid String");
-            return null;
-        }
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year Before")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByYearBefore")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByYearBefore(@RequestParam String year) {
+        return embeddedMoviesService.getEmbeddedMoviesByYearBefore(year);
     }
 
-    public List<EmbeddedMovie> getEmbeddedMoviesByYearAfter(String year) {
-        try {
-            Integer yearInt = Integer.parseInt(year);
-            return embeddedMoviesRepository.findByYearAfter(yearInt);
-        } catch (Exception e) {
-            System.out.println("Invalid String");
-            return null;
-        }
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get Embedded Movies By Year After")
+    @GetMapping("/embeddedMovie/getEmbeddedMoviesByYearAfter")
+    public  List<EmbeddedMovie> getEmbeddedMoviesByYearAfter(@RequestParam String year) {
+        return embeddedMoviesService.getEmbeddedMoviesByYearAfter(year);
     }
 
-    public List<EmbeddedMovie> getAllMoviesByReleaseRange(String lowerDate, String upperDate) throws NumberFormatException {
-        List<EmbeddedMovie> movies = embeddedMoviesRepository.findAll();
-        List<EmbeddedMovie> moviesInRange = new ArrayList<>();
-
-        try {
-            int lowDate = Integer.parseInt(lowerDate);
-            int highDate = Integer.parseInt(upperDate);
-
-            List<EmbeddedMovie> movieRangeList = movies.stream()
-                    .filter(movie -> {
-                        try {
-                            int movieYear = Integer.parseInt(movie.getYear());
-                            return movieYear >= lowDate && movieYear <= highDate;
-                        } catch (NumberFormatException e) {
-                            return false;
-                        }
-                    })
-                    .toList();
-
-            return movieRangeList;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Invalid date format");
-        }
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "Gets all embedded Movies, get All Movies By ReleaseRange")
+    @GetMapping("/embeddedMovie/getAllMoviesByReleaseRange")
+    public List<EmbeddedMovie> getAllMoviesByReleaseRange(@RequestParam String lowerDate, @RequestParam String upperDate) {
+        return embeddedMoviesService.getAllMoviesByReleaseRange(lowerDate,upperDate);
     }
 
-    public EmbeddedMovie addEmbeddedMovie(EmbeddedMovie movie) {
-        try {
-            if(movie.getTitle().isEmpty() || movie.getTitle() == null) {
-                throw new InvalidDocumentException("Movies must have title");
-            } else if (movie.getDirectors().length == 0 || movie.getDirectors() == null) {
-                throw new InvalidDocumentException("Movies must have at least one director");
-            } else if (movie.getCast().length == 0 || movie.getCast() == null) {
-                throw new InvalidDocumentException("Movies must have at least one cast member");
-            } else if (movie.getLanguages().length == 0 || movie.getLanguages() == null) {
-                throw new InvalidDocumentException("Movies must be available in at least one language");
-            } else if (movie.getGenres().length == 0 || movie.getGenres() == null) {
-                throw new InvalidDocumentException("Movies mush have at least one genre");
-            } else {
-                return embeddedMoviesRepository.save(movie);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            return null;
-        }
+    @Tag(name = "Embedded Movie API")
+    @Operation(summary = "creates an embedded movie")
+    @PutMapping("/embeddedMovie/addEmbeddedMovie")
+    public void addEmbeddedMovie(@RequestBody EmbeddedMovie movie) {
+        embeddedMoviesService.addEmbeddedMovie(movie);
     }
-
-    public EmbeddedMovie updateEmbeddedMovieTitle(String Id, String newTitle) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            movie.setTitle(newTitle);
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie updateEmbeddedMovieWriters(String Id, String newWriter) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> writers = Arrays.asList(movie.getWriters());
-            writers.add(newWriter);
-            movie.setWriters(writers.toArray(new String[0]));
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie updateEmbeddedMovieCast(String Id, String newMember) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> cast = Arrays.asList(movie.getCast());
-            cast.add(newMember);
-            movie.setWriters(cast.toArray(new String[0]));
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie updateEmbeddedMovieGenres(String Id, String newGenre) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> genres = Arrays.asList(movie.getGenres());
-            genres.add(newGenre);
-            movie.setWriters(genres.toArray(new String[0]));
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie updateEmbeddedMovieLanguages(String Id, String newLanguage) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> languages = Arrays.asList(movie.getLanguages());
-            languages.add(newLanguage);
-            movie.setWriters(languages.toArray(new String[0]));
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie updateEmbeddedMovieCountries(String Id, String newCountry) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            List<String> countries = Arrays.asList(movie.getCountries());
-            countries.add(newCountry);
-            movie.setWriters(countries.toArray(new String[0]));
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public EmbeddedMovie incrementCommentCount(String Id) {
-        EmbeddedMovie movie = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movie = embeddedMoviesRepository.findById(Id).get();
-            Integer comments = movie.getNum_mflix_comments();
-            Integer newComments = comments++;
-            movie.setNum_mflix_comments(newComments);
-            updateLastUpdated(movie);
-        }
-        return embeddedMoviesRepository.save(movie);
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesCriticMeter(String id, Integer meter ) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getCritic().setMeter(meter);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesViewerMeter(String id, Integer meter ) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getViewer().setMeter(meter);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesViewerNumReviews(String id, Integer numReviews) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getViewer().setNumReviews(numReviews);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesCriticNumReviews(String id, Integer numReviews) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getCritic().setNumReviews(numReviews);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesCriticRating(String id, Double rating) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getCritic().setRating(rating);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesViewerRating(String id, Double rating) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().getViewer().setRating(rating);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesRotten(String id, Integer rotten) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().setRotten(rotten);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesFresh(String id, Integer fresh) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            updateMovie.getTomato().setFresh(fresh);
-            embeddedMoviesRepository.save(updateMovie);
-            updateTomatoesLastUpdated(id);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<EmbeddedMovie> updateTomatoesLastUpdated(String id) {
-        Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
-
-        if(checkMovie.isPresent()) {
-            EmbeddedMovie updateMovie = checkMovie.get();
-            LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.of("UTC"));
-            Date currentDate = Date.from(currentDateTime.atZone(ZoneId.of("UTC")).toInstant());
-            updateMovie.getTomato().setLastUpdated(currentDate);
-            embeddedMoviesRepository.save(updateMovie);
-
-            return Optional.of(updateMovie);
-        }
-
-        return Optional.empty();
-    }
-
-    public EmbeddedMovie updateAwardsWins(String code, Integer wins) {
-        EmbeddedMovie movieToUpdate = null;
-        if(wins != null && code != null){
-            if(embeddedMoviesRepository.findById(code).isPresent()){
-                movieToUpdate = embeddedMoviesRepository.findById(code).get();
-                Awards award = movieToUpdate.getAwards();
-                award.setWins(wins);
-                award.setText(updateText(movieToUpdate));
-                movieToUpdate.setAwards(award);
-                updateLastUpdated(movieToUpdate);
-            }
-        }
-        embeddedMoviesRepository.save(movieToUpdate);
-        return movieToUpdate;
-    }
-
-    public EmbeddedMovie updateAwardsNominations(String code, Integer nominations) {
-        EmbeddedMovie movieToUpdate = null;
-        if(nominations != null && code != null){
-            if(embeddedMoviesRepository.findById(code).isPresent()){
-                movieToUpdate = embeddedMoviesRepository.findById(code).get();
-                Awards award = movieToUpdate.getAwards();
-                award.setNominations(nominations);
-                award.setText(updateText(movieToUpdate));
-                movieToUpdate.setAwards(award);
-                updateLastUpdated(movieToUpdate);
-            }
-        }
-        embeddedMoviesRepository.save(movieToUpdate);
-        return movieToUpdate;
-    }
-
-    public static void updateLastUpdated(EmbeddedMovie movieToUpdate) {
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
-        movieToUpdate.setLastupdated(currentDate.format(formatter));
-    }
-
-    private String updateText(EmbeddedMovie movieToUpdate) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Awards awards = movieToUpdate.getAwards();
-
-        if(awards.getWins() > 0) {
-            stringBuilder.append(awards.getWins()).append(" win");
-        } if (awards.getWins() > 1) {
-            stringBuilder.append("s");
-        }
-
-        if(awards.getNominations() > 0) {
-            if(awards.getWins() > 0) {
-                stringBuilder.append(" and ");
-            }
-            stringBuilder.append(awards.getNominations()).append(" nomination");
-            if(awards.getNominations() > 1) {
-                stringBuilder.append("s");
-            }
-        }
-        stringBuilder.append(".");
-        return stringBuilder.toString();
-    }
-
-    public EmbeddedMovie updateReleaseDate(String Id, String date) {
-        EmbeddedMovie embeddedMovieToUpdate = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            embeddedMovieToUpdate = embeddedMoviesRepository.findById(Id).get();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
-            LocalDate dateToUpdate = LocalDate.parse(date);
-            embeddedMovieToUpdate.setReleased(dateToUpdate.format(formatter));
-        }
-        return embeddedMoviesRepository.save(embeddedMovieToUpdate);
-    }
-
-    public EmbeddedMovie updateRuntime(String Id, Integer runtime) {
-        EmbeddedMovie embeddedMovieToUpdate = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            embeddedMovieToUpdate = embeddedMoviesRepository.findById(Id).get();
-            embeddedMovieToUpdate.setRuntime(runtime);
-            updateLastUpdated(embeddedMovieToUpdate);
-        }
-        return embeddedMoviesRepository.save(embeddedMovieToUpdate);
-    }
-
-    public EmbeddedMovie updateYear(String Id, String year) {
-        EmbeddedMovie movieToUpdate = null;
-        if(embeddedMoviesRepository.findById(Id).isPresent()) {
-            movieToUpdate = embeddedMoviesRepository.findById(Id).get();
-            movieToUpdate.setYear(year);
-            updateLastUpdated(movieToUpdate);
-        }
-        return embeddedMoviesRepository.save(movieToUpdate);
-    }
-
-    public void deleteMovieById(String Id) {
-        Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
-        movie.ifPresent(embeddedMovie -> embeddedMoviesRepository.delete(embeddedMovie));
-    }
-
-    public List<EmbeddedMovie> findEmbeddedMovieFromEmbedding(EmbeddedMovie originalMovie, double wantedDistance) {
-        List<EmbeddedMovie> embeddedMovie = embeddedMoviesRepository.findAll();
-        for (EmbeddedMovie movie : embeddedMovie) {
-            double distance = calculateEuclid(originalMovie.getPlot_embedding(), movie.getPlot_embedding());
-            if (distance <= wantedDistance) {
-                embeddedMovie.add(movie);
-            }
-        }
-        return embeddedMovie;
-    }
-
-    public double calculateEuclid(double[] originalEmbeds, double[] embeds) {
-        double total = 0.0;
-        for (int i = 0; i < originalEmbeds.length; i++) {
-            total += Math.pow(originalEmbeds[i] - embeds[i], 2);
-        }
-        return Math.sqrt(total);
-    }
-
-
-
-
 }
