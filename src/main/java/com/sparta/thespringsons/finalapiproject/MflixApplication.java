@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.List;
@@ -31,6 +32,7 @@ import java.util.logging.Logger;
 @EnableMongoRepositories
 @Import(MongoConfig.class)
 public class MflixApplication {
+
 
     public static final Logger logger = Logger.getLogger(MflixApplication.class.getName());
 
