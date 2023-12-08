@@ -22,7 +22,7 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 
     @Query("{ 'writers' : { $regex: ?0, $options: 'i' } }")
     List<Movie> findAllByWriters(String subStringToSearch);
-
+//    @Query("{ 'genres' : { $regex: ?0, $options: 'i' } }")
     List<Movie> findAllByGenres(String genreName);
 
     List<Movie> findAllByLanguages(String language);
