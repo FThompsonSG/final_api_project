@@ -799,4 +799,36 @@ public class MoviesService {
             return null;
         }
     }
+    public Movie updateReleaseDate(String Id, String date) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+            LocalDate dateToUpdate = LocalDate.parse(date);
+            movieToUpdate.setReleased(dateToUpdate.format(formatter));
+        }
+        return movieRepository.save(movieToUpdate);
+    }
+
+    public Movie updateRuntime(String Id, Integer runtime) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            movieToUpdate.setRuntime(runtime);
+            updateLastUpdated(movieToUpdate);
+        }
+        return movieRepository.save(movieToUpdate);
+    }
+
+    public Movie updateYear(String Id, String year) {
+        Movie movieToUpdate = null;
+        if(movieRepository.findById(Id).isPresent()) {
+            movieToUpdate = movieRepository.findById(Id).get();
+            movieToUpdate.setYear(year);
+            updateLastUpdated(movieToUpdate);
+        }
+        return movieRepository.save(movieToUpdate);
+    }
+
+
 }
