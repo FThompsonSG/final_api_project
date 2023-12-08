@@ -39,19 +39,19 @@ public class UserControllerTests {
     @Test
     @DisplayName("Test Get Users By Name")
     void testGetAllUserByName() {
-        testClient.get().uri("https://localhost:8080/usersbyname/Jon").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/user/byName/Jon").exchange().expectStatus().isEqualTo(200);
     }
 
     @Test
     @DisplayName("Test Get Users By ID")
     void testGetUserById() {
-        testClient.get().uri("https://localhost:8080/userbyid/59b99db4cfa9a34dcd7885b6").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/user/byId/59b99db4cfa9a34dcd7885b6").exchange().expectStatus().isEqualTo(200);
     }
 
     @Test
     @DisplayName("Test Get Users By Email")
     void testGetUsersByEmail() {
-        testClient.get().uri("https://localhost:8080/usersbyemail/ja").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/user/byEmail/ja").exchange().expectStatus().isEqualTo(200);
     }
 
 }

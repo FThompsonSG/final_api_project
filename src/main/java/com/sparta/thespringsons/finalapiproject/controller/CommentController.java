@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,36 +45,36 @@ public class CommentController {
 
     @Tag(name = "Get Comment By Name")
     @Operation(summary = "Get Comment By Name")
-    @GetMapping("/commentsbyname/{name}")
+    @GetMapping("/comment/byName/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         List<Comment> allComments = commentService.getAllByName(name);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/commentsbyname/{name}");
+            throw new NoRecordFoundException("comments", "/comment/ByName/{name}");
         }
         return allComments;
     }
 
     @Tag(name = "Get All Comments For Movie")
     @Operation(summary = "Get All Comments For Movie")
-    @GetMapping("/commentsbymovietitle/{movieTitle}")
-    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+    @GetMapping("/comment/byMovieTitle/{movieTitle}")
+    public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
-        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
+        Map<String, ArrayList<Comment>> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/commentsbymovietitle/{movieTitle}");
+            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
         }
         return allComments;
     }
 
     @Tag(name = "Add New Comment")
     @Operation(summary = "Add new Comment")
-    @PostMapping("/comment")
+    @PostMapping("/comment/add")
     public Optional<Comment> addComment(@RequestBody Comment newComment) throws Exception {
         logger.log(Level.INFO, "Entered add comment method in comment controller");
         Optional<Comment> commentToAdd = commentService.getCommentById(newComment.getId());
         if (commentToAdd.isPresent()) {
-            throw new RecordAlreadyExistsException("comment", "/comment");
+            throw new RecordAlreadyExistsException("comment", "/comment/add");
         }
         return Optional.ofNullable(commentService.saveComment(newComment));
     }

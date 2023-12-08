@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class Tomato {
 
@@ -24,6 +25,10 @@ public class Tomato {
     private Integer rotten;
 
     private Reviewer viewer;
+
+    private Integer numberReviews;
+
+    private Integer meter;
 
     public Reviewer getCritic() {
         return critic;
@@ -79,6 +84,22 @@ public class Tomato {
 
     public void setViewer(Reviewer viewer) {
         this.viewer = viewer;
+    }
+
+    public Integer getNumberReviews() {
+        return numberReviews;
+    }
+
+    public void setNumberReviews(Integer numberReviews) {
+        this.numberReviews = numberReviews;
+    }
+
+    public Integer getMeter() {
+        return meter;
+    }
+
+    public void setMeter(Integer meter) {
+        this.meter = meter;
     }
 }
 

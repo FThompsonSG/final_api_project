@@ -38,12 +38,12 @@ public class CommentControllerTests {
     @Test
     @DisplayName("Test Get Comments By Movie Title")
     void testGetAllCommentsByMovieTitle() throws Exception {
-        testClient.get().uri("https://localhost:8080/commentsbymovietitle/A Corner in Wheat").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/comment/byMovieTitle/A Corner in Wheat").exchange().expectStatus().isEqualTo(200);
     }
 
     @Test
     @DisplayName("Test Get Comments By Name")
     void testGetCommentsByName() {
-        testClient.get().uri("https://localhost:8080/commentsbyname/Mercedes Tyler").exchange().expectStatus().isEqualTo(200);
+        testClient.get().uri("https://localhost:8080/comment/byName/Mercedes Tyler").exchange().expectStatus().isEqualTo(200);
     }
 }

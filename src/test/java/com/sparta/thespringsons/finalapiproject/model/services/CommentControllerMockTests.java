@@ -46,7 +46,7 @@ public class CommentControllerMockTests {
         Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(mockComment);
 
         mockMvc
-                .perform(post("http://localhost:8080/comment")
+                .perform(post("http://localhost:8080/comment/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockComment)))
                 .andExpect(content().contentType("application/json"))
@@ -64,7 +64,7 @@ public class CommentControllerMockTests {
         Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
 
         mockMvc
-                .perform(delete("http://localhost:8080/comments/delete/5a9427648b0beebeb69810b6"))
+                .perform(delete("http://localhost:8080/comment/delete/5a9427648b0beebeb69810b6"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("deleteComment"))

@@ -6,27 +6,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieController {
 
 
-    /*
-    private final MovieRepository movieRepository;
+//    private final MovieRepository movieRepository;
+//
+//    @Autowired
+//    public MovieController(MovieRepository movieRepository1) {
+//        this.movieRepository = movieRepository1;
+//    }
+//    /*
+//    */
+//    //Partial search for movie title
 
-    @Autowired
-    public MovieController(MovieRepository movieRepository) {
-        this.movieController = movieController;
-    }
 
     //Partial search for movie title
-    @Tag(name = "Movie Controller API")
-    @Operation(summary = "")
-    @GetMapping("/movies/title")
-    public void getFilmByTitle(@RequestParam(name = "title", required = true) String title) {
-        //return lists instead of optional
-        Optional<MovieDTO> movie = movieRepository.findByTitle(title);
+//    @Tag(name = "Movie Controller API")
+//    @Operation(summary = "")
+//    @GetMapping("/movies/title")
+//    public void getFilmByTitle(@RequestParam(name = "title", required = true) String title) {
+//        //return lists instead of optional
+//        Optional<MovieDTO> movie = movieRepository.findByTitle(title);
 
-        if(movie.isPresent() && movie.getTitle().contains(title)) {
-            return movie;
-        }
-    }
 
+
+    /*
     @GetMapping("/movies/director")
     public void getFilmByDirector(@RequestParam(name = "director", required = true) String director) {
         Optional<MovieDTO> movie = movieRepository.findByDirector(director);
@@ -35,6 +36,8 @@ public class MovieController {
             return movie;
         }
     }
+
+
 
     @GetMapping("/movies/performer")
     public void getFilmByPerformer(@RequestParam(name = "performer", required = true) String performer) {
@@ -46,6 +49,8 @@ public class MovieController {
             return new PerformerNotFoundException(performer);
         }
     }
+
+
 
     @GetMapping("/movies/genre")
     public void getFilmByGenre(@RequestParam(name = "genre", required = true) String genre) {

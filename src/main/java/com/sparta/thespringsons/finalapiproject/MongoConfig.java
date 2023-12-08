@@ -12,3 +12,4 @@ public class MongoConfig {
         return new MongoTemplate(new SimpleMongoClientDatabaseFactory("mongodb+srv://Sparta:sparta@mflix.5sg6nqi.mongodb.net/sample_mflix?retryWrites=true&w=majority"));
     }
 }
+
