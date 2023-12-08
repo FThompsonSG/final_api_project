@@ -3,6 +3,7 @@ package com.sparta.thespringsons.finalapiproject;
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
+import jakarta.persistence.Embedded;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class EmbeddedMoviesTests {
@@ -255,4 +257,78 @@ public class EmbeddedMoviesTests {
 
         Assertions.assertEquals(mockMovie, result);
     }
+
+    @Test
+    @DisplayName("Testing Add Embedded Movie on Real Database")
+    public void testingAddEmbeddedMovieOnRealDatabase(){
+        EmbeddedMovie testMovie = new EmbeddedMovie();
+        testMovie.setYear("2002");
+        String[] directors = {"Luke Boorman"};
+        testMovie.setDirectors(directors);
+        testMovie.setCast(directors);
+        testMovie.setTitle("The film");
+        testMovie.setGenres(directors);
+        testMovie.setLanguages(directors);
+
+        EmbeddedMovie filmToCheck = embeddedMoviesService.addEmbeddedMovie(testMovie);
+
+        Optional<EmbeddedMovie> tester = embeddedMoviesRepository.findById(filmToCheck.getId());
+        
+        if(tester.isPresent()) {
+            Assertions.assertEquals(filmToCheck, tester.get());
+        }
+    }
+    
+    @Test
+    @DisplayName("Testing Delete Method")
+    public void testingDeleteMethod(){
+        List<EmbeddedMovie> result = embeddedMoviesService.getEmbeddedMoviesByDirector("Luke Boorman");
+        for(EmbeddedMovie movie: result) {
+            embeddedMoviesService.deleteMovieById(movie.getId());
+        }
+        List<EmbeddedMovie> testResult = embeddedMoviesService.getEmbeddedMoviesByDirector("Luke Boorman");
+
+        Assertions.assertTrue(testResult.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Testing Some Update Methods")
+    public void testingSomeUpdateMethods(){
+        EmbeddedMovie testMovie = new EmbeddedMovie();
+        testMovie.setYear("2002");
+        String[] directors = {"Luke Boorman"};
+        testMovie.setDirectors(directors);
+        testMovie.setCast(directors);
+        testMovie.setTitle("The film");
+        testMovie.setGenres(directors);
+        testMovie.setLanguages(directors);
+
+        EmbeddedMovie filmToCheck = embeddedMoviesService.addEmbeddedMovie(testMovie);
+
+        //----------->Updates here<------------
+
+        embeddedMoviesService.updateEmbeddedMovieCast(filmToCheck.getId(), "Ryan MCc");
+        embeddedMoviesService.updateEmbeddedMovieGenres(filmToCheck.getId(), "Action");
+        embeddedMoviesService.updateEmbeddedMovieTitle(filmToCheck.getId(), "The film 2 electric boogaloo");
+        embeddedMoviesService.updateYear(filmToCheck.getId(), "2003");
+
+        Optional<EmbeddedMovie> result = embeddedMoviesRepository.findById(filmToCheck.getId());
+
+        if(result.isPresent()) {
+            String[] cast = {"Luke Boorman", "Ryan MCc"};
+            String[] genres = {"Luke Boorman", "Action"};
+            EmbeddedMovie filmToTest = result.get();
+            Assertions.assertEquals("The film 2 electric boogaloo", filmToTest.getTitle());
+            Assertions.assertEquals(cast, filmToTest.getCast());
+            Assertions.assertEquals(genres, filmToTest.getGenres());
+            Assertions.assertEquals("2003", filmToTest.getYear());
+        }
+
+        //-------------------------------------
+
+        embeddedMoviesService.deleteMovieById(filmToCheck.getId());
+    }
+
+
 }
+
