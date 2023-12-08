@@ -52,17 +52,17 @@ public class CommentController {
         return allComments;
     }
 
-    @Tag(name = "Get All Comments For Movie")
-    @Operation(summary = "Get All Comments For Movie")
-    @GetMapping("/comment/byMovieTitle/{movieTitle}")
-    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
-        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
-        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
-        if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
-        }
-        return allComments;
-    }
+//    @Tag(name = "Get All Comments For Movie")
+//    @Operation(summary = "Get All Comments For Movie")
+//    @GetMapping("/comment/byMovieTitle/{movieTitle}")
+//    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+//        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
+//        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
+//        if (allComments.isEmpty()) {
+//            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
+//        }
+//        return allComments;
+//    }
 
     @Tag(name = "Add New Comment")
     @Operation(summary = "Add new Comment")
