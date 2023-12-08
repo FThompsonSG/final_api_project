@@ -8,6 +8,7 @@ import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -80,15 +81,20 @@ public class CommentController {
 
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
-    @DeleteMapping("/comment/delete/{id}")
-    public Optional<Comment> deleteComment(@PathVariable String id) throws Exception {
+    @DeleteMapping("/comments/delete")
+    public ResponseEntity<String> deleteComment(@RequestBody List<String> id,
+                                                @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
-        Optional<Comment> commentToDelete = commentService.getCommentById(id);
-        if (commentToDelete.isEmpty()) {
-            throw new NoRecordFoundException("comment", "/comments/delete/{id}");
+
+        if (!confirmDelete) {
+            return ResponseEntity.ok("Please confirm deletion by providing 'confirm=true' as a query parameter.");
         }
-        return commentService.deleteComment(id);
+
+        commentService.bulkDeleteComments(id);
+        return ResponseEntity.ok("Comment deleted successfully.");
     }
+
+
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")

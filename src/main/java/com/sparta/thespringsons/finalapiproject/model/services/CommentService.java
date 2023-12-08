@@ -1,16 +1,16 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
-import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,4 +77,11 @@ public class CommentService {
         commentRepository.save(commentToUpdate);
         return commentToUpdate;
     }
+
+    public void bulkDeleteComments(List<String> commentIds){
+        for(String id: commentIds){
+            commentRepository.deleteById(id);
+        }
+    }
+
 }
