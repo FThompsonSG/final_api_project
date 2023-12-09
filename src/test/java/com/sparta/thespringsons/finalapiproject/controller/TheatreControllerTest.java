@@ -6,6 +6,7 @@ import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.TheaterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,9 @@ class TheatreControllerTest {
 
     @MockBean
     TheaterService theaterService;
+
+    @MockBean
+    ApiKeyService apiKeyService;
 
     float[] coords = {21f, 22f};
     Geo geo = new Geo(coords, "Point");
@@ -128,8 +134,11 @@ class TheatreControllerTest {
         String mockMessage = "Theater deleted";
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
         Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
+        Mockito.when(apiKeyService.checkIfApiKeyExists("1337404")).thenReturn(true);
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/{theater_id}", Integer.valueOf(999999)))
+                .perform(MockMvcRequestBuilders
+                        .delete("http://localhost:8080/theater/delete/{theater_id}", 999999)
+                        .header("Key","1337404"))
                 .andExpect(status().is(200))
                 //.andExpect(content().string(mockMessage))
                 .andExpect(handler().methodName("deleteTheater"))
@@ -146,8 +155,11 @@ class TheatreControllerTest {
         String mockMessage = "Theater deleted";
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
         Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
+        Mockito.when(apiKeyService.checkIfApiKeyExists("1337404")).thenReturn(true);
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/{theater_id}", Integer.valueOf(999999)))
+                .perform(MockMvcRequestBuilders.
+                        delete("http://localhost:8080/theater/delete/{theater_id}", 999999)
+                        .header("Key","1337404"))
                 .andExpect(status().is(400))
                 //.andExpect(content().string(mockMessage))
                 .andExpect(handler().methodName("deleteTheater"))
@@ -160,10 +172,13 @@ class TheatreControllerTest {
 
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(existingRecord);
         Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
+        Mockito.when(apiKeyService.checkIfApiKeyExists("1337404")).thenReturn(true);
         mockMvc
-                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                .perform(MockMvcRequestBuilders
+                        .post("http://localhost:8080/theater/update/{theater_id}", 999999)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater))
+                        .header("Key","1337404"))
                 .andExpect(status().is(200))
                 .andExpect(handler().methodName("updateTheater"))
                 .andDo(print());
@@ -175,11 +190,13 @@ class TheatreControllerTest {
         Optional<Theater> noRecord = Optional.empty();
 
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
+        Mockito.when(apiKeyService.checkIfApiKeyExists("1337404")).thenReturn(true);
         Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
         mockMvc
-                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/{theater_id}", 999999)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater))
+                        .header("Key","1337404"))
                 .andExpect(status().is(400))
                 .andExpect(handler().methodName("updateTheater"))
                 .andDo(print());
