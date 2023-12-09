@@ -6,9 +6,11 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.EmbeddedMoviesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,92 +23,133 @@ import java.util.*;
 public class EmbeddedMovieController {
 
     EmbeddedMoviesService embeddedMoviesService;
+    private final HttpServletRequest request;
+    private final ApiKeyService apiKeyService;
 
-    public EmbeddedMovieController(EmbeddedMoviesService embeddedMoviesService) {
+    public EmbeddedMovieController(EmbeddedMoviesService embeddedMoviesService, HttpServletRequest request, ApiKeyService apiKeyService) {
         this.embeddedMoviesService = embeddedMoviesService;
+        this.request = request;
+        this.apiKeyService = apiKeyService;
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Title")
     @PatchMapping ("/embeddedMovie/UpdateTitle")
-    public void updateEmbeddedMovieTitle(@RequestParam String Id, @RequestParam String newTitle) {
+    public void updateEmbeddedMovieTitle(@RequestParam String Id, @RequestParam String newTitle,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieTitle(Id, newTitle);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Writers")
     @PatchMapping ("/embeddedMovie/UpdateWriters")
-    public void updateEmbeddedMovieWriters(@RequestParam String Id, @RequestParam String newWriter) {
+    public void updateEmbeddedMovieWriters(@RequestParam String Id, @RequestParam String newWriter,@RequestHeader(name = "Key") String apiKey) {
+
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieWriters(Id, newWriter);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Cast")
     @PatchMapping ("/embeddedMovie/UpdateCast")
-    public void updateEmbeddedMovieCast(@RequestParam String Id, @RequestParam String newMember) {
+    public void updateEmbeddedMovieCast(@RequestParam String Id, @RequestParam String newMember,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieCast(Id, newMember);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Genre")
     @PatchMapping ("/embeddedMovie/UpdateGenre")
-    public void updateEmbeddedMovieGenres(@RequestParam String Id, @RequestParam String newGenre) {
+    public void updateEmbeddedMovieGenres(@RequestParam String Id, @RequestParam String newGenre,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieGenres(Id,newGenre);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Language")
     @PatchMapping ("/embeddedMovie/UpdateLanguage")
-    public void updateEmbeddedMovieLanguages(@RequestParam String Id, @RequestParam String newLanguage) {
+    public void updateEmbeddedMovieLanguages(@RequestParam String Id, @RequestParam String newLanguage,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieLanguages(Id, newLanguage);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Country")
     @PatchMapping ("/embeddedMovie/UpdateCountry")
-    public void updateEmbeddedMovieCountries(@RequestParam String Id, @RequestParam String newCountry) {
+    public void updateEmbeddedMovieCountries(@RequestParam String Id, @RequestParam String newCountry,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateEmbeddedMovieCountries(Id, newCountry);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates CommentCount")
     @PatchMapping ("/embeddedMovie/UpdateCommentCount")
-    public void incrementCommentCount(@RequestParam String Id) {
+    public void incrementCommentCount(@RequestParam String Id,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.incrementCommentCount(Id);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Critic meter")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesCriticMeter")
-    public void updateTomatoesCriticMeter(@RequestParam String id, @RequestParam Integer meter ) {
+    public void updateTomatoesCriticMeter(@RequestParam String id, @RequestParam Integer meter,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesCriticMeter(id, meter);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Viewer meter")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesViewerMeter")
-    public void updateTomatoesViewerMeter(@RequestParam String id, @RequestParam Integer meter ) {
+    public void updateTomatoesViewerMeter(@RequestParam String id, @RequestParam Integer meter,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesViewerMeter(id, meter);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Viewer NumReviews")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesViewerNumReviews")
-    public void updateTomatoesViewerNumReviews(@RequestParam String id, @RequestParam Integer numReviews) {
+    public void updateTomatoesViewerNumReviews(@RequestParam String id, @RequestParam Integer numReviews,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesViewerNumReviews(id, numReviews);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Critic NumReviews")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesCriticNumReviews")
-    public void updateTomatoesCriticNumReviews(@RequestParam String id, @RequestParam Integer numReviews) {
+    public void updateTomatoesCriticNumReviews(@RequestParam String id, @RequestParam Integer numReviews,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesCriticNumReviews(id, numReviews);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Critic Rating")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesCriticRating")
-    public void updateTomatoesCriticRating(@RequestParam String id, @RequestParam Double rating) {
+    public void updateTomatoesCriticRating(@RequestParam String id, @RequestParam Double rating,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesCriticRating(id, rating);
     }
 
@@ -114,63 +157,90 @@ public class EmbeddedMovieController {
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Viewer Rating")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesViewerRating")
-    public void updateTomatoesViewerRating(@RequestParam String id, @RequestParam Double rating) {
+    public void updateTomatoesViewerRating(@RequestParam String id, @RequestParam Double rating,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesViewerRating(id, rating);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Rotten")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesRotten")
-    public void updateTomatoesRotten(@RequestParam String id, @RequestParam Integer rotten) {
+    public void updateTomatoesRotten(@RequestParam String id, @RequestParam Integer rotten,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesRotten(id, rotten);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Tomatoes Fresh")
     @PatchMapping ("/embeddedMovie/UpdateTomatoesFresh")
-    public void updateTomatoesFresh(@RequestParam String id, @RequestParam Integer fresh) {
+    public void updateTomatoesFresh(@RequestParam String id, @RequestParam Integer fresh,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateTomatoesFresh(id, fresh);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates Award Wins")
     @PatchMapping ("/embeddedMovie/UpdateAwardsWins")
-    public void updateAwardsWins(@RequestParam String code, @RequestParam Integer wins) {
+    public void updateAwardsWins(@RequestParam String code, @RequestParam Integer wins,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateAwardsWins(code, wins);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates awards nominations")
     @PatchMapping ("/embeddedMovie/UpdateAwardsNominations")
-    public void updateAwardsNominations(@RequestParam String code, @RequestParam Integer nominations) {
+    public void updateAwardsNominations(@RequestParam String code, @RequestParam Integer nominations,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateAwardsNominations(code,nominations);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie release date")
     @PatchMapping ("/embeddedMovie/UpdateReleaseDate")
-    public void updateReleaseDate(@RequestParam String Id, @RequestParam String date) {
+    public void updateReleaseDate(@RequestParam String Id, @RequestParam String date,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateReleaseDate(Id, date);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie Runtime")
     @PatchMapping ("/embeddedMovie/UpdateRuntime")
-    public void updateRuntime(@RequestParam String Id, @RequestParam Integer runtime) {
+    public void updateRuntime(@RequestParam String Id, @RequestParam Integer runtime,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateRuntime(Id, runtime);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Updates embedded movie Year")
     @PatchMapping ("/embeddedMovie/UpdateYear")
-    public void updateYear(@RequestParam String Id, @RequestParam String year) {
+    public void updateYear(@RequestParam String Id, @RequestParam String year,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.updateYear(Id, year);
     }
 
     @Tag(name = "Embedded Movie API")
     @Operation(summary = "Deletes embedded movie by Id")
     @DeleteMapping ("/embeddedMovie/DeleteById")
-    public void deleteMovieById(@RequestParam String Id) {
+    public void deleteMovieById(@RequestParam String Id,@RequestHeader(name = "Key") String apiKey) {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return;
+        }
         embeddedMoviesService.deleteMovieById(Id);
     }
 

@@ -27,13 +27,11 @@ public class UserController {
 
     public static final Logger logger = Logger.getLogger(UserController.class.getName());
 
-    private final HttpServletRequest request;
     private final ApiKeyService apiKeyService;
     private final UserService userService;
 
     @Autowired
     public UserController(HttpServletRequest request, ApiKeyService apiKeyService, UserService userService) {
-        this.request = request;
         this.apiKeyService = apiKeyService;
         this.userService = userService;
         OurLogger.setUpLogger(logger);
@@ -93,10 +91,9 @@ public class UserController {
     @Tag(name = "Delete User")
     @Operation(summary = "Delete a User")
     @DeleteMapping("/user/delete/{id}")
-    public Optional<User> deleteUser(@PathVariable String id) throws Exception {
+    public Optional<User> deleteUser(@PathVariable String id,@RequestHeader(name = "Key") String apiKey) throws Exception {
 
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
             return Optional.empty();
         };
 
@@ -113,10 +110,10 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public Optional<User> updateUser(
             @RequestBody User newUser,
-            @PathVariable String id) throws Exception {
+            @PathVariable String id,
+            @RequestHeader(name = "Key") String apiKey) throws Exception {
 
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
             return Optional.empty();
         };
 

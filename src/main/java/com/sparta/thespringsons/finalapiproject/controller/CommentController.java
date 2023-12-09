@@ -27,12 +27,10 @@ public class CommentController {
     public static final Logger logger = Logger.getLogger(CommentController.class.getName());
 
     private final CommentService commentService;
-    private final HttpServletRequest request;
     private final ApiKeyService apiKeyService;
     @Autowired
     public CommentController(CommentService commentService, HttpServletRequest request, ApiKeyService apiKeyService) {
         this.commentService = commentService;
-        this.request = request;
         this.apiKeyService = apiKeyService;
         OurLogger.setUpLogger(logger);
     }
@@ -90,9 +88,10 @@ public class CommentController {
     @Operation(summary = "Delete a Comment")
     @DeleteMapping("/comment/delete")
     public ResponseEntity<String> deleteComment(@RequestBody List<String> id,
-                                                @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete) throws Exception {
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
+                                                @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete,
+                                                @RequestHeader(name = "Key") String apiKey) throws Exception {
+
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
             return ResponseEntity.ok("Request DENIED: Invalid Api-Key");
         };
 
@@ -112,12 +111,11 @@ public class CommentController {
     @PostMapping("/comment/update/{id}")
     public Optional<Comment> updateComment(
             @RequestBody Comment newComment,
-            @PathVariable String id) throws Exception {
-        String apikey = request.getHeader("Key");
-        if(!apiKeyService.checkIfApiKeyExists(apikey)){
+            @PathVariable String id,
+            @RequestHeader(name = "Key") String apiKey) throws Exception {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
             return Optional.empty();
         };
-
         logger.log(Level.INFO, "Entered update comment method in comment controller");
         Optional<Comment> commentToUpdate = commentService.getCommentById(id);
         if (commentToUpdate.isEmpty()) {
