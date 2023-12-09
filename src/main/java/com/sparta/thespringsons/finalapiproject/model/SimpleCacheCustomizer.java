@@ -8,12 +8,12 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-//@Component
-public class SimpleCacheCustomizer {
-//        implements CacheManagerCustomizer<ConcurrentMapCacheManager> {
-//
-//    @Override
-//    public void customize(ConcurrentMapCacheManager cacheManager) {
-//        cacheManager.setCacheNames(List.of("AllEmbeddedMovies"));
-//    }
+@Component
+public class SimpleCacheCustomizer
+        implements CacheManagerCustomizer<ConcurrentMapCacheManager> {
+
+    @Override
+    public void customize(ConcurrentMapCacheManager cacheManager) {
+        cacheManager.setCacheNames(List.of("AllEmbeddedMovies"));
+    }
 }

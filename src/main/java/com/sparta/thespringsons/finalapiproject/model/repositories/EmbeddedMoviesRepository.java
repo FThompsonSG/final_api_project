@@ -69,7 +69,7 @@ public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie,
 
    // Affiq was here again
 
-   // @Cacheable("AllEmbeddedMovies")
+   @Cacheable("AllEmbeddedMovies")
    List<EmbeddedMovie> findAll();
 
 }
