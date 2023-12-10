@@ -5,6 +5,8 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -463,7 +465,7 @@ public class MoviesService {
     }
 
     //Deletes ---------------------------------------------------------------------------------------------------------------
-
+    @CacheEvict("AllMovies")
     public void deleteMovieById(String Id) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -473,7 +475,7 @@ public class MoviesService {
     }
 
     //Create -----------------------------------------------------------------------------------------------------------------
-
+    @CacheEvict("AllMovies")
     public Movie addMovie(Movie movie) {
         try {
             if (movie.getTitle() == null || movie.getDirectors() == null || movie.getCast() == null || movie.getGenres() == null) {
@@ -499,6 +501,7 @@ public class MoviesService {
         return movie;
     }
     //Updates ----------------------------------------------------------------------------------------------------------------
+    @CacheEvict("AllMovies")
     public Movie updateAwardsWins(String code, Integer wins) {
         Movie movieToUpdate = null;
         if(wins != null && code != null){
@@ -515,6 +518,7 @@ public class MoviesService {
         return movieToUpdate;
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateAwardsNominations(String code, Integer nominations) {
         Movie movieToUpdate = null;
         if(nominations != null && code != null){
@@ -560,6 +564,7 @@ public class MoviesService {
         return stringBuilder.toString();
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateImdbRating(String code, Double rating) {
         Movie movieToUpdate = null;
         if(rating != null && code != null) {
@@ -575,6 +580,7 @@ public class MoviesService {
         return movieToUpdate;
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateImdbVotes(String code, Integer votes) {
         Movie movieToUpdate = null;
         if(votes != null && code != null) {
@@ -591,6 +597,7 @@ public class MoviesService {
     }
 
     //Copied methods
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesCriticMeter(String id, Integer meter ) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -605,6 +612,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesViewerMeter(String id, Integer meter ) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -619,6 +627,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesViewerNumReviews(String id, Integer numReviews) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -633,6 +642,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesCriticNumReviews(String id, Integer numReviews) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -647,6 +657,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesCriticRating(String id, Double rating) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -661,6 +672,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesViewerRating(String id, Double rating) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -675,6 +687,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesRotten(String id, Integer rotten) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -689,6 +702,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesFresh(String id, Integer fresh) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -703,6 +717,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Optional<Movie> updateTomatoesLastUpdated(String id) {
         Optional<Movie> checkMovie = movieRepository.findById(id);
 
@@ -719,6 +734,7 @@ public class MoviesService {
         return Optional.empty();
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieTitle(String Id, String newTitle) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -729,6 +745,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieWriters(String Id, String newWriter) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -741,6 +758,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieCast(String Id, String newMember) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -753,6 +771,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieGenres(String Id, String newGenre) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -765,6 +784,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieLanguages(String Id, String newLanguage) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -777,6 +797,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateMovieCountries(String Id, String newCountry) {
         Movie movie = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -801,6 +822,7 @@ public class MoviesService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateReleaseDate(String Id, String date) {
         Movie movieToUpdate = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -812,6 +834,7 @@ public class MoviesService {
         return movieRepository.save(movieToUpdate);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateRuntime(String Id, Integer runtime) {
         Movie movieToUpdate = null;
         if(movieRepository.findById(Id).isPresent()) {
@@ -822,6 +845,7 @@ public class MoviesService {
         return movieRepository.save(movieToUpdate);
     }
 
+    @CacheEvict("AllMovies")
     public Movie updateYear(String Id, String year) {
         Movie movieToUpdate = null;
         if(movieRepository.findById(Id).isPresent()) {

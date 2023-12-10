@@ -1,6 +1,7 @@
 package com.sparta.thespringsons.finalapiproject.model.repositories;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -56,7 +57,12 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     @Query("{'runtime' : { $lte : ?0 } }")
     List<Movie> findByMaxRuntime(Integer mins);
 
-
     List<Movie> findAllByRated(String rating);
+
+
+
+    // Sorry guys, Affiq was here
+    @Cacheable("AllMovies")
+    List<Movie> findAll();
 
 }

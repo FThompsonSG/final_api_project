@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -14,6 +15,7 @@ public class SimpleCacheCustomizer
 
     @Override
     public void customize(ConcurrentMapCacheManager cacheManager) {
-        cacheManager.setCacheNames(List.of("AllEmbeddedMovies"));
+        String[] cacheTables = {"AllEmbeddedMovies", "AllMovies"};
+        cacheManager.setCacheNames(Arrays.asList(cacheTables));
     }
 }
