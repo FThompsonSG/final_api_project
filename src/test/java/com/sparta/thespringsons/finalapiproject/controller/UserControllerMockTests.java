@@ -1,13 +1,9 @@
-package com.sparta.thespringsons.finalapiproject.model.services;
+package com.sparta.thespringsons.finalapiproject.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.thespringsons.finalapiproject.controller.CommentController;
-import com.sparta.thespringsons.finalapiproject.controller.UserController;
-import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
-import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
-import org.junit.jupiter.api.Assertions;
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
+import com.sparta.thespringsons.finalapiproject.model.services.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,8 +16,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(UserController.class)

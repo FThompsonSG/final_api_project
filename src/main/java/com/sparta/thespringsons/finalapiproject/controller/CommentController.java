@@ -6,10 +6,8 @@ import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
-import com.sparta.thespringsons.finalapiproject.security.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,7 @@ public class CommentController {
     private final CommentService commentService;
     private final ApiKeyService apiKeyService;
     @Autowired
-    public CommentController(CommentService commentService, HttpServletRequest request, ApiKeyService apiKeyService) {
+    public CommentController(CommentService commentService, ApiKeyService apiKeyService) {
         this.commentService = commentService;
         this.apiKeyService = apiKeyService;
         OurLogger.setUpLogger(logger);
@@ -50,24 +48,24 @@ public class CommentController {
 
     @Tag(name = "Get Comment By Name")
     @Operation(summary = "Get Comment By Name")
-    @GetMapping("/comment/byName/{name}")
+    @GetMapping("/comment/get/byUsersName/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         List<Comment> allComments = commentService.getAllByName(name);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/comment/ByName/{name}");
+            throw new NoRecordFoundException("comments", "/comment/get/byUsersName/{name}");
         }
         return allComments;
     }
 
     @Tag(name = "Get All Comments For Movie")
     @Operation(summary = "Get All Comments For Movie")
-    @GetMapping("/comment/byMovieTitle/{movieTitle}")
+    @GetMapping("/comment/get/byMovieTitle/{movieTitle}")
     public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
         Map<String, ArrayList<Comment>> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
+            throw new NoRecordFoundException("comments", "/comment/get/byMovieTitle/{movieTitle}");
         }
         return allComments;
     }
@@ -108,7 +106,7 @@ public class CommentController {
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")
-    @PostMapping("/comment/update/{id}")
+    @PostMapping("/comment/update/byId/{id}")
     public Optional<Comment> updateComment(
             @RequestBody Comment newComment,
             @PathVariable String id,

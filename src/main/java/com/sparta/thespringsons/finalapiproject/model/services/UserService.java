@@ -1,8 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
-import com.sparta.thespringsons.finalapiproject.MflixApplication;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
-import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.entities.User;
 import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
