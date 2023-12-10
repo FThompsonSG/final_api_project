@@ -4,7 +4,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.Optional;
 
 public class Tomato {
 

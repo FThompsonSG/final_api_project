@@ -1,6 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.exceptions.norecordfound;
 
-import com.sparta.thespringsons.finalapiproject.controller.CommentController;
 import com.sparta.thespringsons.finalapiproject.exceptions.CustomResponse;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import org.springframework.http.HttpStatus;

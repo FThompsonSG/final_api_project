@@ -3,7 +3,6 @@ package com.sparta.thespringsons.finalapiproject.logger;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.XMLFormatter;
 
 public class FileHandler {
     public static void setUpFileHandler(Logger logger) {

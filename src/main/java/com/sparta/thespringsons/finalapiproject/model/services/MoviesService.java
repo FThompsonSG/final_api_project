@@ -1,7 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
@@ -15,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class MoviesService {
@@ -481,23 +478,27 @@ public class MoviesService {
     @CacheEvict("AllMovies")
     public Movie addMovie(Movie movie) {
         try {
-            if(movie.getTitle().isEmpty() || movie.getTitle() == null) {
-                throw new InvalidDocumentException("Movies must have title");
-            } else if (movie.getDirectors().size() == 0 || movie.getDirectors() == null) {
-                throw new InvalidDocumentException("Movies must have at least one director");
-            } else if (movie.getCast().size() == 0 || movie.getCast() == null) {
-                throw new InvalidDocumentException("Movies must have at least one cast member");
-            } else if (movie.getLanguages().size() == 0 || movie.getLanguages() == null) {
-                throw new InvalidDocumentException("Movies must be available in at least one language");
-            } else if (movie.getGenres().size() == 0 || movie.getGenres() == null) {
-                throw new InvalidDocumentException("Movies mush have at least one genre");
-            } else {
-                return movieRepository.save(movie);
+            if (movie.getTitle() == null || movie.getDirectors() == null || movie.getCast() == null || movie.getGenres() == null) {
+                if(movie.getTitle() == null || movie.getTitle().isEmpty()) {
+                    throw new InvalidDocumentException("Movies must have title");
+                } else if (movie.getDirectors() == null || movie.getDirectors().isEmpty() ) {
+                    throw new InvalidDocumentException("Movies must have at least one director");
+                } else if (movie.getCast() == null || movie.getCast().isEmpty() ) {
+                    throw new InvalidDocumentException("Movies must have at least one cast member");
+                } else if (movie.getLanguages() == null || movie.getLanguages().isEmpty()) {
+                    throw new InvalidDocumentException("Movies must be available in at least one language");
+                } else if (movie.getGenres() == null || movie.getGenres().isEmpty()) {
+                    throw new InvalidDocumentException("Movies mush have at least one genre");
+                } else {
+                    return movieRepository.save(movie);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
             return null;
         }
+        movieRepository.save(movie);
+        return movie;
     }
     //Updates ----------------------------------------------------------------------------------------------------------------
     @CacheEvict("AllMovies")
