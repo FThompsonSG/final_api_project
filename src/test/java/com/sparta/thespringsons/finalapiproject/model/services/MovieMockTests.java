@@ -2,6 +2,9 @@ package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
+import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
+import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
 import org.junit.jupiter.api.Assertions;
@@ -76,17 +79,47 @@ public class MovieMockTests {
     @Test
     @DisplayName("Testing Add Movie on Real Database")
     public void testingAddMovieOnRealDatabase(){
+        //maybe add all the fields?
         Movie testMovie = new Movie();
+        testMovie.setId("HenriqueMartinsDaCunha");
+        Awards testAwards = new Awards();
+        testAwards.setWins(2);
+        testAwards.setNominations(1);
+        testAwards.setText("2 wins and 1 nomination.");
+        testMovie.setAwards(testAwards);
+        testMovie.setFullplot("This is the full plot.");
         testMovie.setYear("2002");
         List<String> directors = new ArrayList<>();
         directors.add("Luke Boorman");
         testMovie.setDirectors(directors);
+        testMovie.setGenres(directors);
+        Imdb testImdb = new Imdb();
+        testImdb.setRating(7.3);
+        testImdb.setVotes(373);
+        testImdb.setId(3794);
+        testMovie.setImdb(testImdb);
         testMovie.setCast(directors);
         testMovie.setTitle("The film");
+        testMovie.setLanguages(directors);
+        testMovie.setLastupdated("Updated now.");
+        testMovie.setNum_mflix_comments(1);
+        testMovie.setPlot("This ist he plot.");
+        testMovie.setPoster("Poster");
+        testMovie.setRated("PG");
+        testMovie.setReleased("Now.");
+        testMovie.setRuntime(37);
+        testMovie.setType("Movie");
+        testMovie.setWriters(directors);
+        Tomato testTomato = new Tomato();
+        testTomato.setFresh(1);
+        testTomato.setRotten(0);
+        testMovie.setTomatoes(testTomato);
+
         testMovie.setGenres(directors);
         testMovie.setLanguages(directors);
 
         Movie filmToCheck = moviesService.addMovie(testMovie);
+        System.out.println(filmToCheck);
 
         Optional<Movie> tester = movieRepositoryMock.findById(filmToCheck.getId());
 
