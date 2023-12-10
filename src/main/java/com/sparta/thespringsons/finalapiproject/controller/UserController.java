@@ -32,7 +32,7 @@ public class UserController {
         OurLogger.setUpLogger(logger);
     }
 
-    @Tag(name = "Get User by Name")
+    @Tag(name = "User API")
     @Operation(summary = "Get User by Name")
     @GetMapping("/user/get/byName/{name}")
     public List<User> getUsersByName(@PathVariable String name) throws NoRecordFoundException {
@@ -46,7 +46,7 @@ public class UserController {
         return users;
     }
 
-    @Tag(name = "Get User by ID")
+    @Tag(name = "User API")
     @Operation(summary = "Get User by ID")
     @GetMapping("/user/get/byId/{id}")
     public Optional<User> getUserById(@PathVariable String id) throws NoRecordFoundException {
@@ -58,7 +58,7 @@ public class UserController {
         return user;
     }
 
-    @Tag(name = "Get User by Email")
+    @Tag(name = "User API")
     @Operation(summary = "Get User by Email")
     @GetMapping("/user/get/byEmail/{email}")
     public List<User> getUsersByEmail(@PathVariable String email) throws NoRecordFoundException {
@@ -70,7 +70,7 @@ public class UserController {
         return users;
     }
 
-    @Tag(name = "Add New User")
+    @Tag(name = "User API")
     @Operation(summary = "Add new User")
     @PostMapping("/user/add")
     public Optional<User> addUser(@RequestBody User newUser) throws Exception {
@@ -83,7 +83,7 @@ public class UserController {
         return userService.saveUser(newUser);
     }
 
-    @Tag(name = "Delete User")
+    @Tag(name = "User API")
     @Operation(summary = "Delete a User")
     @DeleteMapping("/user/delete/byId/{id}")
     public Optional<User> deleteUser(@PathVariable String id,@RequestHeader(name = "Key") String apiKey) throws Exception {
@@ -100,7 +100,7 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @Tag(name = "Update User Record")
+    @Tag(name = "User API")
     @Operation(summary = "Update user record")
     @PostMapping("/user/update/byId/{id}")
     public Optional<User> updateUser(

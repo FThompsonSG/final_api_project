@@ -6,16 +6,52 @@ import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.TheaterService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Tech242 MFlix API",
+                version = "1.0",
+                description = "Summary: \n" +
+                        "\n" +
+                        " An open API developed by Tech 242 to allow users to access MongoDB's" +
+                        " sample MFlix database. Currently, the system allows access to the movies, " +
+                        "embedded movies, users, theaters and comments collection. " +
+                        "Any users can create or read data, but an API key is needed to update or delete " +
+                        "records. Keys should be placed under a header labeled 'key'. A key can be retrieved" +
+                        " from the Key API listed below. \n\n" +
+                        "\n " +
+                        "Consumption Guidelines: \n " +
+                        "\n" +
+                        "To effectively use our open API, we recommend carefully choosing" +
+                        " parameters for given queries, as queries with larger results will typically tend to take " +
+                        "longer to return. Some get operations can perform subsequent gets faster given that there is " +
+                        "no Create, Update or Deletes to a collection - it is recommended to batch Create, Updates or Deletes " +
+                        " consecutively as to reduce possible downtime for Get Requests. Sample request bodies can be found " +
+                        "below under the Schema heading. \n" +
+                        "\n" +
+                        "Additional information: \n " +
+                        "\n" +
+                        "Currently, we are under the base URL of http://localhost:8080.\n" +
+                        " " +
+                        "Please contact akhairuddin@spartaglobal.com for any further queries or information regarding " +
+                        "Tech242 MFlix API"
+        )
+)
 @RestController
 public class TheaterController {
 
@@ -30,7 +66,7 @@ public class TheaterController {
         OurLogger.setUpLogger(logger);
     }
 
-    @Tag(name = "Get All Theaters")
+    @Tag(name = "Theater API")
     @Operation(summary = "Gets all theaters")
     @GetMapping("/theater")
     public List<Theater> getAllTheaters() throws NoRecordFoundException {
@@ -42,7 +78,7 @@ public class TheaterController {
         return allTheaters;
     }
 
-    @Tag(name = "Get Theater by zip code")
+    @Tag(name = "Theater API")
     @Operation(summary = "Gets all theaters with a specific zipcode")
     @GetMapping("/theater/get/byZipCode/{zipcode}")
     public List<Theater> getAllTheatersByZipcode(@PathVariable String zipcode) throws NoRecordFoundException {
@@ -54,7 +90,7 @@ public class TheaterController {
         return theatersMatchingZipcode;
     }
 
-    @Tag(name = "Get Theater by Id")
+    @Tag(name = "Theater API")
     @Operation(summary = "Get Theaters by Id")
     @GetMapping("/theater/get/byId/{theater_id}")
     public Optional<Theater> getTheaterById(@PathVariable Integer theater_id) throws NoRecordFoundException {
@@ -66,7 +102,7 @@ public class TheaterController {
         return theater;
     }
 
-    @Tag(name = "Add New Theater")
+    @Tag(name = "Theater API")
     @Operation(summary = "Add new Theater")
     @PostMapping("/theater/add")
     public Optional<Theater> addTheater(@RequestBody Theater newTheater) throws Exception {
@@ -78,7 +114,7 @@ public class TheaterController {
         return Optional.ofNullable(theaterService.saveTheater(newTheater));
     }
 
-    @Tag(name = "Delete Theater")
+    @Tag(name = "Theater API")
     @Operation(summary = "Delete a Theater")
     @DeleteMapping("/theater/delete/byId/{theater_id}")
     public String deleteTheater(@PathVariable Integer theater_id,@RequestHeader(name = "Key") String apiKey) throws Exception {
@@ -93,7 +129,7 @@ public class TheaterController {
         return theaterService.deleteTheater(theater_id);
     }
 
-    @Tag(name = "Update Theater Record")
+    @Tag(name = "Theater API")
     @Operation(summary = "Update theater record")
     @PostMapping("/theater/update/byId/{theater_id}")
     public Optional<Theater> updateTheater(

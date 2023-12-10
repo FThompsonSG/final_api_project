@@ -1,12 +1,18 @@
 package com.sparta.thespringsons.finalapiproject.exceptions;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+@Schema(name="HTTP Error Response", description = "JSON schema of an invalid response.")
 public class CustomResponse {
 
+    @Schema(description = "Error message returned", example = "Resource not found", defaultValue = "Resource not found")
     private String message;
+
+    @Schema(description = "HTTP Error code", example = "404", defaultValue = "404")
     private int statusCode;
     private String localDateTime;
     private String exception;

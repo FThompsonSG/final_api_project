@@ -3,12 +3,15 @@ package com.sparta.thespringsons.finalapiproject.model.entities;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.fields.Tomato;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Arrays;
 
+@Schema(name="Embedded Movie", description = "JSON schema of Embedded Movie record. Embedded" +
+        " movie records are similar to Movie records, with the addition of a plot_embedding field.")
 @Document("embedded_movies")
 public class EmbeddedMovie {
     @Id

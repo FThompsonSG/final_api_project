@@ -1,9 +1,11 @@
 package com.sparta.thespringsons.finalapiproject.model.entities;
 
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Schema(name="Theater", description = "")
 @Document("theaters")
 public class Theater {
     @Id
