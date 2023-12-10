@@ -1,14 +1,8 @@
-package com.sparta.thespringsons.finalapiproject;
+package com.sparta.thespringsons.finalapiproject.model.services;
 
-import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
-import com.sparta.thespringsons.finalapiproject.model.repositories.MovieRepository;
-import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.reactive.server.WebTestClient;
-
-import java.util.List;
 
 @SpringBootTest
 public class CommentServiceTests {

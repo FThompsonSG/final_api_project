@@ -1,8 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.security;
 
 import java.util.Random;
-import java.util.UUID;
-
 
 public class ApiKeyGenerator {
 
