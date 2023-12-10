@@ -4,6 +4,7 @@ import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
+import jakarta.validation.constraints.AssertTrue;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

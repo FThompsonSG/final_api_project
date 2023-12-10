@@ -1,6 +1,8 @@
 package com.sparta.thespringsons.finalapiproject.model.repositories;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
+import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -63,5 +65,11 @@ public interface EmbeddedMoviesRepository extends MongoRepository<EmbeddedMovie,
 
    List<EmbeddedMovie> findByTitle(String title);
 
+
+
+   // Affiq was here again
+
+   @Cacheable("AllEmbeddedMovies")
+   List<EmbeddedMovie> findAll();
 
 }

@@ -38,7 +38,6 @@ public class EmbeddedMovieController {
     @Operation(summary = "Updates Writers")
     @PatchMapping ("/embeddedMovie/update/writers")
     public void updateEmbeddedMovieWriters(@RequestParam String Id, @RequestParam String newWriter,@RequestHeader(name = "Key") String apiKey) {
-
         if(!apiKeyService.checkIfApiKeyExists(apiKey)){
             return;
         }
