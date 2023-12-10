@@ -18,11 +18,11 @@ class MoviesServiceTest {
     @Test
     @DisplayName("testMovieIsWithinRange")
     public void testMovieIsWithinRange() throws Exception {
-        List<Movie> movie = moviesService.findAllMoviesByReleaseRange("1900", "1915");
-        Assertions.assertNotEquals(0, movie.size());
+        List<Movie> movies = moviesService.findAllMoviesByReleaseRange("1900", "1915");
+        Assertions.assertNotEquals(0, movies.size());
 
-        for (Movie movie1 : movie){
-            System.out.println(movie1.getTitle());
+        for (Movie movie : movies){
+            Assertions.assertTrue(Integer.parseInt(movie.getYear()) >= 1900 && Integer.parseInt(movie.getYear()) <= 1915);
         }
     }
 
