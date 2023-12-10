@@ -1,7 +1,7 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
-import com.sparta.thespringsons.finalapiproject.model.repositories.TheatersRepository;
+import com.sparta.thespringsons.finalapiproject.model.repositories.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,23 +11,23 @@ import java.util.Optional;
 @Service
 public class TheaterService {
 
-    private final TheatersRepository theatersRepository;
+    private final TheaterRepository theaterRepository;
 
     @Autowired
-    public TheaterService(TheatersRepository theatersRepository) {
-        this.theatersRepository = theatersRepository;
+    public TheaterService(TheaterRepository theaterRepository) {
+        this.theaterRepository = theaterRepository;
     }
 
     public List<Theater> getAllTheaters() {
-        return theatersRepository.findAll();
+        return theaterRepository.findAll();
     }
 
     public Optional<Theater> getTheaterByTheaterId(int theater_id) {
-        return theatersRepository.getTheaterByTheaterId(theater_id);
+        return theaterRepository.getTheaterByTheaterId(theater_id);
     }
 
     public Optional<Theater> getTheaterById(String id) {
-        return theatersRepository.findById(id);
+        return theaterRepository.findById(id);
     }
 
     public List<Theater> getTheatersByZipcode(String zipcode) {
@@ -39,7 +39,7 @@ public class TheaterService {
 
     public Theater saveTheater(Theater theater) throws Exception {
         try {
-            theatersRepository.save(theater);
+            theaterRepository.save(theater);
             return theater;
         } catch (Exception e) {
             throw new Exception("Failed to save theater - invalid args");
@@ -54,18 +54,18 @@ public class TheaterService {
                 Theater theaterToUpdate = retrievedTheater.get();
                 theaterToUpdate = theater;
                 theaterToUpdate.setTheaterId(theater_id);
-                theatersRepository.save(theaterToUpdate);
+                theaterRepository.save(theaterToUpdate);
                 return theaterToUpdate;
             }
     }
 
     public String deleteTheater(Integer theater_id) throws Exception {
-        Optional<Theater> theater = theatersRepository.getTheaterByTheaterId(theater_id);
+        Optional<Theater> theater = theaterRepository.getTheaterByTheaterId(theater_id);
 
         if (theater.isEmpty()) {
             throw new Exception("No theater found for given ID.");
         } else {
-            theatersRepository.delete(theater.get());
+            theaterRepository.delete(theater.get());
             return "Theater deleted";
         }
 

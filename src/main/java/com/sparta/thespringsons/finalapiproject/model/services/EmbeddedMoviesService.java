@@ -6,11 +6,11 @@ import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
 import com.sparta.thespringsons.finalapiproject.model.repositories.EmbeddedMoviesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -316,6 +316,7 @@ public class EmbeddedMoviesService  {
         }
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie addEmbeddedMovie(EmbeddedMovie movie) {
         try {
             if(movie.getTitle().isEmpty() || movie.getTitle() == null) {
@@ -337,6 +338,7 @@ public class EmbeddedMoviesService  {
         }
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public void updateEmbeddedMovieTitle(String Id, String newTitle) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -347,6 +349,7 @@ public class EmbeddedMoviesService  {
         embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateEmbeddedMovieWriters(String Id, String newWriter) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -359,6 +362,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public void updateEmbeddedMovieCast(String Id, String newMember) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -371,6 +375,7 @@ public class EmbeddedMoviesService  {
         embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public void updateEmbeddedMovieGenres(String Id, String newGenre) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -383,6 +388,7 @@ public class EmbeddedMoviesService  {
         embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateEmbeddedMovieLanguages(String Id, String newLanguage) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -395,6 +401,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateEmbeddedMovieCountries(String Id, String newCountry) {
         EmbeddedMovie movie = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -419,6 +426,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(movie);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesCriticMeter(String id, Integer meter ) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -433,6 +441,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesViewerMeter(String id, Integer meter ) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -447,6 +456,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesViewerNumReviews(String id, Integer numReviews) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -461,6 +471,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesCriticNumReviews(String id, Integer numReviews) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -475,6 +486,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesCriticRating(String id, Double rating) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -489,6 +501,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesViewerRating(String id, Double rating) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -502,6 +515,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesRotten(String id, Integer rotten) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -516,6 +530,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesFresh(String id, Integer fresh) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
         if(checkMovie.isPresent()) {
@@ -530,6 +545,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public Optional<EmbeddedMovie> updateTomatoesLastUpdated(String id) {
         Optional<EmbeddedMovie> checkMovie = embeddedMoviesRepository.findById(id);
 
@@ -546,6 +562,7 @@ public class EmbeddedMoviesService  {
         return Optional.empty();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateAwardsWins(String code, Integer wins) {
         EmbeddedMovie movieToUpdate = null;
         if(wins != null && code != null){
@@ -562,6 +579,7 @@ public class EmbeddedMoviesService  {
         return movieToUpdate;
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateAwardsNominations(String code, Integer nominations) {
         EmbeddedMovie movieToUpdate = null;
         if(nominations != null && code != null){
@@ -607,6 +625,7 @@ public class EmbeddedMoviesService  {
         return stringBuilder.toString();
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateReleaseDate(String Id, String date) {
         EmbeddedMovie embeddedMovieToUpdate = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -618,6 +637,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(embeddedMovieToUpdate);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public EmbeddedMovie updateRuntime(String Id, Integer runtime) {
         EmbeddedMovie embeddedMovieToUpdate = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -628,6 +648,7 @@ public class EmbeddedMoviesService  {
         return embeddedMoviesRepository.save(embeddedMovieToUpdate);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public void updateYear(String Id, String year) {
         EmbeddedMovie movieToUpdate = null;
         if(embeddedMoviesRepository.findById(Id).isPresent()) {
@@ -638,6 +659,7 @@ public class EmbeddedMoviesService  {
         embeddedMoviesRepository.save(movieToUpdate);
     }
 
+    @CacheEvict("AllEmbeddedMovies")
     public void deleteMovieById(String Id) {
         Optional<EmbeddedMovie> movie = embeddedMoviesRepository.findById(Id);
         movie.ifPresent(embeddedMovie -> embeddedMoviesRepository.delete(embeddedMovie));
@@ -659,6 +681,6 @@ public class EmbeddedMoviesService  {
         for (int i = 0; i < originalEmbeds.length; i++) {
             total += Math.pow(originalEmbeds[i] - embeds[i], 2);
         }
-        return Math.sqrt(total);
+        return Math.abs(Math.sqrt(total));
     }
 }

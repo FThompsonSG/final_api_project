@@ -1,7 +1,5 @@
-package com.sparta.thespringsons.finalapiproject;
+package com.sparta.thespringsons.finalapiproject.model.services;
 
-import com.sparta.thespringsons.finalapiproject.model.repositories.UserRepository;
-import com.sparta.thespringsons.finalapiproject.model.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,39 +1,36 @@
 package com.sparta.thespringsons.finalapiproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.thespringsons.finalapiproject.exceptions.norecordfound.NoRecordFoundException;
 import com.sparta.thespringsons.finalapiproject.model.entities.Theater;
 import com.sparta.thespringsons.finalapiproject.model.fields.Address;
 import com.sparta.thespringsons.finalapiproject.model.fields.Geo;
 import com.sparta.thespringsons.finalapiproject.model.fields.Location;
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.TheaterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = TheatreController.class)
-class TheatreControllerTest {
+@WebMvcTest(TheaterController.class)
+class TheaterControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private ApiKeyService apiKeyService;
 
     @MockBean
     TheaterService theaterService;
@@ -51,10 +48,10 @@ class TheatreControllerTest {
         theaterList.add(mockTheater);
         Mockito.when(theaterService.getAllTheaters()).thenReturn(theaterList);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre"))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(handler().methodName("getAllTheatres"))
+                .andExpect(handler().methodName("getAllTheaters"))
                 .andDo(print());
     }
 
@@ -65,7 +62,7 @@ class TheatreControllerTest {
         theaterList.add(mockTheater);
         Mockito.when(theaterService.getTheatersByZipcode("1234567")).thenReturn(theaterList);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre/byZipcode/{zipcode}", "1234567"))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater/get/byZipCode/{zipcode}", "1234567"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(handler().methodName("getAllTheatersByZipcode"))
@@ -78,10 +75,10 @@ class TheatreControllerTest {
         Optional<Theater> mockTheaterOp = Optional.of(mockTheater);
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
         mockMvc
-                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theatre/byId/{theater_id}", 999999))
+                .perform(MockMvcRequestBuilders.get("http://localhost:8080/theater/get/byId/{theater_id}", 999999))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(handler().methodName("getTheatresById"))
+                .andExpect(handler().methodName("getTheaterById"))
                 .andDo(print());
     }
 
@@ -120,8 +117,8 @@ class TheatreControllerTest {
 
 
     @Test
-    @DisplayName("Test delete theatre endpoint")
-    void testDeleteTheatre() throws Exception {
+    @DisplayName("Test delete theater endpoint")
+    void testDeleteTheater() throws Exception {
         String returned = " ";
         Optional<Theater> mockTheaterOp = Optional.of(mockTheater);
 
@@ -129,7 +126,8 @@ class TheatreControllerTest {
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(mockTheaterOp);
         Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/{theater_id}", Integer.valueOf(999999)))
+                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/byId/{theater_id}", Integer.valueOf(999999))
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 //.andExpect(content().string(mockMessage))
                 .andExpect(handler().methodName("deleteTheater"))
@@ -147,7 +145,7 @@ class TheatreControllerTest {
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
         Mockito.when(theaterService.deleteTheater(999999)).thenReturn(mockMessage);
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/{theater_id}", Integer.valueOf(999999)))
+                .perform(MockMvcRequestBuilders.delete("http://localhost:8080/theater/delete/byId/{theater_id}", Integer.valueOf(999999)))
                 .andExpect(status().is(400))
                 //.andExpect(content().string(mockMessage))
                 .andExpect(handler().methodName("deleteTheater"))
@@ -161,9 +159,10 @@ class TheatreControllerTest {
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(existingRecord);
         Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
         mockMvc
-                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/byId/{theater_id}", 999999)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
+                        .content(new ObjectMapper().writeValueAsBytes(mockTheater))
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(handler().methodName("updateTheater"))
                 .andDo(print());
@@ -177,7 +176,7 @@ class TheatreControllerTest {
         Mockito.when(theaterService.getTheaterByTheaterId(999999)).thenReturn(noRecord);
         Mockito.when(theaterService.updateTheater(mockTheater, 999999)).thenReturn(mockTheater);
         mockMvc
-                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
+                .perform(MockMvcRequestBuilders.post("http://localhost:8080/theater/update/byId/{theater_id}", 999999) .contentType(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsBytes(mockTheater)))
                 .andExpect(status().is(400))

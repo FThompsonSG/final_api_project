@@ -4,13 +4,16 @@ import com.sparta.thespringsons.finalapiproject.exceptions.norecordfound.NoRecor
 import com.sparta.thespringsons.finalapiproject.exceptions.recordalreadyexists.RecordAlreadyExistsException;
 import com.sparta.thespringsons.finalapiproject.logger.OurLogger;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +24,11 @@ public class CommentController {
     public static final Logger logger = Logger.getLogger(CommentController.class.getName());
 
     private final CommentService commentService;
+    private final ApiKeyService apiKeyService;
     @Autowired
-    public CommentController(CommentService commentService) {
+    public CommentController(CommentService commentService, ApiKeyService apiKeyService) {
         this.commentService = commentService;
+        this.apiKeyService = apiKeyService;
         OurLogger.setUpLogger(logger);
     }
 
@@ -42,27 +47,28 @@ public class CommentController {
 
     @Tag(name = "Get Comment By Name")
     @Operation(summary = "Get Comment By Name")
-    @GetMapping("/comment/byName/{name}")
+    @GetMapping("/comment/get/byUsersName/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
         logger.log(Level.INFO, "Entered comments by user name method in comments controller");
         List<Comment> allComments = commentService.getAllByName(name);
         if (allComments.isEmpty()) {
-            throw new NoRecordFoundException("comments", "/comment/ByName/{name}");
+            throw new NoRecordFoundException("comments", "/comment/get/byUsersName/{name}");
         }
         return allComments;
     }
 
-//    @Tag(name = "Get All Comments For Movie")
-//    @Operation(summary = "Get All Comments For Movie")
-//    @GetMapping("/comment/byMovieTitle/{movieTitle}")
-//    public List<Comment> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
-//        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
-//        List<Comment> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
-//        if (allComments.isEmpty()) {
-//            throw new NoRecordFoundException("comments", "/comment/byMovieTitle/{movieTitle}");
-//        }
-//        return allComments;
-//    }
+    @Tag(name = "Get All Comments For Movie")
+    @Operation(summary = "Get All Comments For Movie")
+    @GetMapping("/comment/get/byMovieTitle/{movieTitle}")
+    public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
+        logger.log(Level.INFO, "Entered comments by movie title method in comments controller");
+        Map<String, ArrayList<Comment>> allComments = commentService.getAllCommentsByMovieTitle(movieTitle);
+        if (allComments.isEmpty()) {
+            throw new NoRecordFoundException("comments", "/comment/get/byMovieTitle/{movieTitle}");
+        }
+        return allComments;
+    }
+
 
     @Tag(name = "Add New Comment")
     @Operation(summary = "Add new Comment")
@@ -90,10 +96,14 @@ public class CommentController {
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")
-    @PostMapping("/comment/update/{id}")
+    @PostMapping("/comment/update/byId/{id}")
     public Optional<Comment> updateComment(
             @RequestBody Comment newComment,
-            @PathVariable String id) throws Exception {
+            @PathVariable String id,
+            @RequestHeader(name = "Key") String apiKey) throws Exception {
+        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
+            return Optional.empty();
+        };
         logger.log(Level.INFO, "Entered update comment method in comment controller");
         Optional<Comment> commentToUpdate = commentService.getCommentById(id);
         if (commentToUpdate.isEmpty()) {

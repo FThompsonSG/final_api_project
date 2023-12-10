@@ -29,7 +29,7 @@ public class AuthenticationService {
         return true;
     }
 
-    private boolean isValidApiKey(String apiKey) {
+    public boolean isValidApiKey(String apiKey) {
         return apiKeyRepository.findByApiKey(apiKey).isPresent();
     }
 }

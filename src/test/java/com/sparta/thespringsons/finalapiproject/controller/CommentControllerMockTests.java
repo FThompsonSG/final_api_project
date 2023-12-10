@@ -1,11 +1,10 @@
-package com.sparta.thespringsons.finalapiproject.model.services;
+package com.sparta.thespringsons.finalapiproject.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.thespringsons.finalapiproject.controller.CommentController;
 import com.sparta.thespringsons.finalapiproject.model.entities.Comment;
 import com.sparta.thespringsons.finalapiproject.model.repositories.CommentRepository;
-import org.junit.jupiter.api.Assertions;
+import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
+import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,8 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +31,9 @@ public class CommentControllerMockTests {
 
     @MockBean
     private CommentService commentService;
+
+    @MockBean
+    private ApiKeyService apiKeyService;
 
     @MockBean
     private CommentRepository commentRepository;
@@ -62,17 +62,15 @@ public class CommentControllerMockTests {
     @Test
     @DisplayName("Test Delete comment")
     void testDeleteComment() throws Exception {
-//        Comment mockComment = new Comment();
-//        mockComment.setId("id1");
-//        mockComment.setText("This is text");
-//        Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         List<String> commentIdsToDelete = List.of("id1");
 
         mockMvc.perform(delete("/comment/delete")
                         .param("confirm", "true")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(commentIdsToDelete)))
+                        .content(new ObjectMapper().writeValueAsString(commentIdsToDelete))
+                        .header("Key","68660983"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string("Comment deleted successfully."))
@@ -86,11 +84,13 @@ public class CommentControllerMockTests {
         mockComment.setId("5a9427648b0beebeb69810b6");
         mockComment.setText("This is text");
         Mockito.when(commentService.getCommentById(Mockito.anyString())).thenReturn(Optional.of(mockComment));
+        Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
-                .perform(post("http://localhost:8080/comment/update/5a9427648b0beebeb69810b6")
+                .perform(post("http://localhost:8080/comment/update/byId/5a9427648b0beebeb69810b6")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(mockComment)))
+                        .content(objectMapper.writeValueAsString(mockComment))
+                        .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
                 .andExpect(handler().methodName("updateComment"))

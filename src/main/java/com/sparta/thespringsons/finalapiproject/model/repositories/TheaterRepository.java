@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TheatersRepository extends MongoRepository<Theater, String> {
+public interface TheaterRepository extends MongoRepository<Theater, String> {
 
 
     Optional<Theater> getTheaterByTheaterId(int theater_id);

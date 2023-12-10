@@ -1,7 +1,5 @@
 package com.sparta.thespringsons.finalapiproject.model.services;
 import com.sparta.thespringsons.finalapiproject.exceptions.InvalidDocumentException;
-import com.sparta.thespringsons.finalapiproject.model.entities.EmbeddedMovie;
-import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.entities.Movie;
 import com.sparta.thespringsons.finalapiproject.model.fields.Awards;
 import com.sparta.thespringsons.finalapiproject.model.fields.Imdb;
@@ -13,7 +11,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class MoviesService {
