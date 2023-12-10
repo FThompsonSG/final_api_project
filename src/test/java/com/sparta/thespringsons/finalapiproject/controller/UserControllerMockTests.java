@@ -61,7 +61,7 @@ public class UserControllerMockTests {
         Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
-                .perform(delete("http://localhost:8080/user/delete/5a9427648b0beebeb69810b6")
+                .perform(delete("http://localhost:8080/user/delete/byId/5a9427648b0beebeb69810b6")
                         .header("Key","68660983"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType("application/json"))
@@ -78,7 +78,7 @@ public class UserControllerMockTests {
         Mockito.when(apiKeyService.checkIfApiKeyExists("68660983")).thenReturn(true);
 
         mockMvc
-                .perform(post("http://localhost:8080/user/update/5a9427648b0beebeb69810b6")
+                .perform(post("http://localhost:8080/user/update/byId/5a9427648b0beebeb69810b6")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockUser))
                         .header("Key","68660983"))

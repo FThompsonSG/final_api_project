@@ -115,7 +115,7 @@ public class UserController {
         logger.log(Level.INFO, "Entered update user method in user controller");
         Optional<User> userToUpdate = userService.getById(id);
         if (userToUpdate.isEmpty()) {
-            throw new NoRecordFoundException("user", "/user/update/{id}");
+            throw new NoRecordFoundException("user", "/user/update/byId/{id}");
         }
         return userToUpdate;
     }
