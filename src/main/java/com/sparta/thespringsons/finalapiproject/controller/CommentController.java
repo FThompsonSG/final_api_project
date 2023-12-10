@@ -9,7 +9,6 @@ import com.sparta.thespringsons.finalapiproject.model.services.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -70,6 +69,7 @@ public class CommentController {
         return allComments;
     }
 
+
     @Tag(name = "Add New Comment")
     @Operation(summary = "Add new Comment")
     @PostMapping("/comment/add")
@@ -84,25 +84,15 @@ public class CommentController {
 
     @Tag(name = "Delete Comment")
     @Operation(summary = "Delete a Comment")
-    @DeleteMapping("/comment/delete")
-    public ResponseEntity<String> deleteComment(@RequestBody List<String> id,
-                                                @RequestParam(name = "confirm", defaultValue = "false") boolean confirmDelete,
-                                                @RequestHeader(name = "Key") String apiKey) throws Exception {
-
-        if(!apiKeyService.checkIfApiKeyExists(apiKey)){
-            return ResponseEntity.ok("Request DENIED: Invalid Api-Key");
-        };
-
+    @DeleteMapping("/comment/delete/{id}")
+    public Optional<Comment> deleteComment(@PathVariable String id) throws Exception {
         logger.log(Level.INFO, "Entered delete comment method in comment controller");
-
-        if (!confirmDelete) {
-            return ResponseEntity.ok("Please confirm deletion by providing 'confirm=true' as a query parameter.");
+        Optional<Comment> commentToDelete = commentService.getCommentById(id);
+        if (commentToDelete.isEmpty()) {
+            throw new NoRecordFoundException("comment", "/comments/delete/{id}");
         }
-        commentService.bulkDeleteComments(id);
-        return ResponseEntity.ok("Comment deleted successfully.");
+        return commentService.deleteComment(id);
     }
-
-
 
     @Tag(name = "Update Comment Record")
     @Operation(summary = "Update Comment record")
