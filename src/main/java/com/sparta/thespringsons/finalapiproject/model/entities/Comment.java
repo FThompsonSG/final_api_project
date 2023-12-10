@@ -1,5 +1,6 @@
 package com.sparta.thespringsons.finalapiproject.model.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.util.Date;
 
+@Schema(name="Comment", description = "JSON schema of a comment record.")
 @Document("comments")
 public class Comment {
     @Id

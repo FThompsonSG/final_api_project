@@ -32,7 +32,7 @@ public class CommentController {
         OurLogger.setUpLogger(logger);
     }
 
-    @Tag(name = "Get All Comments")
+    @Tag(name = "Comment API")
     @Operation(summary = "Get All Comments")
     @GetMapping("/comment")
     public List<Comment> getAllComments() throws NoRecordFoundException {
@@ -45,7 +45,7 @@ public class CommentController {
         return allComments;
     }
 
-    @Tag(name = "Get Comment By Name")
+    @Tag(name = "Comment API")
     @Operation(summary = "Get Comment By Name")
     @GetMapping("/comment/get/byUsersName/{name}")
     public List<Comment> getAllCommentsByName(@PathVariable String name) throws NoRecordFoundException {
@@ -57,7 +57,7 @@ public class CommentController {
         return allComments;
     }
 
-    @Tag(name = "Get All Comments For Movie")
+    @Tag(name = "Comment API")
     @Operation(summary = "Get All Comments For Movie")
     @GetMapping("/comment/get/byMovieTitle/{movieTitle}")
     public Map<String, ArrayList<Comment>> getAllCommentsByMovieTitle(@PathVariable String movieTitle) throws NoRecordFoundException {
@@ -70,7 +70,7 @@ public class CommentController {
     }
 
 
-    @Tag(name = "Add New Comment")
+    @Tag(name = "Comment API")
     @Operation(summary = "Add new Comment")
     @PostMapping("/comment/add")
     public Optional<Comment> addComment(@RequestBody Comment newComment) throws Exception {
@@ -82,7 +82,7 @@ public class CommentController {
         return Optional.ofNullable(commentService.saveComment(newComment));
     }
 
-    @Tag(name = "Delete Comment")
+    @Tag(name = "Comment API")
     @Operation(summary = "Delete a Comment")
     @DeleteMapping("/comment/delete/{id}")
     public Optional<Comment> deleteComment(@PathVariable String id) throws Exception {
@@ -94,7 +94,7 @@ public class CommentController {
         return commentService.deleteComment(id);
     }
 
-    @Tag(name = "Update Comment Record")
+    @Tag(name = "Comment API")
     @Operation(summary = "Update Comment record")
     @PostMapping("/comment/update/byId/{id}")
     public Optional<Comment> updateComment(

@@ -3,6 +3,8 @@ package com.sparta.thespringsons.finalapiproject.controller;
 import com.sparta.thespringsons.finalapiproject.model.entities.ApiKey;
 import com.sparta.thespringsons.finalapiproject.model.services.ApiKeyService;
 import com.sparta.thespringsons.finalapiproject.security.ApiKeyGenerator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ public class ApiKeyController {
         this.request = request;
     }
 
+    @Tag(name = "Key API")
+    @Operation(summary = "Generate an API key")
     @GetMapping("/generate")
     public ApiKey generateApiKey() {
         // Generate and return a new API key
@@ -30,7 +34,9 @@ public class ApiKeyController {
         return apiKeyService.createApiKey(apiKey);
     }
 
-    @PostMapping("/random")
+    @Tag(name = "Key API")
+    @Operation(summary = "Test if an API key is valid")
+    @PostMapping("/test")
     public boolean randomCheck() {
         String apikey = request.getHeader("Key");
         return apiKeyService.checkIfApiKeyExists(apikey);

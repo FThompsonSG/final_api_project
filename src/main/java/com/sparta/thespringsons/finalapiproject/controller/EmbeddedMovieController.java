@@ -243,6 +243,7 @@ public class EmbeddedMovieController {
         return embeddedMoviesService.findEmbeddedMovieFromEmbedding(originalMovie, wantedDistance);
     }
 
+    @Tag(name = "Embedded Movie API")
     @Operation(summary = "Gets all embedded movies by tomato rating")
     @GetMapping("/embeddedMovie/get/byTomatoesCriticRating")
     public List<EmbeddedMovie> findAllByTomatoesCriticRating(@RequestParam double minRating, @RequestParam double maxRating) {
