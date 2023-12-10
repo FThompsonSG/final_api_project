@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApiKeyService {
-    private ApiKeyRepository apiKeyRepository;
+    private final ApiKeyRepository apiKeyRepository;
     @Autowired
     public ApiKeyService(ApiKeyRepository apiKeyRepository) {
         this.apiKeyRepository = apiKeyRepository;
@@ -21,10 +21,6 @@ public class ApiKeyService {
     }
 
     public boolean checkIfApiKeyExists(String apiKey){
-        boolean keyExists = false;
-        if(apiKeyRepository.findByApiKey(apiKey).isPresent()){
-            keyExists = true;
-        }
-        return keyExists;
+        return apiKeyRepository.findByApiKey(apiKey).isPresent();
     }
 }
